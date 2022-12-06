@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.AccountList {
+  position: relative;
+  top: 30px;
+  background: #fff;
+  width: 80%;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
