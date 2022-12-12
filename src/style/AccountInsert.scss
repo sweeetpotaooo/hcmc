@@ -6,7 +6,7 @@
 .AccountInsert {
   position: relative;
   background: #fff;
-  width: 80%;
+  width: 600px;
   margin: auto;
   padding: 30px;
   border-radius: 20px;
@@ -15,7 +15,7 @@
   flex-flow: row wrap;
   justify-content: space-around;
   box-sizing: border-box;
-  top: 30px;
+  top: 60px;
   margin-bottom: 30px;
 }
 .inputDate,
@@ -44,4 +44,10 @@ select {
   // &:focus {
   //   outline: none;
   // }
+}
+
+.radioBtn {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
 }

@@ -1,0 +1,8 @@
+.chartArea {
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 30px;
+}

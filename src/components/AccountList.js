@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/AccountList.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,17 +7,31 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-// import FilterListIcon from "@mui/icons-material/FilterList";
-// import IconButton from "@mui/material/IconButton";
-// import Tooltip from "@mui/material/Tooltip";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 const AccountList = (props) => {
-  const { rows } = props;
+  const { rows, totalIncome, totalExpense, monthFilter } = props;
+  let expense = 0;
+  let income = 0;
+
+  useEffect(() => {
+    rows.forEach((item) => {
+      if (item.tag === "지출") {
+        expense = expense + parseInt(item.amount);
+        totalExpense(expense);
+      } else if (item.tag === "수입") {
+        income = income + parseInt(item.amount);
+        totalIncome(income);
+      }
+    });
+  }, [rows]);
 
   const columns = [
     { id: "date", label: "Date", minWidth: 120 },
-    { id: "title", label: "Title", minWidth: 180 },
+    { id: "title", label: "Title", minWidth: 150 },
     {
       id: "category",
       label: "Category",
@@ -27,13 +41,13 @@ const AccountList = (props) => {
     {
       id: "tag",
       label: "Tag",
-      minWidth: 100,
+      minWidth: 80,
       align: "right",
     },
     {
       id: "amount",
       label: "Amount",
-      minWidth: 100,
+      minWidth: 80,
       align: "right",
     },
   ];
@@ -60,22 +74,33 @@ const AccountList = (props) => {
     setPage(0);
   };
 
+  
+
   return (
     <div className="AccountList">
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Typography
-          sx={{ flex: "1 1 100%" }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          현재 총 지출 :
-          {/* {rows.forEach((item) => (allAmount += item.price))} */}
-          {/* <Tooltip title="Filter list">
+        <Typography sx={{ flex: "1 1 100%" }} id="tableTitle" component="div">
+          <Tooltip title="Filter list">
             <IconButton>
               <FilterListIcon />
             </IconButton>
-          </Tooltip> */}
+          </Tooltip>
+
+          <select className="monthFilter" placeholder="월" onChange={monthFilter}>
+            <option value="" disabled>월별 필터</option>
+            <option value="01">1월</option>
+            <option value="02">2월</option>
+            <option value="03">3월</option>
+            <option value="04">4월</option>
+            <option value="05">5월</option>
+            <option value="06">6월</option>
+            <option value="07">7월</option>
+            <option value="08">8월</option>
+            <option value="09">9월</option>
+            <option value="10">10월</option>
+            <option value="11">11월</option>
+            <option value="12">12월</option>
+          </select>
         </Typography>
 
         <Table stickyHeader aria-label="sticky table">
