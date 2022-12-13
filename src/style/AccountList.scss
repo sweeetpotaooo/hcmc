@@ -5,7 +5,6 @@
 
 .AccountList {
   position: relative;
-  top: 60px;
   background: #fff;
   width: 600px;
   margin: 30px auto;
@@ -26,4 +25,7 @@
   select option[value=""][disabled] {
     display: none;
   }
+  // button {
+  //   all: unset;
+  // }
 }

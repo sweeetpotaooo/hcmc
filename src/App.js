@@ -5,8 +5,6 @@ import AccountInsert from "./components/AccountInsert";
 import AccountList from "./components/AccountList";
 import AccountTempleat from "./components/AccountTempleat";
 import ChartArea from "./components/ChartArea";
-import TotalExpense from "./components/TotalExpense";
-import TotalIncome from "./components/TotalIncome";
 
 function App() {
   const [orgRows, setOrgRows] = useState([
@@ -36,6 +34,14 @@ function App() {
     },
   ]);
 
+  const [dataList, setDataList] = useState({
+    food: 10000,
+    goods: 0,
+    edu: 12000,
+    etc: 0,
+    save: 0,
+  });
+
   const [rows, setRows] = useState(orgRows);
 
   useEffect(() => {
@@ -53,6 +59,33 @@ function App() {
       amount: row[4],
     };
 
+    if (newRow.category === "식비") {
+      setDataList((prev) => ({
+        ...prev,
+        food: (dataList.food += newRow.amount),
+      }));
+    } else if (newRow.category === "생필품") {
+      setDataList((prev) => ({
+        ...prev,
+        goods: dataList.goods + newRow.amount,
+      }));
+    } else if (newRow.category === "문화/교육비") {
+      setDataList((prev) => ({
+        ...prev,
+        edu: (dataList.edu += newRow.amount),
+      }));
+    } else if (newRow.category === "기타") {
+      setDataList((prev) => ({
+        ...prev,
+        etc: (dataList.etc += newRow.amount),
+      }));
+    } else if (newRow.category === "저축") {
+      setDataList((prev) => ({
+        ...prev,
+        save: (dataList.save += newRow.amount),
+      }));
+    }
+
     setOrgRows((prevState) => [newRow, ...prevState]);
     ++nextId.current;
   };
@@ -68,7 +101,7 @@ function App() {
   }
 
   const changeMonthHandler = (e) => {
-    const newRows = orgRows.filter(
+    let newRows = orgRows.filter(
       (prevState) => prevState.date.slice(5, 7) === e.target.value
     );
 
@@ -78,12 +111,30 @@ function App() {
     setRows(newRows);
   };
 
+  const [count, setCount] = useState(0);
+
+  const changeTagHandler = () => {
+    setCount(count + 1);
+    console.log(count);
+    let newRows = [];
+    if (count % 3 === 0) {
+      newRows = orgRows.filter((item) => item.tag !== "수입");
+      setRows(newRows);
+    } else if (count % 3 === 1) {
+      newRows = orgRows.filter((prevState) => prevState.tag !== "지출");
+      setRows(newRows);
+    } else {
+      setRows(orgRows);
+    }
+  };
+
   return (
     <AccountTempleat>
-      <ChartArea>
-        <TotalExpense totalExpense={expense} />
-        <TotalIncome totalIncome={income} />
-      </ChartArea>
+      <ChartArea
+        totalExpense={expense}
+        totalIncome={income}
+        dataList={dataList}
+      />
       <AccountArea>
         <AccountInsert insertRow={insertRowHandler} />
         <AccountList
@@ -91,6 +142,7 @@ function App() {
           totalIncome={totalIncomeHandler}
           totalExpense={totalExpenseHandler}
           monthFilter={changeMonthHandler}
+          tagFilter={changeTagHandler}
         />
       </AccountArea>
     </AccountTempleat>

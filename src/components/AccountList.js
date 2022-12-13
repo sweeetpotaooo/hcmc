@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 const AccountList = (props) => {
-  const { rows, totalIncome, totalExpense, monthFilter } = props;
+  const { rows, totalIncome, totalExpense, monthFilter, tagFilter } = props;
   let expense = 0;
   let income = 0;
 
@@ -35,7 +35,7 @@ const AccountList = (props) => {
     {
       id: "category",
       label: "Category",
-      minWidth: 80,
+      minWidth: 100,
       align: "center",
     },
     {
@@ -52,16 +52,6 @@ const AccountList = (props) => {
     },
   ];
 
-  // function createData(date, title, category, tag, amount) {
-  //   return { date, title, category, tag, amount };
-  // }
-
-  // const rows = [
-  //   createData("India", "IN", 1324171354, 3287263),
-  //   createData("China", "CN", 1403500365, 9596961),
-  //   createData("Italy", "IT", 60483973, 301340),
-  // ];
-
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -74,20 +64,26 @@ const AccountList = (props) => {
     setPage(0);
   };
 
-  
-
   return (
     <div className="AccountList">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Typography sx={{ flex: "1 1 100%" }} id="tableTitle" component="div">
           <Tooltip title="Filter list">
             <IconButton>
-              <FilterListIcon />
+              <FilterListIcon type="button" onClick={tagFilter} />
             </IconButton>
           </Tooltip>
 
-          <select className="monthFilter" placeholder="월" onChange={monthFilter}>
-            <option value="" disabled>월별 필터</option>
+          <select
+            className="monthFilter"
+            placeholder="월"
+            onChange={monthFilter}
+            required
+            defaultValue=""
+          >
+            <option value="" disabled>
+              월별 필터
+            </option>
             <option value="01">1월</option>
             <option value="02">2월</option>
             <option value="03">3월</option>

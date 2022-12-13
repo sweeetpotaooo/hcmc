@@ -2,7 +2,28 @@
   width: 600px;
   margin: 0 auto;
   display: flex;
+  flex-flow: row wrap;
   justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.total {
+  width: 285px;
+  height: 150px;
+  background: #5d35b2;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  color: #fff;
+  padding: 45px 35px;
+}
+.total span {
+  font-size: 20px;
+  font-weight: bold;
   position: relative;
-  top: 30px;
+  top: 15px;
+}
+
+.totalIncome {
+  background: #1e88e5;
 }
