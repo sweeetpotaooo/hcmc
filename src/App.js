@@ -1,12 +1,31 @@
 import { useEffect, useRef, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import AccountArea from "./components/AccountArea";
 import AccountInsert from "./components/AccountInsert";
 import AccountList from "./components/AccountList";
 import AccountTempleat from "./components/AccountTempleat";
 import ChartArea from "./components/ChartArea";
+import NotFound from "./components/NotFound";
+import Page1 from "./components/Page1";
+import Page2 from "./components/Page2";
+import Root from "./components/Root";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      errorElement: <NotFound />,
+      // Outlet 설정
+      children: [
+        { index: true, element: <AccountTempleat /> }, // index:true = path:"/" 둘 다 같은 뜻
+        { path: "/page1", element: <Page1 /> }, // path로 경로를 요청하면 element의 컴포넌트를 보여줌
+        { path: "/page2", element: <Page2 /> },
+      ],
+    },
+  ]);
+
   const [orgRows, setOrgRows] = useState([
     {
       id: 1,
@@ -34,15 +53,29 @@ function App() {
     },
   ]);
 
+  const [rows, setRows] = useState(orgRows);
+  const [income, setIncome] = useState(0);
+  const [expense, setExpense] = useState(0);
+  const [count, setCount] = useState(0);
+
+  // 차트에 들어갈 데이터 초기화
   const [dataList, setDataList] = useState({
-    food: 10000,
+    food: 0,
     goods: 0,
-    edu: 12000,
+    edu: 0,
     etc: 0,
     save: 0,
   });
 
-  const [rows, setRows] = useState(orgRows);
+  useEffect(() => {
+    setDataList({
+      food: 0,
+      goods: 0,
+      edu: 0,
+      etc: 0,
+      save: 0,
+    });
+  }, [rows]);
 
   useEffect(() => {
     setRows(orgRows);
@@ -59,39 +92,41 @@ function App() {
       amount: row[4],
     };
 
-    if (newRow.category === "식비") {
-      setDataList((prev) => ({
-        ...prev,
-        food: (dataList.food += newRow.amount),
-      }));
-    } else if (newRow.category === "생필품") {
-      setDataList((prev) => ({
-        ...prev,
-        goods: dataList.goods + newRow.amount,
-      }));
-    } else if (newRow.category === "문화/교육비") {
-      setDataList((prev) => ({
-        ...prev,
-        edu: (dataList.edu += newRow.amount),
-      }));
-    } else if (newRow.category === "기타") {
-      setDataList((prev) => ({
-        ...prev,
-        etc: (dataList.etc += newRow.amount),
-      }));
-    } else if (newRow.category === "저축") {
-      setDataList((prev) => ({
-        ...prev,
-        save: (dataList.save += newRow.amount),
-      }));
-    }
-
     setOrgRows((prevState) => [newRow, ...prevState]);
     ++nextId.current;
+    // dataListHandler(newRow);
   };
 
-  const [income, setIncome] = useState(0);
-  const [expense, setExpense] = useState(0);
+  useEffect(() => {
+    rows.map((item) => {
+      if (item.category === "식비") {
+        setDataList((prev) => ({
+          ...prev,
+          food: (dataList.food += item.amount),
+        }));
+      } else if (item.category === "생필품") {
+        setDataList((prev) => ({
+          ...prev,
+          goods: dataList.goods + item.amount,
+        }));
+      } else if (item.category === "문화/교육비") {
+        setDataList((prev) => ({
+          ...prev,
+          edu: (dataList.edu += item.amount),
+        }));
+      } else if (item.category === "기타") {
+        setDataList((prev) => ({
+          ...prev,
+          etc: (dataList.etc += item.amount),
+        }));
+      } else if (item.category === "저축") {
+        setDataList((prev) => ({
+          ...prev,
+          save: (dataList.save += item.amount),
+        }));
+      }
+    });
+  }, [rows]);
 
   function totalIncomeHandler(data) {
     setIncome(data);
@@ -111,8 +146,6 @@ function App() {
     setRows(newRows);
   };
 
-  const [count, setCount] = useState(0);
-
   const changeTagHandler = () => {
     setCount(count + 1);
     console.log(count);
@@ -129,23 +162,27 @@ function App() {
   };
 
   return (
-    <AccountTempleat>
-      <ChartArea
-        totalExpense={expense}
-        totalIncome={income}
-        dataList={dataList}
-      />
-      <AccountArea>
-        <AccountInsert insertRow={insertRowHandler} />
-        <AccountList
-          rows={rows}
-          totalIncome={totalIncomeHandler}
-          totalExpense={totalExpenseHandler}
-          monthFilter={changeMonthHandler}
-          tagFilter={changeTagHandler}
+    <>
+      {/* <RouterProvider router={router} /> */}
+      <AccountTempleat>
+        <ChartArea
+          totalExpense={expense}
+          totalIncome={income}
+          dataList={dataList}
+          orgRows={orgRows}
         />
-      </AccountArea>
-    </AccountTempleat>
+        <AccountArea>
+          <AccountInsert insertRow={insertRowHandler} />
+          <AccountList
+            rows={rows}
+            totalIncome={totalIncomeHandler}
+            totalExpense={totalExpenseHandler}
+            monthFilter={changeMonthHandler}
+            tagFilter={changeTagHandler}
+          />
+        </AccountArea>
+      </AccountTempleat>
+    </>
   );
 }
 

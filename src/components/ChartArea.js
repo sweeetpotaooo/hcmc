@@ -1,8 +1,9 @@
 import React from "react";
 import "../style/ChartArea.scss";
 import Chart from "./Chart";
+import VerticalBarChart from "./VerticalBarChart";
 
-const ChartArea = ({ totalExpense, totalIncome, rows, dataList }) => {
+const ChartArea = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
   return (
     <div className="chartArea">
       <div className="total totalExpense">
@@ -16,6 +17,7 @@ const ChartArea = ({ totalExpense, totalIncome, rows, dataList }) => {
         <span>{totalIncome} 원 </span>
       </div>
       <Chart dataList={dataList} />
+      <VerticalBarChart orgRows={orgRows} />
     </div>
   );
 };
