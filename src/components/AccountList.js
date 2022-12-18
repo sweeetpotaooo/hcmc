@@ -30,8 +30,8 @@ const AccountList = (props) => {
   }, [rows]);
 
   const columns = [
-    { id: "date", label: "Date", minWidth: 120 },
-    { id: "title", label: "Title", minWidth: 150 },
+    { id: "date", label: "Date", minWidth: 110 },
+    { id: "title", label: "Title", minWidth: 110 },
     {
       id: "category",
       label: "Category",
@@ -41,7 +41,7 @@ const AccountList = (props) => {
     {
       id: "tag",
       label: "Tag",
-      minWidth: 80,
+      minWidth: 60,
       align: "right",
     },
     {

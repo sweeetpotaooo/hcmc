@@ -6,8 +6,9 @@
 .AccountInsert {
   position: relative;
   background: #fff;
-  width: 600px;
-  margin: auto;
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
   padding: 30px;
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -46,4 +47,10 @@ select {
   position: absolute;
   bottom: 30px;
   left: 30px;
+}
+
+@media all and (max-width: 768px) {
+  .AccountInsert {
+    width: 100%;
+  }
 }

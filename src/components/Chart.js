@@ -31,7 +31,7 @@ const Chart = ({ dataList }) => {
   };
 
   const options = {
-    responsive: false,
+    responsive: true,
     plugins: {
       legend: {
         position: "right",
@@ -42,13 +42,8 @@ const Chart = ({ dataList }) => {
   return (
     <div className="chartDiv">
       <h3>소비 분석 레포트 📈</h3>
-      <Doughnut
-        data={data}
-        options={options}
-        width="400px"
-        height="400px"
-        className="chart"
-      />
+
+      <Doughnut data={data} options={options} className="chart" />
     </div>
   );
 };

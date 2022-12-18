@@ -1,30 +1,25 @@
 import { useEffect, useRef, useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import AccountArea from "./components/AccountArea";
 import AccountInsert from "./components/AccountInsert";
 import AccountList from "./components/AccountList";
 import AccountTempleat from "./components/AccountTempleat";
 import ChartArea from "./components/ChartArea";
-import NotFound from "./components/NotFound";
-import Page1 from "./components/Page1";
-import Page2 from "./components/Page2";
-import Root from "./components/Root";
 
 function App() {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Root />,
-      errorElement: <NotFound />,
-      // Outlet 설정
-      children: [
-        { index: true, element: <AccountTempleat /> }, // index:true = path:"/" 둘 다 같은 뜻
-        { path: "/page1", element: <Page1 /> }, // path로 경로를 요청하면 element의 컴포넌트를 보여줌
-        { path: "/page2", element: <Page2 /> },
-      ],
-    },
-  ]);
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <Root />,
+  //     errorElement: <NotFound />,
+  //     // Outlet 설정
+  //     children: [
+  //       { index: true, element: <AccountTempleat /> }, // index:true = path:"/" 둘 다 같은 뜻
+  //       { path: "/page1", element: <Page1 /> }, // path로 경로를 요청하면 element의 컴포넌트를 보여줌
+  //       { path: "/page2", element: <Page2 /> },
+  //     ],
+  //   },
+  // ]);
 
   const [orgRows, setOrgRows] = useState([
     {
@@ -68,16 +63,6 @@ function App() {
   });
 
   useEffect(() => {
-    setDataList({
-      food: 0,
-      goods: 0,
-      edu: 0,
-      etc: 0,
-      save: 0,
-    });
-  }, [rows]);
-
-  useEffect(() => {
     setRows(orgRows);
   }, [orgRows]);
 
@@ -94,35 +79,42 @@ function App() {
 
     setOrgRows((prevState) => [newRow, ...prevState]);
     ++nextId.current;
-    // dataListHandler(newRow);
   };
 
   useEffect(() => {
+    setDataList({
+      food: 0,
+      goods: 0,
+      edu: 0,
+      etc: 0,
+      save: 0,
+    });
+    console.log(rows);
     rows.map((item) => {
       if (item.category === "식비") {
         setDataList((prev) => ({
           ...prev,
-          food: (dataList.food += item.amount),
+          food: prev.food + item.amount,
         }));
       } else if (item.category === "생필품") {
         setDataList((prev) => ({
           ...prev,
-          goods: dataList.goods + item.amount,
+          goods: prev.goods + item.amount,
         }));
       } else if (item.category === "문화/교육비") {
         setDataList((prev) => ({
           ...prev,
-          edu: (dataList.edu += item.amount),
+          edu: prev.edu + item.amount,
         }));
       } else if (item.category === "기타") {
         setDataList((prev) => ({
           ...prev,
-          etc: (dataList.etc += item.amount),
+          etc: prev.etc + item.amount,
         }));
       } else if (item.category === "저축") {
         setDataList((prev) => ({
           ...prev,
-          save: (dataList.save += item.amount),
+          save: prev.save + item.amount,
         }));
       }
     });
@@ -165,12 +157,6 @@ function App() {
     <>
       {/* <RouterProvider router={router} /> */}
       <AccountTempleat>
-        <ChartArea
-          totalExpense={expense}
-          totalIncome={income}
-          dataList={dataList}
-          orgRows={orgRows}
-        />
         <AccountArea>
           <AccountInsert insertRow={insertRowHandler} />
           <AccountList
@@ -181,6 +167,12 @@ function App() {
             tagFilter={changeTagHandler}
           />
         </AccountArea>
+        <ChartArea
+          totalExpense={expense}
+          totalIncome={income}
+          dataList={dataList}
+          orgRows={orgRows}
+        />
       </AccountTempleat>
     </>
   );
