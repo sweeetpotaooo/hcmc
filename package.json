@@ -1,4 +1,5 @@
 {
+  "homepage": "https://gyulls2.github.io/accounterbook_app/",
   "name": "account-app",
   "version": "0.1.0",
   "private": true,
@@ -25,7 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
@@ -46,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.6.0"
+    "@faker-js/faker": "^7.6.0",
+    "gh-pages": "^4.0.0"
   }
 }
