@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# 💰 간편 가계부
+<img src="https://gyulls2.github.io/Portfolio/images/proj03.svg" alt="파일없음" width="827"/>
+<br/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+🔗 배포 URL : [💰 간편 가계부](https://gyulls2.github.io/accounterbook_app/)
+<br/><br/><br/>
 
-## Available Scripts
+## 💰 프로젝트 소개
 
-In the project directory, you can run:
+간단한 가계부 페이지로, Form에 수입, 지출을 입력받아 표로 정리하여 나타냅니다. <br/>
+차트 라이브러리를 사용하여 가계부 내역을 한눈에 볼 수 있도록 데이터를 시각화하였습니다. <br/>
+월별 수입과 지출을 나타내는 차트로 월별 자산의 흐름을 쉽게 파악할 수 있으며, 지출을 카테고리별로 나누어 소비 분석 및 소비 성향을 파악할 수 있도록 도넛 차트를 활용하였습니다. 개인 사이드 프로젝트로 React 사용 경험 및 숙련도 향상을 위해 진행하였습니다.
+<br/><br/><br/>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🗓 작업기간
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2022.12.06 ~ 2022.12.18
 
-### `npm test`
+<br/><br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠 기술스택
 
-### `npm run build`
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=React&logoColor=white"/> <img src="https://img.shields.io/badge/Sass-CC6699?style=flat-square&logo=Sass&logoColor=white"/>
+<img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=HTML5&logoColor=white"/> <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=CSS3&logoColor=white"/> <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=flat-square&logo=Javascript&logoColor=white"/> <img src="https://img.shields.io/badge/Github-181717?style=flat-square&logo=Github&logoColor=white"/>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/><br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 주요 기능
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- React Hooks를 사용한 상태 관리
+- Chart-js 라이브러리를 사용하여 차트 표현
+- 소비 분석 레포트를 통해 사용자의 소비 성향 파악 가능
+- filter 메서드를 사용한 월별 필터 기능
+- MUI 라이브러리를 활용한 테이블 표현
+- SaSS를 활용한 컴포넌트 스타일링
