@@ -10,7 +10,7 @@ const AccountInsert = ({ insertRow }) => {
   const [row, setRow] = useState({});
   const [value, setValue] = useState({});
 
-  const inputHandler = (e) => {
+  const inputHandler = e => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
 
@@ -20,7 +20,7 @@ const AccountInsert = ({ insertRow }) => {
   // const [amount, setAmount] = useState();
   // const [tag, setTag] = useState();
 
-  const submitHandler = (e) => {
+  const submitHandler = e => {
     e.preventDefault();
 
     if (

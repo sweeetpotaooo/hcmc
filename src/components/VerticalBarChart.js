@@ -17,7 +17,7 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const VerticalBarChart = ({ orgRows }) => {
@@ -53,119 +53,119 @@ const VerticalBarChart = ({ orgRows }) => {
       decIn: 0,
       decOut: 0,
     });
-    orgRows.map((item) => {
+    orgRows.map(item => {
       const month = item.date.slice(5, 7);
 
       if (item.tag === "지출") {
         if (month === "01") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             janOut: prev.janOut + item.amount,
           }));
         } else if (month === "02") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             fabOut: prev.fabOut + item.amount,
           }));
         } else if (month === "03") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             aprOut: prev.aprOut + item.amount,
           }));
         } else if (month === "05") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             mayOut: prev.mayOut + item.amount,
           }));
         } else if (month === "06") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             junOut: prev.junOut + item.amount,
           }));
         } else if (month === "07") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             julOut: prev.julOut + item.amount,
           }));
         } else if (month === "08") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             augOut: prev.augIn + item.amount,
           }));
         } else if (month === "09") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             sepOut: prev.sepOut + item.amount,
           }));
         } else if (month === "10") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             octOut: prev.octOut + item.amount,
           }));
         } else if (month === "11") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             novOut: prev.novOut + item.amount,
           }));
         } else if (month === "12") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             decOut: prev.decOut + item.amount,
           }));
         }
       } else if (item.tag === "수입") {
         if (month === "01") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             janIn: prev.janIn + item.amount,
           }));
         } else if (month === "02") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             fabIn: prev.fabIn + item.amount,
           }));
         } else if (month === "03") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             aprIn: prev.aprIn + item.amount,
           }));
         } else if (month === "05") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             mayIn: prev.mayIn + item.amount,
           }));
         } else if (month === "06") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             junIn: prev.junIn + item.amount,
           }));
         } else if (month === "07") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             julIn: prev.julIn + item.amount,
           }));
         } else if (month === "08") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             augIn: prev.augIn + item.amount,
           }));
         } else if (month === "09") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             sepIn: prev.sepIn + item.amount,
           }));
         } else if (month === "10") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             octIn: prev.octIn + item.amount,
           }));
         } else if (month === "11") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             novIn: prev.novIn + item.amount,
           }));
         } else if (month === "12") {
-          setVerDataList((prev) => ({
+          setVerDataList(prev => ({
             ...prev,
             decIn: prev.decIn + item.amount,
           }));
