@@ -12,13 +12,13 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
-const AccountList = (props) => {
+const AccountList = props => {
   const { rows, totalIncome, totalExpense, monthFilter, tagFilter } = props;
   let expense = 0;
   let income = 0;
 
   useEffect(() => {
-    rows.forEach((item) => {
+    rows.forEach(item => {
       if (item.tag === "지출") {
         expense = expense + parseInt(item.amount);
         totalExpense(expense);
@@ -59,7 +59,7 @@ const AccountList = (props) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = event => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
@@ -102,7 +102,7 @@ const AccountList = (props) => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map(column => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -116,10 +116,10 @@ const AccountList = (props) => {
           <TableBody>
             {rows
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map(row => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                    {columns.map((column) => {
+                    {columns.map(column => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
