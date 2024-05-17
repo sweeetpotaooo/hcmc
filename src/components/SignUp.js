@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-
-const SignUpForm = () => {
+import { useState } from "react";
+import React from "react";
+const SignUp = () => {
   const [form, setForm] = useState({
     username: "",
     birthdate: "",
@@ -73,4 +73,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default SignUp;
