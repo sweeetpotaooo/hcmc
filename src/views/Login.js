@@ -34,7 +34,7 @@ export default function Login() {
     }
 
     if (isValid) {
-      navigate("/");
+      navigate("/plan");
     }
     // 입력값이 유효하면 홈페이지로 이동
   };
@@ -77,7 +77,7 @@ export default function Login() {
 
       <p className="user">
         아이디가 없다면?
-        <a href="/singup">회원가입</a>
+        <a href="/signup">회원가입</a>
       </p>
     </div>
   );
