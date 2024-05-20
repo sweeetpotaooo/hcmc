@@ -5,7 +5,7 @@
 
 .AccountList {
   position: relative;
-  background: #fff;
+  background: #ffffff;
   width: 90%;
   max-width: 600px;
   margin: 30px auto;
@@ -26,11 +26,9 @@
   select option[value=""][disabled] {
     display: none;
   }
-
 }
 
-
-@media all and (max-width: 768px){
+@media all and (max-width: 768px) {
   .AccountList {
     width: 100%;
   }

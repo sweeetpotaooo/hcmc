@@ -15,6 +15,9 @@ export default function Plan() {
       <div>
         <button className="plan" onClick={handleNavigate}>
           <div className="planTitle">계획적인 소비</div>
+          <div>
+            <img src="/public/logo192.png" alt="plan" />
+          </div>
           <div className="planContent">
             <p align="left">예산을 설정하고 예산 안에서</p>
             <p align="left">소비하는 습관을 기릅니다.</p>
