@@ -1,0 +1,37 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.AccountList {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px 30px;
+  border-radius: 20px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+  .monthFilter {
+    position: absolute;
+    right: 30px;
+    border: none;
+    text-align: right;
+  }
+  .monthFilter:focus {
+    outline: none;
+  }
+
+  select option[value=""][disabled] {
+    display: none;
+  }
+
+}
+
+
+@media all and (max-width: 768px){
+  .AccountList {
+    width: 100%;
+  }
+}
