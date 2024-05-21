@@ -7,20 +7,6 @@ import AccountTempleat from "./components/AccountTempleat";
 import ChartArea from "./components/ChartArea";
 
 function App() {
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     element: <Root />,
-  //     errorElement: <NotFound />,
-  //     // Outlet 설정
-  //     children: [
-  //       { index: true, element: <AccountTempleat /> }, // index:true = path:"/" 둘 다 같은 뜻
-  //       { path: "/page1", element: <Page1 /> }, // path로 경로를 요청하면 element의 컴포넌트를 보여줌
-  //       { path: "/page2", element: <Page2 /> },
-  //     ],
-  //   },
-  // ]);
-
   const [orgRows, setOrgRows] = useState([
     {
       id: 1,
@@ -89,6 +75,7 @@ function App() {
       etc: 0,
       save: 0,
     });
+
     console.log(rows);
     rows.map((item) => {
       if (item.category === "식비") {

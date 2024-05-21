@@ -1,59 +1,73 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/AccountList.scss";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
+import axios from "axios";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
+
+const columns = [
+  { id: "date", label: "Date", minWidth: 110 },
+  { id: "title", label: "Title", minWidth: 110 },
+  { id: "category", label: "Category", minWidth: 100, align: "center" },
+  // { id: "tag", label: "Tag", minWidth: 60, align: "right" },
+  { id: "amount", label: "Amount", minWidth: 80, align: "right" },
+];
 
 const AccountList = (props) => {
-  const { rows, totalIncome, totalExpense, monthFilter, tagFilter } = props;
-  let expense = 0;
-  let income = 0;
+  const { totalIncome, totalExpense, monthFilter, tagFilter } = props;
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [expense, setExpense] = useState(0);
+  const [income, setIncome] = useState(0);
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-CA", options);
+  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/wallet/money");
+        const formattedData = response.data.map((item) => ({
+          ...item,
+          date: formatDate(item.date),
+        }));
+        setRows(formattedData);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    let exp = 0;
+    let inc = 0;
     rows.forEach((item) => {
       if (item.tag === "지출") {
-        expense = expense + parseInt(item.amount);
-        totalExpense(expense);
+        exp += parseInt(item.amount);
       } else if (item.tag === "수입") {
-        income = income + parseInt(item.amount);
-        totalIncome(income);
+        inc += parseInt(item.amount);
       }
     });
-  }, [rows]);
-
-  const columns = [
-    { id: "date", label: "Date", minWidth: 110 },
-    { id: "title", label: "Title", minWidth: 110 },
-    {
-      id: "category",
-      label: "Category",
-      minWidth: 100,
-      align: "center",
-    },
-    {
-      id: "tag",
-      label: "Tag",
-      minWidth: 60,
-      align: "right",
-    },
-    {
-      id: "amount",
-      label: "Amount",
-      minWidth: 80,
-      align: "right",
-    },
-  ];
-
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    setExpense(exp);
+    setIncome(inc);
+    totalExpense(exp);
+    totalIncome(inc);
+  }, [rows, totalExpense, totalIncome]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -69,8 +83,8 @@ const AccountList = (props) => {
       <TableContainer sx={{ maxHeight: 440 }}>
         <Typography sx={{ flex: "1 1 100%" }} id="tableTitle" component="div">
           <Tooltip title="Filter list">
-            <IconButton>
-              <FilterListIcon type="button" onClick={tagFilter} />
+            <IconButton onClick={tagFilter}>
+              <FilterListIcon />
             </IconButton>
           </Tooltip>
 
@@ -118,7 +132,7 @@ const AccountList = (props) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row._id}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
