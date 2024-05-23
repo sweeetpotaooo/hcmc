@@ -69,9 +69,7 @@ const AccountList = (props) => {
     let exp = 0;
     let inc = 0;
     rows.forEach((item) => {
-      if (item.tag === "지출") {
-        exp += parseInt(item.amount);
-      } else if (item.tag === "수입") {
+      if (item.tag === "수입") {
         inc += parseInt(item.amount);
       }
     });
@@ -172,14 +170,10 @@ const AccountList = (props) => {
                       let style = {};
 
                       if (column.id === "amount") {
-                        if (row.tag == "지출") {
-                          displayValue = `-${value}`;
-                          style.color = "red";
-                        } else if (row.tag === "수입") {
-                          displayValue = `+${value}`;
-                          style.color = "blue";
-                        }
+                        displayValue = `-${value}`;
+                        style.color = "red";
                       }
+        
                       return (
                         <TableCell key={column.id} align={column.align} style={style}>
                           {displayValue}
@@ -201,6 +195,58 @@ const AccountList = (props) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      {/* <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ ...style, width: 400 }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Edit Row
+          </Typography>
+          {selectedRow && (
+            <div>
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Date"
+                type="date"
+                name="date"
+                value={selectedRow.date}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Title"
+                name="title"
+                value={selectedRow.title}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Category"
+                name="category"
+                value={selectedRow.category}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Amount"
+                name="amount"
+                value={selectedRow.amount}
+                onChange={handleInputChange}
+              />
+              <Button onClick={handleSave} color="primary">
+                Save
+              </Button>
+            </div>
+          )}
+        </Box>
+      </Modal> */}
     </div>
   );
 };

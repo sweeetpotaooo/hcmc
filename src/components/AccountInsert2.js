@@ -12,7 +12,7 @@ const AccountInsert2 = ({ insertRow }) => {
     category: "",
     title: "",
     amount: "",
-    tag: "",
+    //tag: "",
   });
 
   const inputHandler = (e) => {
@@ -26,8 +26,8 @@ const AccountInsert2 = ({ insertRow }) => {
       value.date.trimEnd() === "" ||
       value.category.trimEnd() === "" ||
       value.title.trimEnd() === "" ||
-      value.amount.trimEnd() === "" ||
-      value.tag.trimEnd() === ""
+      value.amount.trimEnd() === "" 
+      //value.tag.trimEnd() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
     }
@@ -37,7 +37,7 @@ const AccountInsert2 = ({ insertRow }) => {
       title: value.title,
       category: value.category,
       amount: parseInt(value.amount),
-      tag: value.tag,
+      //tag: value.tag,
     };
     insertRow(newRow);
 
@@ -65,7 +65,7 @@ const AccountInsert2 = ({ insertRow }) => {
       category: " ",
       title: " ",
       amount: " ",
-      tag: " ",
+      //tag: " ",
     });
   };
 

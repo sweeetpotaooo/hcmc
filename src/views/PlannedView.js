@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import AccountArea from "../components/AccountArea2";
 import AccountInsert from "../components/AccountInsert2";
-import AccountList from "../components/AccountList";
+import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
 import ChartArea from "../components/ChartArea2";
+import VerticalBarChart from "../components/VerticalBarChart";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([
@@ -12,7 +13,7 @@ function PlannedView() {
       date: "2022-12-02",
       title: "점심",
       category: "식비",
-      tag: "지출",
+      //tag: "지출",
       amount: 8000,
     },
     {
@@ -20,7 +21,7 @@ function PlannedView() {
       date: "2022-12-02",
       title: "간식",
       category: "식비",
-      tag: "지출",
+      //tag: "지출",
       amount: 2000,
     },
     {
@@ -28,7 +29,7 @@ function PlannedView() {
       date: "2022-12-02",
       title: "영화",
       category: "문화/교육비",
-      tag: "지출",
+      //tag: "지출",
       amount: 12000,
     },
   ]);
@@ -58,7 +59,7 @@ function PlannedView() {
       title: row[1],
       category: row[2],
       //tag: row[3],
-      amount: row[4],
+      amount: row[3],
     };
 
     setOrgRows((prevState) => [newRow, ...prevState]);
@@ -126,10 +127,7 @@ function PlannedView() {
     setCount(count + 1);
     console.log(count);
     let newRows = [];
-    if (count % 3 === 0) {
-      newRows = orgRows.filter((item) => item.tag !== "수입");
-      setRows(newRows);
-    } else if (count % 3 === 1) {
+    if (count % 3 === 1) {
       newRows = orgRows.filter((prevState) => prevState.tag !== "지출");
       setRows(newRows);
     } else {
@@ -148,6 +146,7 @@ function PlannedView() {
           monthFilter={changeMonthHandler}
           tagFilter={changeTagHandler}
         />
+        <VerticalBarChart orgRows={rows} />
       </AccountArea>
       <ChartArea
         totalExpense={expense}
