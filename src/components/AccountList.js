@@ -12,8 +12,25 @@ import {
   IconButton,
   Tooltip,
   Typography,
+  TextField,
+  Box,
+  Button,
+  Modal,
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
+
+// 모달창 스타일
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const columns = [
   { id: "date", label: "Date", minWidth: 110, align: "left" },
@@ -47,6 +64,58 @@ const AccountList = (props) => {
   const [expense, setExpense] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [income, setIncome] = useState(0);
+
+  // 모달창 구현
+  const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const handleOpen = (row) => {
+    setSelectedRow(row);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedRow(null);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedRow((prevRow) => ({ ...prevRow, [name]: value }));
+  };
+
+  // 모달창 리스트 데이터 수정
+  const handleSave = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
+        selectedRow
+      );
+      const updatedRows = rows.map((row) =>
+        row._id === selectedRow._id ? selectedRow : row
+      );
+      setRows(updatedRows);
+      console.log(updatedRows);
+      handleClose();
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // 모달창 리스트 데이터 삭제
+  const handleDelete = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:4000/wallet/money/delete/${selectedRow._id}`,
+        selectedRow
+      );
+      handleClose();
+      console.log(response.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // 리스트 데이터
   useEffect(() => {
@@ -98,42 +167,6 @@ const AccountList = (props) => {
     setPage(0);
   };
 
-  // ObjectId 추출 후 백엔드로 보내기
-  const handleRowClick = async (id) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:4000/wallet/money/${id}`,
-        { id },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      console.log(response.data);
-      handleDeleteWindow(id);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  // 삭제 window 띄우기
-  const handleDeleteWindow = (id) => {
-    if (window.confirm("삭제하시겠습니까?")) {
-      handleDeleteClick(id);
-    }
-  };
-  // 선택한 데이터 삭제
-  const handleDeleteClick = async (id) => {
-    try {
-      const response = await axios.post(
-        `http://localhost:4000/wallet/money/delete/${id}`
-      );
-      console.log(response.data);
-      window.location.reload();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <div className="AccountList">
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -181,13 +214,12 @@ const AccountList = (props) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  // _id: ObjectId이기 때문에 이걸 클릭하면 ObjectId가 눌려지도록 하기
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
                     key={row._id}
-                    onClick={() => handleRowClick(row._id)}
+                    onClick={() => handleOpen(row)}
                   >
                     {columns.map((column) => {
                       const value = row[column.id];
@@ -212,6 +244,61 @@ const AccountList = (props) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{ ...style, width: 400 }}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Edit Row
+          </Typography>
+          {selectedRow && (
+            <div>
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Date"
+                type="date"
+                name="date"
+                value={selectedRow.date}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Title"
+                name="title"
+                value={selectedRow.title}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Category"
+                name="category"
+                value={selectedRow.category}
+                onChange={handleInputChange}
+              />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Amount"
+                name="amount"
+                value={selectedRow.amount}
+                onChange={handleInputChange}
+              />
+              <Button onClick={handleSave} color="primary">
+                Save
+              </Button>
+              <Button onClick={handleDelete} color="primary">
+                Delete
+              </Button>
+            </div>
+          )}
+        </Box>
+      </Modal>
     </div>
   );
 };
