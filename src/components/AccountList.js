@@ -211,7 +211,14 @@ const AccountList = (props) => {
           </TableHead>
           <TableBody>
             {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .slice(
+                (page && page >= 0 ? page : 0) *
+                  (rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10),
+                (page && page >= 0 ? page : 0) *
+                  (rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10) +
+                  (rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10)
+              )
+
               .map((row) => {
                 return (
                   <TableRow
