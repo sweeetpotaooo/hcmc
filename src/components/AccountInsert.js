@@ -47,9 +47,7 @@ const AccountInsert = ({ insertRow }) => {
           "http://localhost:4000/wallet/money",
           data,
           {
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
           }
         );
         console.log(response.data);

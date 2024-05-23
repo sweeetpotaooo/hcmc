@@ -76,7 +76,7 @@ function App() {
       save: 0,
     });
 
-    console.log(rows);
+    // console.log(rows);
     rows.map((item) => {
       if (item.category === "식비") {
         setDataList((prev) => ({
