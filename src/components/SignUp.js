@@ -31,7 +31,7 @@ const SignUp = () => {
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username">아이디:</label>
+            <label htmlFor="username">아이디</label>
             <input
               type="text"
               id="username"
@@ -41,7 +41,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="password">비밀번호:</label>
+            <label htmlFor="password">비밀번호</label>
             <input
               type="password"
               id="password"
@@ -51,7 +51,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="birthdate">생년월일:</label>
+            <label htmlFor="birthdate">생년월일</label>
             <input
               type="date"
               id="birthdate"
@@ -61,7 +61,7 @@ const SignUp = () => {
             />
           </div>
           <div>
-            <label htmlFor="gender">성별:</label>
+            <label htmlFor="gender">성별</label>
             <select
               id="gender"
               name="gender"
@@ -74,7 +74,7 @@ const SignUp = () => {
             </select>
           </div>
           <div>
-            <label htmlFor="university">소속 대학교:</label>
+            <label htmlFor="university">소속 대학교</label>
             <input
               type="text"
               id="university"

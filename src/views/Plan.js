@@ -5,15 +5,18 @@ import "../style/Plan.scss";
 export default function Plan() {
   const navigate = useNavigate();
   const handleNavigate = () => {
-    navigate("/");
+    navigate("/free");
   };
+  const handle2Navigate = () => {
+    navigate("/planned");
+  }
 
   return (
     <div className="PlanPage">
       <div className="title">돈, 어떻게 쓰고 싶나요?</div>
 
       <div>
-        <button className="plan" onClick={handleNavigate}>
+        <button className="plan" onClick={handle2Navigate}>
           <div className="planTitle">계획적인 소비</div>
           <div className="planContent">
             <p align="left">예산을 설정하고 예산 안에서</p>

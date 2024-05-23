@@ -40,45 +40,49 @@ export default function Login() {
   };
 
   return (
-    <div className="LoginPage">
-      <div className="title">Login</div>
+    <div>
+      <div className="LoginPage">
+        <div className="b">
+          <div className="title">Login</div>
 
-      <div className="contentTitle">
-        <div className="inputTitle">Id</div>
-        <div className="inputWrite">
-          <input
-            type="text"
-            className="input"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
+          <div className="contentTitle">
+            <div className="inputtitle">Id</div>
+            <div className="inputWrite">
+              <input
+                type="text"
+                className="input"
+                value={id}
+                onChange={(e) => setId(e.target.value)}
+              />
+            </div>
+          </div>
+          {idError && <div className="errMessage">{idError}</div>}
+
+          <div className="contentTitle">
+            <div className="inputtitle">PassWord</div>
+            <div className="inputWrite">
+              <input
+                type="password"
+                className="input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          {passwordError && <div className="errMessage">{passwordError}</div>}
+
+          <div className="button">
+            <button className="btn" type="button" onClick={handleLoginClick}>
+              로그인
+            </button>
+          </div>
+
+          <p className="user">
+            아이디가 없다면?
+            <a href="/signup">회원가입</a>
+          </p>
         </div>
       </div>
-      {idError && <div className="errMessage">{idError}</div>}
-
-      <div className="contentTitle">
-        <div className="inputTitle">PassWord</div>
-        <div className="inputWrite">
-          <input
-            type="password"
-            className="input"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      </div>
-      {passwordError && <div className="errMessage">{passwordError}</div>}
-
-      <div className="button">
-        <button className="btn" type="button" onClick={handleLoginClick}>
-          로그인
-        </button>
-      </div>
-
-      <p className="user">
-        아이디가 없다면?
-        <a href="/signup">회원가입</a>
-      </p>
-    </div>
+   </div>
   );
 }
