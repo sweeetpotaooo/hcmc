@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import "../style/AccountInsert.scss";
 import Button from "@mui/material/Button";
-
+import axios from "axios";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
 const AccountInsert = ({ insertRow }) => {
-  const [row, setRow] = useState({});
-  const [value, setValue] = useState({});
+  const [value, setValue] = useState({
+    date: "",
+    category: "",
+    title: "",
+    amount: "",
+    tag: "",
+  });
 
   const inputHandler = e => {
     setValue({ ...value, [e.target.name]: e.target.value });
   };
-
-  // const [date, setDate] = useState("");
-  // const [category, setCategory] = useState("");
-  // const [title, setTitle] = useState("");
-  // const [amount, setAmount] = useState();
-  // const [tag, setTag] = useState();
 
   const submitHandler = e => {
     e.preventDefault();
@@ -27,65 +26,98 @@ const AccountInsert = ({ insertRow }) => {
       value.date.trimEnd() === "" ||
       value.category.trimEnd() === "" ||
       value.title.trimEnd() === "" ||
-      value.amount.trimEnd() === ""
+      value.amount.trimEnd() === "" ||
+      value.tag.trimEnd() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
     }
 
-    insertRow([
-      value.date,
-      value.title,
-      value.category,
-      value.tag,
-      parseInt(value.amount),
-    ]);
+    const newRow = {
+      date: value.date,
+      title: value.title,
+      category: value.category,
+      amount: parseInt(value.amount),
+      tag: value.tag,
+    };
+    insertRow(newRow);
 
-    // setValue({
-    //   date:" ",
-    //   category:" ",
-    //   title:" ",
-    //   amount:" ",
-    // })
+    const sendData = async data => {
+      try {
+        const response = await axios.post(
+          "http://localhost:4000/wallet/money",
+          data,
+          {
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+        console.log(response.data);
+        window.location.reload();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    sendData([newRow]); // 데이터를 백엔드로 전송
 
-    // setTitle("");
-    // setAmount("");
-    // setDate("");
-    // setCategory("");
+    setValue({
+      date: " ",
+      category: " ",
+      title: " ",
+      amount: " ",
+      tag: " ",
+    });
   };
 
   return (
-    <form className="AccountInsert" onSubmit={submitHandler}>
+    <form
+      className="AccountInsert"
+      onSubmit={submitHandler}
+      target="insertSubmit"
+    >
       <label className="inputDate">
-        Date
+        <h3>Date</h3>
         <input type="date" name="date" onChange={inputHandler} />
       </label>
 
       <label className="inputSelect">
-        Category
-        <select onChange={inputHandler} name="category" required>
-          <option disabled>지출</option>
+        <h3>Category</h3>
+        <select
+          name="category"
+          value={value.category}
+          onChange={inputHandler}
+          required
+        >
+          <option value="" disabled>
+            지출
+          </option>
           <option>식비</option>
           <option>생필품</option>
           <option>문화/교육비</option>
           <option>기타</option>
           <option>저축</option>
-          <option disabled>수입</option>
+          <option value="" disabled>
+            수입
+          </option>
           <option>월급</option>
           <option>기타소득</option>
         </select>
       </label>
       <label className="inputTitle">
-        Title
-        <input type="text" onChange={inputHandler} name="title" />
+        <h3>Title</h3>
+        <input
+          type="text"
+          name="title"
+          value={value.title}
+          onChange={inputHandler}
+        />
       </label>
 
       <label className="inputNumber">
-        Amount
+        <h3>Amount</h3>
         <input
           type="number"
-          onChange={inputHandler}
-          // step={10000}
           name="amount"
+          value={value.amount}
+          onChange={inputHandler}
         />
       </label>
 
@@ -93,18 +125,19 @@ const AccountInsert = ({ insertRow }) => {
         <RadioGroup
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
-          // defaultValue="지출"
+          name="tag"
+          value={value.tag}
+          onChange={inputHandler}
         >
           <FormControlLabel
             value="수입"
-            control={<Radio size="small" name="tag" onChange={inputHandler} />}
+            control={<Radio size="small" />}
             label="수입"
             labelPlacement="start"
           />
           <FormControlLabel
             value="지출"
-            control={<Radio size="small" name="tag" onChange={inputHandler} />}
+            control={<Radio size="small" />}
             label="지출"
             labelPlacement="start"
           />
