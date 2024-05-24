@@ -5,6 +5,7 @@ import AccountInsert from "../components/AccountInsert";
 import AccountList from "../components/AccountList";
 import AccountTempleat from "../components/AccountTempleat";
 import ChartArea from "../components/ChartArea";
+import Header from "../components/Header";
 
 function HomeView() {
   const [orgRows, setOrgRows] = useState([
@@ -141,6 +142,7 @@ function HomeView() {
   return (
     <>
       {/* <RouterProvider router={router} /> */}
+      <Header/>
       <AccountTempleat>
         <AccountArea>
           <AccountInsert insertRow={insertRowHandler} />
