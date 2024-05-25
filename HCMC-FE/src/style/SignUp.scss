@@ -1,0 +1,76 @@
+// SignUp.scss
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; // Optional: to distinguish the form background
+}
+
+.signup-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+
+  form {
+    div {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="password"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      select {
+        height: 38px;
+      }
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      background-color: #8f9cd0;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #2a1e62;
+      }
+    }
+  }
+}
