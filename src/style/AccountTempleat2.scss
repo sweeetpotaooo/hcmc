@@ -5,7 +5,7 @@
 .body2 {
   width: 100vw;
   min-height: 100vh;
-  background-color: #9eaeb9;
+  background-color: #97a1b5;
 
   .wrap {
     width: 80%;
@@ -17,15 +17,15 @@
   }
 }
 @media all and (max-width: 768px) {
-  .body {
+  .body2 {
     .wrap {
       width: 90%;
       flex-flow: column wrap;
       position: relative;
       top: -30px;
 
-      .accountArea,
-      .chartArea {
+      .accountArea2,
+      .chartArea2 {
         width: 100%;
       }
     }

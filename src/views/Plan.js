@@ -13,7 +13,7 @@ export default function Plan() {
 
   return (
     <div className="PlanPage">
-      <div className="title">돈, 어떻게 쓰고 싶나요?</div>
+      <div className="Title">돈, 어떻게 쓰고 싶나요?</div>
 
       <div>
         <button className="plan" onClick={handle2Navigate}>

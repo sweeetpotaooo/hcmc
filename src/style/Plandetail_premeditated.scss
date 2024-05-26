@@ -4,90 +4,104 @@ html {
   margin: 0;
 }
 
-.wrapper {
+.LoginPage {
+  width: 100%;
+  height: 100vh;
+  //padding: 10px;
+  background-color: #f1f4fa;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.subdiv {
+  width: 500px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0; // Optional: to distinguish the form background
+  flex-direction: column;
+  text-align: center;
 }
 
-.signup-container {
+.title {
   width: 100%;
-  max-width: 400px;
-  padding: 20px;
-  border: 1px solid #ddd;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #262626;
+  text-align: center;
+}
+
+.contentTitle {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.inputtitle {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #262626;
+  text-align: left;
+
+}
+
+.inputWrite {
+  width: 100%;
   border-radius: 5px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+}
 
-  h1 {
-    text-align: center;
-    margin-bottom: 40px;
-    font-size: 24px;
-    color: #333;
-  }
+.input {
+  height: 45px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 15px;
+}
 
-  form {
-    div {
-      margin-bottom: 15px;
+.input:focus {
+  outline: 2px solid rgb(139, 133, 205);
+}
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-      }
+.plan-duration {
+  display: flex;
+  align-items: center;
+}
 
-      input[type="text"],
-      input[type="password"],
-      input[type="date"],
-      input[type="number"],
-      select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-      }
+.plan-duration span {
+  margin: 0 10px;
+}
 
-      select {
-        height: 38px;
-      }
-    }
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 
-    .plan-duration {
-      display: flex;
-      align-items: center;
+.btn {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: rgb(43, 5, 133);
+  border-radius: 7px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 
-      label {
-        margin-right: 10px;
-      }
-
-      input[type="date"] {
-        width: auto;
-        flex: 1;
-        margin-right: 5px;
-      }
-
-      span {
-        margin: 0 5px;
-      }
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background-color: #8f9cd0;
-      border: none;
-      border-radius: 4px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #2a1e62;
-      }
-    }
-  }
+.btn:hover {
+  background-color: rgb(129, 134, 203);
 }

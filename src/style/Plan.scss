@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   padding: 50px;
-  background-color: #e4e9f3;
+  background-color: #f1f4fa;
 
   display: flex;
   justify-content: center; //가로축 가운데 정렬
@@ -11,29 +11,34 @@
   flex-direction: column; // 요소 세로로 배치
 }
 
-.title {
-  width: 700px;
-  font-size: 40px;
+.Title {
+  width: 800px;
+  font-size: 45px;
+  font-weight: 700;
+  margin-top: 40px;
+  margin-bottom: 60px;
   color: black;
+  text-align: left;
 }
 
 .plan {
-  width: 700px;
-  height: 170px;
-  background-color: #656575;
-  padding: 30px;
+  width: 800px;
+  height: 200px;
+  background-color: rgb(43, 5, 133);
+  padding: 40px;
   border: 0;
   border-radius: 15px;
   margin-bottom: 50px;
   flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .plan:hover {
-  background-color: #2a1e62;
+  background-color: rgb(129, 134, 203);
 }
 
 .planTitle {
-  font-size: 25px;
+  font-size: 28px;
   font-weight: 600;
   color: rgb(255, 255, 255);
   float: left;
@@ -42,7 +47,7 @@
 
 .planContent {
   font-size: 20px;
-  color: #c4c4c4;
-  margin-top: 55px;
+  color: #d8d8d8;
+  margin-top: 60px;
   padding: 5px;
 }

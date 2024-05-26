@@ -2,7 +2,7 @@
   width: 100%;
   height: 100vb;
   padding: 20px;
-  background-color: #e4e9f3;
+  background-color: #f1f4fa;
   display: flex;
   justify-content: center; //가로축 가운데 정렬
   align-items: center; //세로축 가운데 정렬
@@ -11,26 +11,25 @@
 .subdiv {
   width: 500px;
   padding: 30px;
-  background-color: #f0f1f4;
+  background-color: #fff;
   border-radius: 15px;
   border: 1px solid #ddd;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   display: flex;
   justify-content: center; //가로축 가운데 정렬
-  align-items: left; //세로축 가운데 정렬
+  align-items: center; //세로축 가운데 정렬
   flex-direction: column; //요소 세로로 배치
-  border-radius: 15px;
 }
 
 .title {
-  width: 100%;
+  width: 500px;
   margin-top: 30px;
   margin-bottom: 60px;
   font-size: 30px;
   font-weight: 700;
   color: #262626;
-  text-align: left;
+  text-align: center;
 }
 
 .contentTitle {
@@ -41,7 +40,7 @@
 .inputtitle {
   width: 100%;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   color: #262626;
 }
 
@@ -56,10 +55,11 @@
   height: 45px;
   border: 0;
   border-radius: 5px;
-  outline: none;
-  font-size: 15px;
+  //outline: none;
+  font-size: 16px;
   font-weight: 400;
   background-color: #ffffff;
+  border: 1px solid #ccc;
 }
 
 .input:focus {
@@ -82,14 +82,15 @@
   width: 100%;
   height: 48px;
   border: none;
+  font-size: 15px;
   font-weight: 700;
-  background-color: #8f9cd0;
+  background-color: rgb(43, 5, 133);
   border-radius: 7px;
   color: rgb(255, 255, 255);
 }
 
 .btn:hover {
-  background-color: #2a1e62
+  background-color: rgb(129, 134, 203)
 }
 //#1a328e
 

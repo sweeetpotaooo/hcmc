@@ -6,6 +6,7 @@ import AccountTempleat from "../components/AccountTempleat";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
 import Header from "../components/Hearder";
+import PlanName from "../components/PlanName";
 
 function HomeView() {
   const [orgRows, setOrgRows] = useState([
@@ -142,25 +143,26 @@ function HomeView() {
   return (
     <>
       <Header />
-      <AccountTempleat>
-        <AccountArea>
-          <AccountInsert insertRow={insertRowHandler} />
-          <AccountList
-            rows={rows}
-            totalIncome={totalIncomeHandler}
-            totalExpense={totalExpenseHandler}
-            monthFilter={changeMonthHandler}
-            tagFilter={changeTagHandler}
+        <AccountTempleat>
+          <PlanName> </PlanName>
+          <AccountArea>
+            <AccountInsert insertRow={insertRowHandler} />
+            <AccountList
+              rows={rows}
+              totalIncome={totalIncomeHandler}
+              totalExpense={totalExpenseHandler}
+              monthFilter={changeMonthHandler}
+              tagFilter={changeTagHandler}
+            />
+            <VerticalBarChart orgRows={rows} />
+          </AccountArea>
+          <ChartArea
+            totalExpense={expense}
+            totalIncome={income}
+            dataList={dataList}
+            orgRows={orgRows}
           />
-          <VerticalBarChart orgRows={rows} />
-        </AccountArea>
-        <ChartArea
-          totalExpense={expense}
-          totalIncome={income}
-          dataList={dataList}
-          orgRows={orgRows}
-        />
-      </AccountTempleat>
+        </AccountTempleat>
     </>
   );
 }

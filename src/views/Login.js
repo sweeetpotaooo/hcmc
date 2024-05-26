@@ -46,7 +46,7 @@ export default function Login() {
           <div className="title">Login</div>
 
           <div className="contentTitle">
-            <div className="inputtitle">Id</div>
+            <div className="inputtitle">아이디</div>
             <div className="inputWrite">
               <input
                 type="text"
@@ -59,7 +59,7 @@ export default function Login() {
           {idError && <div className="errMessage">{idError}</div>}
 
           <div className="contentTitle">
-            <div className="inputtitle">PassWord</div>
+            <div className="inputtitle">비밀번호</div>
             <div className="inputWrite">
               <input
                 type="password"

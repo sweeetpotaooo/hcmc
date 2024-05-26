@@ -1,17 +1,32 @@
-.mainPage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  padding: 50px;
-  background-color: #e4e9f3;
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+}
 
+.mainPage, .mainPage2, .mainPage3 {
+  //position: absolute;
+  width: 100%;
+  height: 90vh;
+  padding: 50px;
   display: flex;
   justify-content: center; //가로축 가운데 정렬
   align-items: left; //세로축 왼쪽 정렬
   flex-direction: column; // 요소 세로로 배치
 }
 
-.a {
+.mainPage {
+  background-color: #f1f4fa !important;
+}
+
+.mainPage2 {
+  background-color: #c7cfdc;
+}
+
+.mainPage {
+  background-color: #e4e9f3;
+}
+
+.mainsubdiv {
   padding-left: 18%;
 }
 .maintitle {
@@ -24,13 +39,14 @@
 
 .maincontent {
   font-size: 20px;
-  font-weight: 400;
-  color: #636262;
+  font-weight: 600;
+  color: #414141;
 }
 
 .Button {
   display: flex;
   gap: 20px;
+  margin-top: 30px;
 }
 .mainbtn {
   margin-top: 50px;
@@ -38,13 +54,14 @@
   width: 150px;
   height: 48px;
   border: none;
+  font-size: 15px;
   font-weight: 700;
-  background-color: #8f9cd0;
+  background-color: rgb(43, 5, 133);
   border-radius: 7px;
   color: rgb(255, 255, 255);
 }
 
 .mainbtn:hover {
-  background-color: #2a1e62;
+  background-color: rgb(129, 134, 203);
 }
 //#1a328e
