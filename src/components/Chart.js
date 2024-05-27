@@ -9,11 +9,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const processData = (data) => {
   const categories = ["식비", "생필품", "문화/교육비", "기타", "저축"];
   const backgroundColors = [
-    "rgb(255, 130, 157)",
-    "rgba(54, 162, 235)",
-    "rgba(255, 206, 86)",
-    "rgba(75, 192, 192)",
-    "rgba(60, 179, 113)",
+    "rgb(255, 130, 157)", // 식비
+    "rgba(54, 162, 235)", // 생필품
+    "rgba(255, 206, 86)", // 문화/교육비
+    "rgba(75, 192, 192)", // 기타
+    "rgba(60, 179, 113)", // 저축
   ];
 
   const dataList = categories.reduce((acc, category) => {
@@ -26,6 +26,8 @@ const processData = (data) => {
       dataList[item.category] += item.amount;
     }
   });
+  console.log(dataList);
+
   return {
     labels: categories,
     datasets: [
@@ -41,12 +43,6 @@ const Chart = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const options = {
-    responsive: true,
-    plugins: { legend: { position: "right" } },
-    layout: { padding: { left: 60 } },
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,9 +55,14 @@ const Chart = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []); // useEffect에 빈 배열을 두어 컴포넌트가 마운트될 때만 실행되도록 함
+
+  const options = {
+    responsive: true,
+    plugins: { legend: { position: "right" } },
+    layout: { padding: { left: 60 } },
+  };
 
   if (loading) {
     return <div>Loading...</div>;
