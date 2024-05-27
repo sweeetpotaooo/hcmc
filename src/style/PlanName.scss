@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.PlanNamePage {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  height: 130px;
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  box-sizing: border-box;
+}
+
+.Subdiv {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.planname {
+  font-size: 20px;
+  font-weight: 700;
+  color: #262626;
+  text-align: left;
+}
+
+.plandate {
+  font-size: 15px;
+  color: #262626;
+  text-align: left;
+}
+
+.plancontent {
+  font-size: 15px;
+  color: #262626;
+  text-align: left;
+}
+
+@media all and (max-width: 768px) {
+  .PlanNamePage {
+    width: 100%;
+    // padding: 20px;
+    // height: auto;
+  }
+  
+  // .Subdiv {
+  //   width: 100%;
+  // }
+
+  // .planname,
+  // .plandate,
+  // .plancontent {
+  //   font-size: 14px;
+  //   text-align: center;
+  //   width: 100%;
+  //   margin-bottom: 10px;
+  // }
+}

@@ -1,0 +1,107 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.LoginPage {
+  width: 100%;
+  height: 100vh;
+  //padding: 10px;
+  background-color: #f1f4fa;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+
+.subdiv {
+  width: 500px;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.title {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #262626;
+  text-align: center;
+}
+
+.contentTitle {
+  width: 100%;
+  margin-top: 26px;
+}
+
+.inputtitle {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #262626;
+  text-align: left;
+
+}
+
+.inputWrite {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 8px;
+}
+
+.input {
+  height: 45px;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+.input:focus {
+  outline: 2px solid rgb(139, 133, 205);
+}
+
+.plan-duration {
+  display: flex;
+  align-items: center;
+}
+
+.plan-duration span {
+  margin: 0 10px;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: rgb(43, 5, 133);
+  border-radius: 7px;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: rgb(129, 134, 203);
+}

@@ -1,0 +1,106 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$calendar-border-color: #ccc;
+$calendar-bg-color: #ffffff;
+$day-border-color: #f0f0f0;
+
+.calendar {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 1px solid $calendar-border-color;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background-color: $calendar-bg-color;
+  border-radius: 20px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: $calendar-bg-color;
+    border-bottom: 1px solid $calendar-border-color;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .days-of-week {
+    display: flex;
+    background-color: $calendar-bg-color;
+    border-bottom: 1px solid $calendar-border-color;
+
+    .day-of-week {
+      width: 14.28%;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      font-weight: bold;
+    }
+  }
+
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+
+    .day {
+      width: 14.28%;
+      height: 100px; // 고정된 높이 설정
+      padding: 5px; // 패딩 조정
+      box-sizing: border-box;
+      text-align: center;
+      border: 1px solid $day-border-color;
+      display: flex;
+      flex-direction: column;
+      align-items: center; // 수평 정렬을 왼쪽으로
+      justify-content: flex-start; // 수직 정렬을 위쪽으로
+      position: relative; // 상대 위치 지정
+
+      .date {
+        font-weight: bold;
+        margin-bottom: 5px; // 날짜 아래에 여백 추가
+      }
+
+      .income, .expense {
+        font-size: 0.9em;
+        align-self: center; // 수평 정렬을 가운데로
+      }
+
+      .income {
+        color: green;
+      }
+
+      .expense {
+        color: red;
+      }
+    }
+
+    .empty {
+      width: 14.28%;
+      height: 100px; // 고정된 높이 설정
+      padding: 5px; // 패딩 조정
+      box-sizing: border-box;
+      border: 1px solid $day-border-color;
+    }
+  }
+  @media all and (max-width: 768px){
+    .calendar {
+      width: 100%;
+    }
+  }
+}
