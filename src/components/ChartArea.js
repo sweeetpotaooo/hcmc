@@ -1,10 +1,6 @@
 import React from "react";
 import "../style/ChartArea.scss";
 import Chart from "./Chart";
-<<<<<<< HEAD
-//import VerticalBarChart from "./VerticalBarChart";
-=======
->>>>>>> main
 
 const ChartArea = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
   return (

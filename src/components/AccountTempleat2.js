@@ -5,10 +5,7 @@ const AccountTempleat2 = ({ children }) => {
   return (
     <div className="body2">
       <div className="wrap"> {children}</div>
-<<<<<<< HEAD
-=======
      
->>>>>>> main
     </div>
   );
 };

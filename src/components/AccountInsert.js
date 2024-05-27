@@ -4,11 +4,7 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-<<<<<<< HEAD
-import FormControlLabel from "@mui/material/FormControlLabel";
-=======
 import { FormControlLabel } from "@mui/material";
->>>>>>> main
 
 const AccountInsert = ({ insertRow }) => {
   const [value, setValue] = useState({
@@ -119,16 +115,7 @@ const AccountInsert = ({ insertRow }) => {
 
       <label className="inputNumber">
         <h3>Amount</h3>
-<<<<<<< HEAD
-        <input
-          type="number"
-          name="amount"
-          value={value.amount}
-          onChange={inputHandler}
-        />
-=======
         <input name="amount" value={value.amount} onChange={inputHandler} />
->>>>>>> main
       </label>
 
       <label className="radioBtn">
