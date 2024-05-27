@@ -9,6 +9,7 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+<<<<<<< HEAD
   Tooltip,
   Typography,
   TextField,
@@ -34,11 +35,19 @@ const style = {
   boxShadow: 24,
   p: 3,
 };
+=======
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
+>>>>>>> main
 
 const columns = [
   { id: "date", label: "Date", minWidth: 110 },
   { id: "title", label: "Title", minWidth: 110 },
   { id: "category", label: "Category", minWidth: 100, align: "center" },
+<<<<<<< HEAD
   { id: "amount", label: "Amount", minWidth: 80, align: "right" },
 ];
 
@@ -70,6 +79,19 @@ const AccountList = (props) => {
   const [input, setInput] = useState(null);
   const [searchList, setSearchList] = useState(null);
   // 모달창 구현
+=======
+  // { id: "tag", label: "Tag", minWidth: 60, align: "right" },
+  { id: "amount", label: "Amount", minWidth: 80, align: "right" },
+];
+
+const AccountList = (props) => {
+  const { totalIncome, totalExpense, monthFilter, tagFilter } = props;
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [expense, setExpense] = useState(0);
+  const [income, setIncome] = useState(0);
+>>>>>>> main
   const [open, setOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState(null);
 
@@ -81,6 +103,7 @@ const AccountList = (props) => {
   const handleClose = () => {
     setOpen(false);
     setSelectedRow(null);
+<<<<<<< HEAD
     window.location.reload(); // 모달창 닫을 시 자동으로 새로고침
   };
 
@@ -130,6 +153,16 @@ const AccountList = (props) => {
     };
 
     // 리스트 데이터 불러오기
+=======
+  };
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-CA", options);
+  };
+
+  useEffect(() => {
+>>>>>>> main
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/wallet/money");
@@ -142,16 +175,27 @@ const AccountList = (props) => {
         console.error(err);
       }
     };
+<<<<<<< HEAD
     fetchData();
   }, []);
 
   // 지출, 수입 데이터 상태 체크
+=======
+
+    fetchData();
+  }, []);
+
+>>>>>>> main
   useEffect(() => {
     let exp = 0;
     let inc = 0;
     rows.forEach((item) => {
       if (item.tag === "수입") {
+<<<<<<< HEAD
         inc -= parseInt(item.amount);
+=======
+        inc += parseInt(item.amount);
+>>>>>>> main
       }
     });
     setExpense(exp);
@@ -169,6 +213,7 @@ const AccountList = (props) => {
     setPage(0);
   };
 
+<<<<<<< HEAD
   // 검색기능 구현
   const handleSearch = (e) => {
     setInput(e.target.value.toLowerCase());
@@ -183,6 +228,24 @@ const AccountList = (props) => {
       );
       setSearchList(response.row);
       console.log(response.data);
+=======
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSelectedRow((prevRow) => ({ ...prevRow, [name]: value }));
+  };
+
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(`http://localhost:4000/wallet/money/${selectedRow._id}`, selectedRow);
+      const updatedRow = response.data;
+
+      // 로컬 상태 업데이트
+      const updatedRows = rows.map((row) =>
+        row._id === updatedRow._id ? updatedRow : row
+      );
+      setRows(updatedRows);
+      handleClose();
+>>>>>>> main
     } catch (err) {
       console.error(err);
     }
@@ -192,11 +255,18 @@ const AccountList = (props) => {
     <div className="AccountList">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Typography sx={{ flex: "1 1 100%" }} id="tableTitle" component="div">
+<<<<<<< HEAD
           <Tooltip title="Search list">
             <Button onClick={onClickSearh} type="text" disabled={input === 0}>
               <Input onChange={handleSearch} type="text"></Input>
               <SearchIcon></SearchIcon>
             </Button>
+=======
+          <Tooltip title="Filter list">
+            <IconButton onClick={tagFilter}>
+              <FilterListIcon />
+            </IconButton>
+>>>>>>> main
           </Tooltip>
 
           <select
@@ -209,11 +279,26 @@ const AccountList = (props) => {
             <option value="" disabled>
               월별 필터
             </option>
+<<<<<<< HEAD
             {months.map((month) => (
               <option key={month.number} value={month.number}>
                 {month.name}
               </option>
             ))}
+=======
+            <option value="01">1월</option>
+            <option value="02">2월</option>
+            <option value="03">3월</option>
+            <option value="04">4월</option>
+            <option value="05">5월</option>
+            <option value="06">6월</option>
+            <option value="07">7월</option>
+            <option value="08">8월</option>
+            <option value="09">9월</option>
+            <option value="10">10월</option>
+            <option value="11">11월</option>
+            <option value="12">12월</option>
+>>>>>>> main
           </select>
         </Typography>
 
@@ -242,6 +327,7 @@ const AccountList = (props) => {
               )
               .map((row) => {
                 return (
+<<<<<<< HEAD
                   <TableRow
                     hover
                     role="checkbox"
@@ -249,12 +335,16 @@ const AccountList = (props) => {
                     key={row._id}
                     onClick={() => handleOpen(row)}
                   >
+=======
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row._id} onClick={() => handleOpen(row)}>
+>>>>>>> main
                     {columns.map((column) => {
                       const value = row[column.id];
                       let displayValue = value;
                       let style = {};
 
                       if (column.id === "amount") {
+<<<<<<< HEAD
                         if (row.tag == "지출") {
                           displayValue = `-${value}`;
                           style.color = "red";
@@ -266,6 +356,14 @@ const AccountList = (props) => {
                           align={column.align}
                           style={style}
                         >
+=======
+                        displayValue = `-${value}`;
+                        style.color = "red";
+                      }
+        
+                      return (
+                        <TableCell key={column.id} align={column.align} style={style}>
+>>>>>>> main
                           {displayValue}
                         </TableCell>
                       );
@@ -285,6 +383,7 @@ const AccountList = (props) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+<<<<<<< HEAD
       <Modal
         open={open}
         onClose={handleClose}
@@ -338,8 +437,27 @@ const AccountList = (props) => {
           )}
         </Box>
       </Modal>
+=======
+>>>>>>> main
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default AccountList;
+=======
+// const style = {
+//   position: 'absolute',
+//   top: '50%',
+//   left: '50%',
+//   transform: 'translate(-50%, -50%)',
+//   width: 400,
+//   bgcolor: 'background.paper',
+//   border: '2px solid #000',
+//   boxShadow: 24,
+//   p: 4,
+// };
+
+
+export default AccountList;
+>>>>>>> main

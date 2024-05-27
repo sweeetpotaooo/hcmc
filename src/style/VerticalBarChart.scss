@@ -3,15 +3,30 @@
   background: #fff;
   width: 90%;
   max-width: 600px;
+<<<<<<< HEAD
   height: 20%;
   margin: 30px auto 30px auto;
   padding: 20px 30px;
+=======
+  height: 25%;
+  margin: 30px auto 30px auto;
+  padding-top: 30px;
+  padding-left: 50px;
+>>>>>>> main
   border-radius: 20px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
+<<<<<<< HEAD
 @media all and (max-width: 768px){
   .verticalChart {
     width: 100%;
   }
 }
+=======
+@media all and (max-width: 768px) {
+  .verticalChart {
+    width: 100%;
+  }
+}
+>>>>>>> main

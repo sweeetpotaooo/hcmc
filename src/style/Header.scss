@@ -4,7 +4,11 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+<<<<<<< HEAD
   background-color: #ececec;
+=======
+  background-color: #dddddd;
+>>>>>>> main
 
   .logo {
     font-size: 24px;
@@ -27,7 +31,11 @@
         font-size: 16px;
         cursor: pointer;
         position: relative;
+<<<<<<< HEAD
         margin-left: 20px;
+=======
+        margin-left:10px;
+>>>>>>> main
 
         &:hover::after {
           content: '';

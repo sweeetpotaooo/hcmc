@@ -1,6 +1,10 @@
 {
+<<<<<<< HEAD
   "homepage": "https://gyulls2.github.io/accounterbook_app/",
   "name": "account-app",
+=======
+  "name": "hcmc",
+>>>>>>> main
   "version": "0.1.0",
   "private": true,
   "dependencies": {

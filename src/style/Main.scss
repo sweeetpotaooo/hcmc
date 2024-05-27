@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -8,12 +9,22 @@
   width: 100%;
   height: 90vh;
   padding: 50px;
+=======
+.mainPage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  background-color: #e4e9f3;
+
+>>>>>>> main
   display: flex;
   justify-content: center; //가로축 가운데 정렬
   align-items: left; //세로축 왼쪽 정렬
   flex-direction: column; // 요소 세로로 배치
 }
 
+<<<<<<< HEAD
 .mainPage {
   background-color: #f1f4fa !important;
 }
@@ -27,6 +38,9 @@
 }
 
 .mainsubdiv {
+=======
+.a {
+>>>>>>> main
   padding-left: 18%;
 }
 .maintitle {
@@ -39,14 +53,22 @@
 
 .maincontent {
   font-size: 20px;
+<<<<<<< HEAD
   font-weight: 600;
   color: #414141;
+=======
+  font-weight: 400;
+  color: #636262;
+>>>>>>> main
 }
 
 .Button {
   display: flex;
   gap: 20px;
+<<<<<<< HEAD
   margin-top: 30px;
+=======
+>>>>>>> main
 }
 .mainbtn {
   margin-top: 50px;
@@ -54,14 +76,25 @@
   width: 150px;
   height: 48px;
   border: none;
+<<<<<<< HEAD
   font-size: 15px;
   font-weight: 700;
   background-color: rgb(43, 5, 133);
+=======
+  font-weight: 700;
+  background-color: #8f9cd0;
+>>>>>>> main
   border-radius: 7px;
   color: rgb(255, 255, 255);
 }
 
 .mainbtn:hover {
+<<<<<<< HEAD
   background-color: rgb(129, 134, 203);
 }
 //#1a328e
+=======
+  background-color: #2a1e62;
+}
+//#1a328e
+>>>>>>> main

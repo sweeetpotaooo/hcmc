@@ -9,7 +9,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+<<<<<<< HEAD
   Tooltip,
+=======
+>>>>>>> main
   Typography,
   TextField,
   Box,
@@ -59,14 +62,20 @@ const months = [
 
 const AccountList = (props) => {
   const { totalIncome, totalExpense, monthFilter } = props;
+<<<<<<< HEAD
   const [rows, setRows] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+=======
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+>>>>>>> main
   // eslint-disable-next-line no-unused-vars
   const [expense, setExpense] = useState(0);
   // eslint-disable-next-line no-unused-vars
   const [income, setIncome] = useState(0);
   // 검색기능 구현
+<<<<<<< HEAD
   const [input, setInput] = useState(null);
   const [searchList, setSearchList] = useState(null);
   // 모달창 구현
@@ -75,6 +84,17 @@ const AccountList = (props) => {
 
   const handleOpen = (row) => {
     setSelectedRow(row);
+=======
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredRows, setFilteredRows] = useState([]);
+  // 모달창 구현
+  const [open, setOpen] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedMonth, setSelectedMonth] = useState("");
+
+  const handleOpen = (filteredRows) => {
+    setSelectedRow(filteredRows);
+>>>>>>> main
     setOpen(true);
   };
 
@@ -96,10 +116,17 @@ const AccountList = (props) => {
         `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
         selectedRow
       );
+<<<<<<< HEAD
       const updatedRows = rows.map((row) =>
         row._id === selectedRow._id ? selectedRow : row
       );
       setRows(updatedRows);
+=======
+      const updatedRows = selectedRow.map((filteredRows) =>
+        filteredRows._id === selectedRow._id ? selectedRow : filteredRows
+      );
+      setFilteredRows(updatedRows);
+>>>>>>> main
       handleClose();
       console.log(response.data);
     } catch (err) {
@@ -121,6 +148,7 @@ const AccountList = (props) => {
     }
   };
 
+<<<<<<< HEAD
   // 리스트 데이터 useEffect()
   useEffect(() => {
     // Intl 시간형식 지정
@@ -130,6 +158,15 @@ const AccountList = (props) => {
     };
 
     // 리스트 데이터 불러오기
+=======
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+    return new Date(dateString).toLocaleDateString("en-CA", options);
+  };
+
+  // 리스트 데이터 불러오기
+  useEffect(() => {
+>>>>>>> main
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:4000/wallet/money");
@@ -137,7 +174,12 @@ const AccountList = (props) => {
           ...item,
           date: formatDate(item.date),
         }));
+<<<<<<< HEAD
         setRows(formattedData);
+=======
+        setFilteredRows(formattedData);
+        setFilteredRows(formattedData);
+>>>>>>> main
       } catch (err) {
         console.error(err);
       }
@@ -149,7 +191,11 @@ const AccountList = (props) => {
   useEffect(() => {
     let exp = 0;
     let inc = 0;
+<<<<<<< HEAD
     rows.forEach((item) => {
+=======
+    filteredRows.forEach((item) => {
+>>>>>>> main
       if (item.tag === "지출") {
         exp += parseInt(item.amount);
       } else if (item.tag === "수입") {
@@ -160,7 +206,11 @@ const AccountList = (props) => {
     setIncome(inc);
     totalExpense(exp);
     totalIncome(inc);
+<<<<<<< HEAD
   }, [rows, totalExpense, totalIncome]);
+=======
+  }, [filteredRows, totalExpense, totalIncome]);
+>>>>>>> main
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -171,6 +221,7 @@ const AccountList = (props) => {
     setPage(0);
   };
 
+<<<<<<< HEAD
   // 검색기능 구현
   const handleSearch = (e) => {
     setInput(e.target.value.toLowerCase());
@@ -185,11 +236,36 @@ const AccountList = (props) => {
       );
       setSearchList(response.row);
       console.log(response.data);
+=======
+  const handleSearchChange = (e) => {
+    setSearchInput(e.target.value);
+  };
+
+  // 엔터키 입력
+  const activeEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+  // 검색기능 구현
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/wallet/money/find/${searchInput}`
+      );
+      const formattedData = response.data.map((item) => ({
+        ...item,
+        date: formatDate(item.date),
+      }));
+      setFilteredRows(formattedData);
+>>>>>>> main
     } catch (err) {
       console.error(err);
     }
   };
 
+<<<<<<< HEAD
   return (
     <div className="AccountList">
       <TableContainer sx={{ maxHeight: 440 }}>
@@ -217,6 +293,40 @@ const AccountList = (props) => {
               </option>
             ))}
           </select>
+=======
+  const handleMonthChange = (e) => {
+    setSelectedMonth(e.target.value);
+    monthFilter(e.target.value);
+  };
+
+  return (
+    <Box className="AccountList">
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Typography sx={{ flex: "1 1 100%" }} id="tableTitle" component="div">
+          <Input
+            value={searchInput}
+            onChange={handleSearchChange}
+            placeholder="검색어를 입력하세요"
+            onKeyDown={(e) => activeEnter(e)}
+          />
+          <Button>
+            <SearchIcon />
+          </Button>
+
+          <Select
+            sx={{ "& .MuiSelect-select": { padding: "5px" } }}
+            className="monthFilter"
+            value={selectedMonth}
+            onChange={handleMonthChange}
+          >
+            <MenuItem value="" disabled></MenuItem>
+            {months.map((month) => (
+              <MenuItem key={month.number} value={month.number}>
+                {month.name}
+              </MenuItem>
+            ))}
+          </Select>
+>>>>>>> main
         </Typography>
 
         <Table stickyHeader aria-label="sticky table">
@@ -234,7 +344,11 @@ const AccountList = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
+<<<<<<< HEAD
             {rows
+=======
+            {filteredRows
+>>>>>>> main
               .slice(
                 (page && page >= 0 ? page : 0) *
                   (rowsPerPage && rowsPerPage > 0 ? rowsPerPage : 10),
@@ -257,7 +371,11 @@ const AccountList = (props) => {
                       let style = {};
 
                       if (column.id === "amount") {
+<<<<<<< HEAD
                         if (row.tag == "지출") {
+=======
+                        if (row.tag === "지출") {
+>>>>>>> main
                           displayValue = `-${value}`;
                           style.color = "red";
                         } else if (row.tag === "수입") {
@@ -282,9 +400,15 @@ const AccountList = (props) => {
         </Table>
       </TableContainer>
       <TablePagination
+<<<<<<< HEAD
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
+=======
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        count={filteredRows.length}
+>>>>>>> main
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
@@ -346,8 +470,16 @@ const AccountList = (props) => {
           )}
         </Box>
       </Modal>
+<<<<<<< HEAD
     </div>
   );
 };
 
 export default AccountList;
+=======
+    </Box>
+  );
+};
+
+export default AccountList;
+>>>>>>> main
