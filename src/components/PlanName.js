@@ -3,7 +3,7 @@ import React from "react";
 //import PlanDetail from "./Plandetail_free";
 import "../style/PlanName.scss";
 
-const PlanName = ({PlanDetail}) => {
+const PlanName = () => {
   
 
   return (

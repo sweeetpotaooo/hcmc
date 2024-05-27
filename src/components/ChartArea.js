@@ -1,10 +1,8 @@
 import React from "react";
 import "../style/ChartArea.scss";
-import Chart from "./Chart";
 
 const ChartArea = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
   return (
-    <div className="chartArea">
       <div className="totalBox">
         <div className="total totalExpense">
           총 지출
@@ -17,8 +15,6 @@ const ChartArea = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
           <span>{totalIncome} 원 </span>
         </div>
       </div>
-      <Chart dataList={dataList} />
-    </div>
   );
 };
 

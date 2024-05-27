@@ -6,7 +6,7 @@
 .PlanNamePage {
   position: relative;
   background: #fff;
-  width: 100%;
+  width: 90%;
   max-width: 600px;
   height: 130px;
   margin: 0 auto;
@@ -47,20 +47,21 @@
 
 @media all and (max-width: 768px) {
   .PlanNamePage {
-    padding: 20px;
-    height: auto;
+    width: 100%;
+    // padding: 20px;
+    // height: auto;
   }
   
-  .Subdiv {
-    width: 100%;
-  }
+  // .Subdiv {
+  //   width: 100%;
+  // }
 
-  .planname,
-  .plandate,
-  .plancontent {
-    font-size: 14px;
-    text-align: center;
-    width: 100%;
-    margin-bottom: 10px;
-  }
+  // .planname,
+  // .plandate,
+  // .plancontent {
+  //   font-size: 14px;
+  //   text-align: center;
+  //   width: 100%;
+  //   margin-bottom: 10px;
+  // }
 }
