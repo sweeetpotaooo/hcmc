@@ -56,7 +56,7 @@ function HomeView() {
     <>
       <Header />
         <AccountTempleat>
-          <PlanName> </PlanName>
+          <PlanName/>
           <AccountArea>
             <AccountInsert insertRow={insertRowHandler} />
             <AccountList
