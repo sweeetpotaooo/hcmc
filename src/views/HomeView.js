@@ -54,7 +54,6 @@ function HomeView() {
   return (
     <>
       <Header />
-<<<<<<< HEAD
         <AccountTempleat>
           <PlanName> </PlanName>
           <AccountArea>
@@ -64,36 +63,17 @@ function HomeView() {
               totalIncome={totalIncomeHandler}
               totalExpense={totalExpenseHandler}
               monthFilter={changeMonthHandler}
-              tagFilter={changeTagHandler}
+              //tagFilter={changeTagHandler}
             />
             <VerticalBarChart orgRows={rows} />
           </AccountArea>
           <ChartArea
             totalExpense={expense}
             totalIncome={income}
-            dataList={dataList}
+            //dataList={dataList}
             orgRows={orgRows}
           />
         </AccountTempleat>
-=======
-      <AccountTempleat>
-        <AccountArea>
-          <AccountInsert insertRow={insertRowHandler} />
-          <AccountList
-            rows={rows}
-            totalIncome={totalIncomeHandler}
-            totalExpense={totalExpenseHandler}
-            monthFilter={changeMonthHandler}
-          />
-          <VerticalBarChart orgRows={rows} />
-        </AccountArea>
-        <ChartArea
-          totalExpense={expense}
-          totalIncome={income}
-          orgRows={orgRows}
-        />
-      </AccountTempleat>
->>>>>>> main
     </>
   );
 }
