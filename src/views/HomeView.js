@@ -5,8 +5,9 @@ import AccountList from "../components/AccountList";
 import AccountTempleat from "../components/AccountTempleat";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Hearder";
+import Header from "../components/Header";
 import PlanName from "../components/PlanName";
+import Calendar from "../components/Calender";
 
 function HomeView() {
   const [orgRows, setOrgRows] = useState([]);
@@ -73,6 +74,7 @@ function HomeView() {
             //dataList={dataList}
             orgRows={orgRows}
           />
+          <Calendar/>
         </AccountTempleat>
     </>
   );

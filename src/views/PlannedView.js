@@ -5,7 +5,7 @@ import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Hearder";
+import Header from "../components/Header";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([

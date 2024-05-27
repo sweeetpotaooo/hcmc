@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #ececec;
+  background-color: #f8f9fa;
 
   .logo {
     font-size: 24px;
@@ -17,7 +17,7 @@
     margin-left: auto; // Ensure auth-nav section is pushed to the right
 
     .auth {
-      margin-left: auto; // Push the authentication section to the far right
+      margin-left: 10px; // Push the authentication section to the far right
       display: flex;
       align-items: center;
 
@@ -27,7 +27,7 @@
         font-size: 16px;
         cursor: pointer;
         position: relative;
-        margin-left: 20px;
+        margin-left:10px;
 
         &:hover::after {
           content: '';

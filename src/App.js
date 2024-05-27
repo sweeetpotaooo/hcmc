@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import "./App.css"
 import Main from "./views/Main"
 import HomeView from "./views/HomeView";
@@ -13,6 +14,7 @@ import PlandetailPremeditated from "./views/Plandetail_premeditated";
 
 const App = () => {
   return (
+    <Provider store={store}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />} />
@@ -25,6 +27,7 @@ const App = () => {
         <Route path="/plandetail_premeditated" element={<PlandetailPremeditated />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }
 export default App;

@@ -1,0 +1,46 @@
+// src/Calendar.scss
+$calendar-border-color: #ccc;
+$calendar-bg-color: #f0f0f0;
+$day-border-color: #f0f0f0;
+
+.calendar {
+  width: 300px;
+  margin: 0 auto;
+  border: 1px solid $calendar-border-color;
+  border-radius: 5px;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: $calendar-bg-color;
+    border-bottom: 1px solid $calendar-border-color;
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .days {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+
+    .day {
+      width: 14.28%;
+      padding: 10px;
+      box-sizing: border-box;
+      text-align: center;
+      border: 1px solid $day-border-color;
+    }
+  }
+}
