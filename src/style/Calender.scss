@@ -1,16 +1,12 @@
-<<<<<<< HEAD
 * {
   margin: 0;
   padding: 0;
 }
 
-=======
->>>>>>> origin/dev
 $calendar-border-color: #ccc;
 $calendar-bg-color: #ffffff;
 $day-border-color: #f0f0f0;
 
-<<<<<<< HEAD
 .calender {
   position: relative;
   width: 100%;
@@ -18,9 +14,6 @@ $day-border-color: #f0f0f0;
   margin: 0 auto;
   padding: 30px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-=======
-.calendar {
->>>>>>> origin/dev
   width: 600px;
   margin: 0 auto;
   border: 1px solid $calendar-border-color;
@@ -29,10 +22,7 @@ $day-border-color: #f0f0f0;
   font-family: Arial, sans-serif;
   background-color: $calendar-bg-color;
   border-radius: 20px;
-<<<<<<< HEAD
   margin-bottom: 30px;
-=======
->>>>>>> origin/dev
 
   .header {
     display: flex;
@@ -89,7 +79,8 @@ $day-border-color: #f0f0f0;
         margin-bottom: 5px; // 날짜 아래에 여백 추가
       }
 
-      .income, .expense {
+      .income,
+      .expense {
         font-size: 0.9em;
         align-self: center; // 수평 정렬을 가운데로
       }
@@ -111,7 +102,7 @@ $day-border-color: #f0f0f0;
       border: 1px solid $day-border-color;
     }
   }
-  @media all and (max-width: 768px){
+  @media all and (max-width: 768px) {
     .calender {
       width: 100%;
       border: 1px solid $day-border-color;

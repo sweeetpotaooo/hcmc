@@ -2,8 +2,6 @@ import React from "react";
 import "../style/PlanName.scss";
 
 const PlanName = () => {
-  
-
   return (
     <div className="PlanNamePage">
       <div className="Subdiv">

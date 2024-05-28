@@ -10,36 +10,20 @@ body {
 body {
   background: #eee;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-<<<<<<< HEAD
-  font-size: 13px;
-=======
   font-size: 14px;
->>>>>>> origin/dev
   color: #000;
   margin: 0;
   padding: 0;
 }
 
 .swiper {
-<<<<<<< HEAD
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-=======
   width: 50%;
   height: 100%;
->>>>>>> origin/dev
 }
 
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-<<<<<<< HEAD
-  background: #fff;
-  padding: 30px;
-=======
->>>>>>> origin/dev
 
   /* Center slide text vertically */
   display: flex;
@@ -52,22 +36,9 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-<<<<<<< HEAD
-  padding: 30px;
-=======
->>>>>>> origin/dev
 }
 
 .swiper {
   margin-left: auto;
   margin-right: auto;
 }
-<<<<<<< HEAD
-
-@media all and (max-width: 768px){
-  .swiper {
-    width: 100%;
-  }
-}
-=======
->>>>>>> origin/dev

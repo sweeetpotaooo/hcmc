@@ -16,9 +16,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
 import MyPlan from "./components/MyPlan";
-// import NotAuthRoutes from "./appointment/NotAuthRoutes";
-// import ProtectedRoutes from "./appointment/ProtectedRoutes";
-// import { authUser } from "./redux/thunkFunctions";
 
 function Layout({ children }) {
   return (
@@ -48,22 +45,26 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/free" element={<HomeView />} />
-          <Route path="/planned" element={<PlannedView />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/plan" element={<Plan />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/plandetail_free" element={<PlandetailFree />} />
-          <Route
-            path="/plandetail_premeditated"
-            element={<PlandetailPremeditated />}
-          />
-          <Route path="MyPlan" element={<MyPlan />} />
-        </Routes>
-      </BrowserRouter>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/free" element={<HomeView />} />
+              <Route path="/planned" element={<PlannedView />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/plan" element={<Plan />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/plandetail_free" element={<PlandetailFree />} />
+              <Route
+                path="/plandetail_premeditated"
+                element={<PlandetailPremeditated />}
+              />
+              <Route path="/myplan" element={<MyPlan />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   );
 };
