@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../style/Plandetail_premeditated.scss";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const PlanDetail = () => {
   const [form, setForm] = useState({
@@ -15,7 +15,7 @@ const PlanDetail = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm(prevForm => ({
+    setForm((prevForm) => ({
       ...prevForm,
       [name]: value,
     }));
@@ -33,7 +33,9 @@ const PlanDetail = () => {
         <h1 className="title">당신의 플랜에 대해 알려주세요</h1>
         <form onSubmit={handleSubmit}>
           <div className="contentTitle">
-            <label className="inputtitle" htmlFor="planname">플랜 이름</label>
+            <label className="inputtitle" htmlFor="planname">
+              플랜 이름
+            </label>
             <div className="inputWrite">
               <input
                 type="text"
@@ -71,7 +73,9 @@ const PlanDetail = () => {
             </div>
           </div>
           <div className="contentTitle">
-            <label className="inputtitle" htmlFor="budget">예산</label>
+            <label className="inputtitle" htmlFor="budget">
+              예산
+            </label>
             <div className="inputWrite">
               <input
                 type="number"
@@ -86,7 +90,9 @@ const PlanDetail = () => {
             </div>
           </div>
           <div className="contentTitle">
-            <label className="inputtitle" htmlFor="details">세부 설명</label>
+            <label className="inputtitle" htmlFor="details">
+              세부 설명
+            </label>
             <div className="inputWrite">
               <input
                 id="details"
@@ -99,7 +105,9 @@ const PlanDetail = () => {
             </div>
           </div>
           <div className="button">
-            <button className="btn" type="submit">제출</button>
+            <button className="btn" type="submit">
+              제출
+            </button>
           </div>
         </form>
       </div>

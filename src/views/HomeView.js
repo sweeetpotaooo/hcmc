@@ -5,7 +5,6 @@ import AccountList from "../components/AccountList";
 import AccountTempleat from "../components/AccountTempleat";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Header";
 import PlanName from "../components/PlanName";
 import Calendar from "../components/Calender";
 
@@ -54,28 +53,27 @@ function HomeView() {
 
   return (
     <>
-      <Header />
-        <AccountTempleat>
-          <PlanName> </PlanName>
-          <AccountArea>
-            <AccountInsert insertRow={insertRowHandler} />
-            <AccountList
-              rows={rows}
-              totalIncome={totalIncomeHandler}
-              totalExpense={totalExpenseHandler}
-              monthFilter={changeMonthHandler}
-              //tagFilter={changeTagHandler}
-            />
-            <VerticalBarChart orgRows={rows} />
-          </AccountArea>
-          <ChartArea
-            totalExpense={expense}
-            totalIncome={income}
-            //dataList={dataList}
-            orgRows={orgRows}
+      <AccountTempleat>
+        <PlanName> </PlanName>
+        <AccountArea>
+          <AccountInsert insertRow={insertRowHandler} />
+          <AccountList
+            rows={rows}
+            totalIncome={totalIncomeHandler}
+            totalExpense={totalExpenseHandler}
+            monthFilter={changeMonthHandler}
+            //tagFilter={changeTagHandler}
           />
-          <Calendar/>
-        </AccountTempleat>
+          <VerticalBarChart orgRows={rows} />
+        </AccountArea>
+        <ChartArea
+          totalExpense={expense}
+          totalIncome={income}
+          //dataList={dataList}
+          orgRows={orgRows}
+        />
+        <Calendar />
+      </AccountTempleat>
     </>
   );
 }
