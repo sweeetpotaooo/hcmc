@@ -1,0 +1,77 @@
+.header {
+  position: relative; /* Ensure positioning context for absolute positioning */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #ececec;
+
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .auth-nav {
+    display: flex;
+    align-items: center;
+    margin-left: auto; // Ensure auth-nav section is pushed to the right
+
+    .auth {
+      margin-left: 10px; // Push the authentication section to the far right
+      display: flex;
+      align-items: center;
+
+      .auth-button {
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+        margin-left: 20px;
+
+        &:hover::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -2px;
+          height: 2px;
+          background-color: #000;
+        }
+      }
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+
+      .plan-button {
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        position: relative;
+
+        &:hover::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -2px;
+          height: 2px;
+          background-color: #000;
+        }
+      }
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #000; /* Change to desired underline color */
+  }
+}
