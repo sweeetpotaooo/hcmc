@@ -10,22 +10,24 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({ mode: "onChange" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onSubmit = ({ id, password, birth, gender, univ }) => {
-    const body = {
-      id,
-      password,
-      birth,
-      gender,
-      univ,
-    };
-    dispatch(registerUser(body)).unwrap();
-    reset();
-    navigate("/login");
+  const onSubmit = async ({ id, password, birth, gender, univ }) => {
+    try {
+      const body = {
+        id,
+        password,
+        birth,
+        gender,
+        univ,
+      };
+      await dispatch(registerUser(body));
+      navigate("/login");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const userId = {

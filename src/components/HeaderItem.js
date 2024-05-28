@@ -7,8 +7,8 @@ import "../style/HeaderItem.scss";
 const routes = [
   { to: "/signup", name: "회원가입", auth: false },
   { to: "/login", name: "로그인", auth: false },
-  { to: "/myplan", name: "내 플랜보기", auth: true },
   { to: "/plan", name: "플랜 추가", auth: true },
+  { to: "/myplan", name: "내 플랜보기", auth: true },
   { to: "", name: "로그아웃", auth: true },
 ];
 

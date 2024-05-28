@@ -5,7 +5,6 @@ import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Header";
 import PlanName from "../components/PlanName";
 import Calender from "../components/Calender";
 
@@ -143,22 +142,22 @@ function PlannedView() {
       <AccountTempleat>
         <AccountArea>
           <PlanName> </PlanName>
-            <AccountInsert insertRow={insertRowHandler} />
-            <AccountList
-              rows={rows}
-              totalIncome={totalIncomeHandler}
-              totalExpense={totalExpenseHandler}
-              monthFilter={changeMonthHandler}
-              tagFilter={changeTagHandler}
-            />
-            <VerticalBarChart orgRows={rows} />
-          </AccountArea>
-          <ChartArea
-            totalExpense={expense}
-            totalIncome={income}
-            dataList={dataList}
-            orgRows={orgRows}
+          <AccountInsert insertRow={insertRowHandler} />
+          <AccountList
+            rows={rows}
+            totalIncome={totalIncomeHandler}
+            totalExpense={totalExpenseHandler}
+            monthFilter={changeMonthHandler}
+            tagFilter={changeTagHandler}
           />
+          <VerticalBarChart orgRows={rows} />
+        </AccountArea>
+        <ChartArea
+          totalExpense={expense}
+          totalIncome={income}
+          dataList={dataList}
+          orgRows={orgRows}
+        />
         <Calender />
       </AccountTempleat>
     </>
