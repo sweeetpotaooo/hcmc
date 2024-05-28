@@ -1,77 +1,81 @@
-.header {
-  position: relative; /* Ensure positioning context for absolute positioning */
+.background {
+  position: relative;
+  z-index: 10;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  --tw-bg-opacity: 1;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.width {
+  width: 100%;
+}
+
+.items {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #ececec;
+  justify-content: space-between;
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
 
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
+  @media (min-width: 640px) {
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
   }
 
-  .auth-nav {
-    display: flex;
-    align-items: center;
-    margin-left: auto; // Ensure auth-nav section is pushed to the right
+  @media (min-width: 1024px) {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+}
 
-    .auth {
-      margin-left: 10px; // Push the authentication section to the far right
-      display: flex;
-      align-items: center;
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+  height: 3.5rem; /* 56px */
+}
 
-      .auth-button {
-        background: none;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        position: relative;
-        margin-left: 20px;
+.flex-box {
+  font-size: 1.5rem; /* 24px */
+  line-height: 2rem; /* 32px */
+}
 
-        &:hover::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -2px;
-          height: 2px;
-          background-color: #000;
-        }
-      }
-    }
+.sm-hidden {
+  @media (min-width: 640px) {
+    display: none;
+  }
+}
 
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
+.sm-block {
+  @media (min-width: 640px) {
+    display: block;
+  }
+}
 
-      .plan-button {
-        background: none;
-        border: none;
-        font-size: 16px;
-        cursor: pointer;
-        position: relative;
+.large-header {
+  display: none;
+}
 
-        &:hover::after {
-          content: '';
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: -2px;
-          height: 2px;
-          background-color: #000;
-        }
-      }
-    }
+.small-header {
+  display: block;
+}
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .large-header {
+    display: block;
   }
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #000; /* Change to desired underline color */
+  .small-header {
+    display: none;
   }
 }

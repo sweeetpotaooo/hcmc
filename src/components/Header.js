@@ -1,52 +1,40 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import '../style/Header.scss';
-import { logOutUser } from '../redux/user';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import HeaderItem from "./HeaderItem";
+import "../style/Header.scss";
 
 const Header = () => {
-  const isLoggedIn = useSelector((state) => Boolean(state.user.data.token.atk));
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const userToken = useSelector((state) => state.user.data.token.atk);
+  const [menu, setMenu] = useState(false);
 
-  const handleLogout = async () => {
-    try {
-      await dispatch(logOutUser({ userToken }));
-      navigate('/');
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleAuthClick = () => {
-    if (isLoggedIn) {
-      handleLogout();
-    } else {
-      navigate('/login');
-    }
+  const handleMenu = () => {
+    setMenu((prevMenu) => !prevMenu);
   };
 
   return (
-    <header className="header">
-      <div className="logo">흥청망청</div>
-      <div className="auth-nav">
-        {isLoggedIn && (
-          <div className="nav-buttons">
-            <Link to="/myplan">
-              <button className="plan-button">내플랜 보기</button>
-            </Link>
-            <Link to="/plan">
-              <button className="plan-button">플랜추가</button>
-            </Link>
+    <div className="background">
+      <div className="width">
+        <div className="items">
+          {/* Logo */}
+          <div className="logo">
+            <Link to="/">흥청망청</Link>
           </div>
-        )}
-        <div className="auth" onClick={handleAuthClick}>
-          {isLoggedIn ? '로그아웃' : '로그인'}
+          {/* Div  */}
+          <div className="flex-box sm-hidden">
+            <button onClick={handleMenu} aria-expanded={menu}>
+              {menu ? "-" : "+"}
+            </button>
+          </div>
+          {/* Large Header  */}
+          <div className="large-header sm-block">
+            <HeaderItem />
+          </div>
+          {/* Small Header  */}
+          <div className={`small-header ${menu ? "block" : "hidden"}`}>
+            <HeaderItem mobile />
+          </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 };
 

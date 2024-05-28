@@ -102,8 +102,9 @@ $day-border-color: #f0f0f0;
     }
   }
   @media all and (max-width: 768px){
-    .calendar {
+    .calender {
       width: 100%;
+      border: 1px solid $day-border-color;
     }
   }
 }

@@ -6,7 +6,6 @@ import AccountTempleat from "../components/AccountTempleat";
 import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Header";
 import PlanName from "../components/PlanName";
 import Calender from "../components/Calender";
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
@@ -61,7 +60,6 @@ function HomeView() {
 
   return (
     <>
-      <Header />
       <AccountTempleat>
         <AccountArea>
           <PlanName />
