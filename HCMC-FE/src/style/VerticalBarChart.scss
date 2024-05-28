@@ -1,0 +1,28 @@
+.verticalChart {
+  position: relative;
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  height: 300px;
+  margin: 30px auto 30px auto;
+  //padding-top: 30px;
+  //padding-left: 50px;
+  border-radius: 20px;
+  box-shadow: rgba(154, 178, 202, 0.2) 0px 8px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  height: auto;
+  padding: 30px;
+  display: flex;
+  //align-items: center;
+}
+
+@media all and (max-width: 768px) {
+  .verticalChart {
+    width: 100%;
+  }
+}
