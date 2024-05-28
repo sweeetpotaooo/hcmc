@@ -9,6 +9,9 @@ import VerticalBarChart from "../components/VerticalBarChart";
 import Header from "../components/Header";
 import PlanName from "../components/PlanName";
 import Calendar from "../components/Calender";
+import GenderCard from "../components/GenderCard";
+import AgeCard from "../components/AgeCard";
+import UnivCard from "../components/UnivCard";
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import '../style/Swiper.scss';
@@ -97,8 +100,14 @@ function HomeView() {
             <Chart/>
           </SwiperSlide>
           <SwiperSlide>
+            <GenderCard/>
           </SwiperSlide>
-          {/* 다른 슬라이드들이 필요하다면 추가하세요 */}
+          <SwiperSlide>
+            <UnivCard/>
+          </SwiperSlide>
+          <SwiperSlide>
+            <AgeCard/>
+          </SwiperSlide>
         </SwiperComponent>
       </AccountTempleat>
     </>
