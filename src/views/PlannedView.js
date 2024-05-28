@@ -140,7 +140,6 @@ function PlannedView() {
 
   return (
     <>
-      <Header />
       <AccountTempleat>
         <AccountArea>
           <PlanName> </PlanName>
