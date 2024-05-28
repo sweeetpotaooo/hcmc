@@ -7,7 +7,10 @@ import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
 import Header from "../components/Header";
 import PlanName from "../components/PlanName";
+<<<<<<< HEAD
 import Calender from "../components/Calender";
+=======
+>>>>>>> origin/dev
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([
@@ -160,7 +163,10 @@ function PlannedView() {
             dataList={dataList}
             orgRows={orgRows}
           />
+<<<<<<< HEAD
         <Calender />
+=======
+>>>>>>> origin/dev
       </AccountTempleat>
     </>
   );

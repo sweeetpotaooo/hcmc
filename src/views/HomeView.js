@@ -7,7 +7,14 @@ import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
 import PlanName from "../components/PlanName";
+<<<<<<< HEAD
 import Calender from "../components/Calender";
+=======
+import Calendar from "../components/Calender";
+import GenderCard from "../components/GenderCard";
+import AgeCard from "../components/AgeCard";
+import UnivCard from "../components/UnivCard";
+>>>>>>> origin/dev
 import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import '../style/Swiper.scss';
@@ -60,10 +67,23 @@ function HomeView() {
 
   return (
     <>
+<<<<<<< HEAD
       <AccountTempleat>
         <AccountArea>
           <PlanName />
 
+=======
+      <Header />
+      <AccountTempleat>
+        <PlanName/>
+        <ChartArea
+              totalExpense={expense}
+              totalIncome={income}
+              //dataList={dataList}
+              orgRows={orgRows}
+            />
+        <AccountArea>
+>>>>>>> origin/dev
           <AccountInsert insertRow={insertRowHandler} />
           <AccountList
             rows={rows}
@@ -71,6 +91,7 @@ function HomeView() {
             totalExpense={totalExpenseHandler}
             monthFilter={changeMonthHandler}
             //tagFilter={changeTagHandler}
+<<<<<<< HEAD
           />
           <VerticalBarChart orgRows={rows} />
         </AccountArea>
@@ -103,6 +124,36 @@ function HomeView() {
             {/* 다른 슬라이드들이 필요하다면 추가하세요 */}
           </SwiperComponent>
         </AccountArea>
+=======
+          />
+          <VerticalBarChart orgRows={rows} />
+        </AccountArea>
+        <Calendar/>
+        <SwiperComponent
+          slidesPerView={1}
+          spaceBetween={5}
+          loop={true}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <Chart/>
+          </SwiperSlide>
+          <SwiperSlide>
+            <GenderCard/>
+          </SwiperSlide>
+          <SwiperSlide>
+            <UnivCard/>
+          </SwiperSlide>
+          <SwiperSlide>
+            <AgeCard/>
+          </SwiperSlide>
+        </SwiperComponent>
+>>>>>>> origin/dev
       </AccountTempleat>
     </>
   );

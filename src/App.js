@@ -15,6 +15,7 @@ import PlandetailPremeditated from "./views/Plandetail_premeditated";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
+import MyPlan from "./components/MyPlan";
 // import NotAuthRoutes from "./appointment/NotAuthRoutes";
 // import ProtectedRoutes from "./appointment/ProtectedRoutes";
 // import { authUser } from "./redux/thunkFunctions";
@@ -47,32 +48,22 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              {/* 로그인 한 사람은 갈 수 없는 경로 */}
-              {/* <Route element={<ProtectedRoutes isAuth={isAuth} />}> */}
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              {/* </Route> */}
-
-              {/* 로그인 한 사람만 갈 수 있는 경로 */}
-              {/* <Route element={<NotAuthRoutes isAuth={isAuth} />}> */}
-              <Route path="/free" element={<HomeView />} />
-              <Route path="/planned" element={<PlannedView />} />
-              <Route path="/plan" element={<Plan />} />
-              <Route path="/plandetail_free" element={<PlandetailFree />} />
-              <Route
-                path="/plandetail_premeditated"
-                element={<PlandetailPremeditated />}
-              />
-              {/* </Route> */}
-            </Routes>
-          </Layout>
-        </BrowserRouter>
-      </PersistGate>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/free" element={<HomeView />} />
+          <Route path="/planned" element={<PlannedView />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/plan" element={<Plan />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/plandetail_free" element={<PlandetailFree />} />
+          <Route
+            path="/plandetail_premeditated"
+            element={<PlandetailPremeditated />}
+          />
+          <Route path="MyPlan" element={<MyPlan />} />
+        </Routes>
+      </BrowserRouter>
     </Provider>
   );
 };

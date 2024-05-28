@@ -65,8 +65,10 @@ const AccountList = (props) => {
   const { totalIncome, totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [, setExpense] = useState(0);
-  const [, setIncome] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [expense, setExpense] = useState(0);
+  // eslint-disable-next-line no-unused-vars
+  const [income, setIncome] = useState(0);
   // 검색기능 구현
   const [searchInput, setSearchInput] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
@@ -137,6 +139,7 @@ const AccountList = (props) => {
           ...item,
           date: formatDate(item.date),
         }));
+        setFilteredRows(formattedData);
         setFilteredRows(formattedData);
       } catch (err) {
         console.error(err);
