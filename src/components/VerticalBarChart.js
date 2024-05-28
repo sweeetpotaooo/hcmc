@@ -111,10 +111,6 @@ const VerticalBarChart = ({ orgRows }) => {
   return (
     <div className="verticalChart">
       <Bar options={options} data={data} className="bar" />
-
-      {/* <div className="verDiv">
-        <Bar options={options} data={data} className="bar" />
-      </div> */}
     </div>
   );
 };

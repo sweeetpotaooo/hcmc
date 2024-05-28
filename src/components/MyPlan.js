@@ -1,11 +1,9 @@
 import React from "react";
-import Header from "../components/Header";
 import "../style/MyPlan.scss";
 
 const MyPlan = () => {
   return (
     <>
-      <Header />
       <div className="MyPlanPage">
         <div className="div">
           <div className="mainTitle">내 플랜 관리</div>
@@ -28,7 +26,6 @@ const MyPlan = () => {
                 <div>자유로운 / 계획적인 소비</div>
               </div>
             </div>
-            
             <div className="past">
               <div className="plantitle">진행 완료</div>
               <div className="pastplan">

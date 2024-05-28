@@ -8,12 +8,15 @@ import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
 import PlanName from "../components/PlanName";
 import Calender from "../components/Calender";
-import { Swiper as SwiperComponent, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import '../style/Swiper.scss';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import GenderCard from "../components/GenderCard";
+import AgeCard from "../components/AgeCard";
+import UnivCard from "../components/UnivCard";
+import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "../style/Swiper.scss";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
 
 function HomeView() {
   const [orgRows, setOrgRows] = useState([]);
