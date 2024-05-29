@@ -102,8 +102,15 @@ function HomeView() {
               <Chart/>
             </SwiperSlide>
             <SwiperSlide>
+              <GenderCard/>
             </SwiperSlide>
-            {/* 다른 슬라이드들이 필요하다면 추가하세요 */}
+            <SwiperSlide>
+              <AgeCard/>
+            </SwiperSlide>
+            <SwiperSlide>
+              <UnivCard/>
+            </SwiperSlide>
+            
           </SwiperComponent>
         </AccountArea>
       </AccountTempleat>

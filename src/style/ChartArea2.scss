@@ -1,9 +1,9 @@
-.chartArea2 {
-  width: 48%;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  margin-bottom: 30px;
+//.chartArea2 {
+  //width: 48%;
+  //display: flex;
+  //flex-flow: row wrap;
+  //justify-content: space-between;
+  //margin-bottom: 30px;
 
   .totalBox {
     width: 90%;
@@ -11,9 +11,11 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    //padding: 30px;
+    margin-bottom: 30px;
 
     .total {
-      width: 100%;
+      width: 48%;
       height: 140px;
       background: #5d35b2;
       padding: 30px;
@@ -36,4 +38,5 @@
       width: 100%;
     }
   }
-}
+// }
+

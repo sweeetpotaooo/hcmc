@@ -3,10 +3,20 @@ import AccountArea from "../components/AccountArea2";
 import AccountInsert from "../components/AccountInsert2";
 import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
+import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
 import PlanName from "../components/PlanName";
 import Calender from "../components/Calender";
+import GenderCard from "../components/GenderCard";
+import AgeCard from "../components/AgeCard";
+import UnivCard from "../components/UnivCard";
+import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "../style/Swiper.scss";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([
@@ -141,7 +151,7 @@ function PlannedView() {
     <>
       <AccountTempleat>
         <AccountArea>
-          <PlanName> </PlanName>
+          <PlanName />
           <AccountInsert insertRow={insertRowHandler} />
           <AccountList
             rows={rows}
@@ -152,13 +162,40 @@ function PlannedView() {
           />
           <VerticalBarChart orgRows={rows} />
         </AccountArea>
-        <ChartArea
-          totalExpense={expense}
-          totalIncome={income}
-          dataList={dataList}
-          orgRows={orgRows}
-        />
-        <Calender />
+        <AccountArea>
+          <ChartArea
+            totalExpense={expense}
+            totalIncome={income}
+            //dataList={dataList}
+            orgRows={orgRows}
+          />
+          <Calender />
+
+          <SwiperComponent
+            slidesPerView={1}
+            spaceBetween={5}
+            loop={true}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <Chart />
+            </SwiperSlide>
+            <SwiperSlide>
+              <GenderCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <AgeCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <UnivCard />
+            </SwiperSlide>
+          </SwiperComponent>
+        </AccountArea>
       </AccountTempleat>
     </>
   );

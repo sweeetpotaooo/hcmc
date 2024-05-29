@@ -32,3 +32,17 @@
   border-bottom-width: 4px;
   cursor: pointer;
 }
+
+/* 추가된 스타일 */
+.list a {
+  color: inherit; /* 부모 요소의 색상 상속 */
+  text-decoration: none; /* 기본 텍스트 데코레이션 제거 */
+}
+
+.list a:visited {
+  color: inherit; /* 부모 요소의 색상 상속 */
+}
+
+.list a:hover {
+  text-decoration: underline; /* 밑줄 표시 */
+}
