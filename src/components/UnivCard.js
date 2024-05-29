@@ -33,9 +33,7 @@ const UnivSpendingCard = () => {
   return (
     <div className="cardDiv">
       <h4>나의 동창들은 얼마나 썼을까?</h4>
-      <div className="card-body">
-        <Bar data={data} options={options} />
-      </div>
+        <Bar data={data} options={options} className="bar"/>
     </div>
   );
 };

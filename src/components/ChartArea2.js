@@ -4,7 +4,7 @@ import "../style/ChartArea2.scss";
 const ChartArea2 = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
   return (
       <div className="totalBox">
-        <div className="total totalExpense">
+        <div className="Total totalExpense">
           남은 예산
           <br />
           <span>{totalExpense} 원 /</span>

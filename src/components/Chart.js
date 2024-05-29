@@ -72,7 +72,9 @@ const Chart = () => {
     <div className="chartDiv">
       <div className="charSubDiv">
         <div className="charTitle">소비 분석 레포트 📈</div>
-        <Doughnut data={data} options={options} className="chart" />
+        <div className="char">
+          <Doughnut data={data} options={options}/>
+        </div>
       </div>
     </div>
   );
