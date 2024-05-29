@@ -3,11 +3,20 @@ import AccountArea from "../components/AccountArea2";
 import AccountInsert from "../components/AccountInsert2";
 import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
+import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
-import Header from "../components/Header";
 import PlanName from "../components/PlanName";
 import Calender from "../components/Calender";
+import GenderCard from "../components/GenderCard";
+import AgeCard from "../components/AgeCard";
+import UnivCard from "../components/UnivCard";
+import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "../style/Swiper.scss";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper/modules";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([
@@ -142,24 +151,51 @@ function PlannedView() {
     <>
       <AccountTempleat>
         <AccountArea>
-          <PlanName> </PlanName>
-            <AccountInsert insertRow={insertRowHandler} />
-            <AccountList
-              rows={rows}
-              totalIncome={totalIncomeHandler}
-              totalExpense={totalExpenseHandler}
-              monthFilter={changeMonthHandler}
-              tagFilter={changeTagHandler}
-            />
-            <VerticalBarChart orgRows={rows} />
-          </AccountArea>
+          <PlanName />
+          <AccountInsert insertRow={insertRowHandler} />
+          <AccountList
+            rows={rows}
+            totalIncome={totalIncomeHandler}
+            totalExpense={totalExpenseHandler}
+            monthFilter={changeMonthHandler}
+            tagFilter={changeTagHandler}
+          />
+          <VerticalBarChart orgRows={rows} />
+        </AccountArea>
+        <AccountArea>
           <ChartArea
             totalExpense={expense}
             totalIncome={income}
-            dataList={dataList}
+            //dataList={dataList}
             orgRows={orgRows}
           />
-        <Calender />
+          <Calender />
+
+          <SwiperComponent
+            slidesPerView={1}
+            spaceBetween={5}
+            loop={true}
+            pagination={{
+              clickable: true,
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <Chart />
+            </SwiperSlide>
+            <SwiperSlide>
+              <GenderCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <AgeCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <UnivCard />
+            </SwiperSlide>
+          </SwiperComponent>
+        </AccountArea>
       </AccountTempleat>
     </>
   );

@@ -28,9 +28,7 @@ function Layout() {
         autoClose={1500}
       />
       <Header />
-      <main className="main">
-        <Outlet />
-      </main>
+      <Outlet />
     </div>
   );
 }
@@ -52,10 +50,10 @@ const App = () => {
         <Route index element={<Main />} />
 
         {/* 로그인 한 사람만 갈 수 있는 경로 */}
-        <Route element={<ProtectedRoutes isAuth={isAuth} />}>
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/plan" element={<Plan />} />
           <Route path="/free" element={<HomeView />} />
           <Route path="/planned" element={<PlannedView />} />
-          <Route path="/plan" element={<Plan />} />
           <Route path="/plandetail_free" element={<PlandetailFree />} />
           <Route
             path="/plandetail_premeditated"
@@ -65,7 +63,7 @@ const App = () => {
         </Route>
 
         {/* 로그인 한 사람은 갈 수 없는 경로 */}
-        <Route element={<NotAuthRoutes isAuth={isAuth} />}>
+        <Route element={<NotAuthRoutes />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Route>

@@ -9,7 +9,7 @@ export default function Plan() {
   };
   const handle2Navigate = () => {
     navigate("/plandetail_premeditated");
-  }
+  };
 
   return (
     <div className="PlanPage">
