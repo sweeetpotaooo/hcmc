@@ -1,40 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, BarElement, LinearScale, Tooltip, Legend } from 'chart.js';
+import axios from 'axios';
 import '../style/Card.scss';
 
-ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+ChartJS.register(BarElement, LinearScale, Tooltip, Legend);
 
-const GenderSpendingCard = () => {
-  const mySpending = 200; // 나의 금액
-  const avgSpending = 150; // 평균 금액
-  const maleAvgSpending = 170; // 남성 평균 금액
-  const femaleAvgSpending = 130; // 여성 평균 금액
+  const processData = (data) => {
+    const categories = ["지출", "전체 평균"];
+    const backgroundColors = [
+      "rgb(255, 130, 157)", 
+      "rgba(54, 162, 235)", 
+    ];
+  const dataList = categories.reduce((acc, tag) => {
+    acc[tag] = 0;
+    return acc;
+  }, {});
 
-  const data = {
-    labels: ['나의 금액', '전체 평균 금액', '남성 평균 금액', '여성 평균 금액'],
-    datasets: [
+  data.forEach((item) => {
+    if (dataList[item.tag] !== undefined) {
+      dataList[item.tag] += item.amount;
+    }
+  });
+console.log(dataList);
+
+return {
+  labels: categories,
+  datasets: [
       {
-        label: '금액($)',
-        data: [mySpending, avgSpending, maleAvgSpending, femaleAvgSpending],
-        backgroundColor: [
-          'rgba(75, 192, 192, 0.6)', 
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 99, 132, 0.6)'
-        ],
-        borderColor: [
-          'rgba(75, 192, 192, 1)', 
-          'rgba(153, 102, 255, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 99, 132, 1)'
-        ],
-        borderWidth: 1,
+        data: categories.map((tag) => dataList[tag]),
+        backgroundColor: backgroundColors,
       },
     ],
   };
+};
+
+const GenderSpendingCard = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/wallet/money");
+        const chartData = processData(response.data);
+        setData(chartData);
+        setLoading(false);
+      } catch (err) {
+        console.error(err);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []); // useEffect에 빈 배열을 두어 컴포넌트가 마운트될 때만 실행되도록 함
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -46,7 +72,9 @@ const GenderSpendingCard = () => {
     <div className="cardDiv">
       <h4>나의 동성친구는 얼마나 썼을까?</h4>
       <div className="card-body">
-        <Bar data={data} options={options} />
+        <div className="chart-container">
+          <Bar data={data} options={options} />
+        </div>
       </div>
     </div>
   );
