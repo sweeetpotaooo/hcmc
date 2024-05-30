@@ -284,7 +284,7 @@ const AccountList = (props) => {
                           align={column.align}
                           style={style}
                         >
-                          {displayValue}
+                          {displayValue.toLocaleString()}
                         </TableCell>
                       );
                     })}

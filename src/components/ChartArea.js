@@ -7,12 +7,12 @@ const ChartArea = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
       <div className="total totalExpense">
         총 지출
         <br />
-        <span>{totalExpense} 원</span>
+        <span>{totalExpense.toLocaleString()} 원</span>
       </div>
       <div className="total totalIncome">
         총 수입
         <br />
-        <span>{totalIncome} 원 </span>
+        <span>{totalIncome.toLocaleString()} 원 </span>
       </div>
     </div>
   );
