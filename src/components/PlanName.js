@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/PlanName.scss";
+import { axios } from "axios";
 
 const PlanName = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/");
+      } catch (err) {
+        console.error(err);
+      }
+    };
+  }, []);
+
   return (
     <div className="PlanNamePage">
       <div className="Subdiv">
