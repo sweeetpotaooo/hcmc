@@ -21,13 +21,13 @@ import NotAuthRoutes from "./appointment/NotAuthRoutes";
 function Layout() {
   return (
     <div className="layout">
+      <Header />
       <ToastContainer
         position="bottom-right"
         theme="light"
         pauseOnHover
         autoClose={1500}
       />
-      <Header />
       <Outlet />
     </div>
   );

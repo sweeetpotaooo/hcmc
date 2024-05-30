@@ -16,7 +16,7 @@ const Header = () => {
         <div className="items">
           {/* Logo */}
           <div className="logo">
-            <Link to="/">흥청망청</Link>
+            <Link to="/">HCMC</Link>
           </div>
           {/* Div  */}
           <div className="flex-box sm-hidden">

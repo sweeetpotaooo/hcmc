@@ -1,49 +1,91 @@
 import React, { useState } from "react";
 import "../style/Plandetail_premeditated.scss";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const PlanDetail = () => {
-  const [form, setForm] = useState({
-    planname: "",
+  const [value, setValue] = useState({
+    planName: "",
     planStart: "",
     planEnd: "",
     budget: "",
-    details: "",
+    description: "",
   });
 
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+  const inputHandler = (e) => {
+    setValue({ ...value, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const sendData = async (data) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/plandetail_premeditated/consumption",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.data) {
+        navigate("/planned");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("데이터 전송에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
+
+  const submitHandler = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    navigate("/planned");
+    if (
+      value.planName.trimEnd() === "" ||
+      value.planStart.trimEnd() === "" ||
+      value.planEnd.trimEnd() === "" ||
+      value.budget.trimEnd() === "" ||
+      value.description.trimEnd() === ""
+    ) {
+      return alert("모든 정보를 입력해주세요");
+    }
+
+    const newRow = {
+      planName: value.planName,
+      planStart: value.planStart,
+      planEnd: value.planEnd,
+      budget: value.budget,
+      description: value.description,
+    };
+    sendData(newRow);
+
+    setValue({
+      planName: "",
+      planStart: "",
+      planEnd: "",
+      budget: "",
+      description: "",
+    });
   };
 
   return (
     <div className="LoginPage">
       <div className="subdiv">
         <h1 className="title">당신의 플랜에 대해 알려주세요</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitHandler}>
           <div className="contentTitle">
-            <label className="inputtitle" htmlFor="planname">
+            <label className="inputtitle" htmlFor="planName">
               플랜 이름
             </label>
             <div className="inputWrite">
               <input
                 type="text"
-                id="planname"
-                name="planname"
+                id="planName"
+                name="planName"
                 className="input"
-                value={form.planname}
-                onChange={handleChange}
+                value={value.planName}
+                onChange={inputHandler}
                 required
               />
             </div>
@@ -56,8 +98,8 @@ const PlanDetail = () => {
                 id="planStart"
                 name="planStart"
                 className="input"
-                value={form.planStart}
-                onChange={handleChange}
+                value={value.planStart}
+                onChange={inputHandler}
                 required
               />
               <span> ~ </span>
@@ -66,8 +108,8 @@ const PlanDetail = () => {
                 id="planEnd"
                 name="planEnd"
                 className="input"
-                value={form.planEnd}
-                onChange={handleChange}
+                value={value.planEnd}
+                onChange={inputHandler}
                 required
               />
             </div>
@@ -82,9 +124,8 @@ const PlanDetail = () => {
                 id="budget"
                 name="budget"
                 className="input"
-                value={form.budget}
-                onChange={handleChange}
-                min="0"
+                value={value.budget}
+                onChange={inputHandler}
                 required
               />
             </div>
@@ -95,11 +136,11 @@ const PlanDetail = () => {
             </label>
             <div className="inputWrite">
               <input
-                id="details"
-                name="details"
+                id="description"
+                name="description"
                 className="input"
-                value={form.details}
-                onChange={handleChange}
+                value={value.description}
+                onChange={inputHandler}
                 required
               />
             </div>
