@@ -22,11 +22,13 @@
 .swiper {
   width: 90%;
   height: 474px;
+  max-width: 600px;
   border-radius: 20px;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgb(255, 255, 255);
 }
 
 .swiper-slide {
@@ -35,6 +37,7 @@
   text-align: center;
   font-size: 18px;
   padding: 30px;
+  border-radius: 20px;
 
   /* Center slide text vertically */
   display: flex;
@@ -44,8 +47,8 @@
 }
 
 // .swiper {
-//   //margin-left: auto;
-//   //margin-right: auto;
+//   margin-left: auto;
+//   margin-right: auto;
 // }
 
 @media all and (max-width: 768px){
