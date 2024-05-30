@@ -10,6 +10,7 @@ const PlanDetail = () => {
     planStart: "",
     planEnd: "",
     description: "",
+    pattern: "계획적인 소비",
   });
 
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ const PlanDetail = () => {
       planStart: value.planStart,
       planEnd: value.planEnd,
       description: value.description,
+      pattern: value.pattern,
     };
 
     const planId = await sendData(newRow);
@@ -67,6 +69,7 @@ const PlanDetail = () => {
       planStart: "",
       planEnd: "",
       description: "",
+      pattern: "계획적인 소비",
     });
   };
 
@@ -130,6 +133,7 @@ const PlanDetail = () => {
                 required
               />
             </div>
+            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="button">
             <button className="btn" type="submit">
