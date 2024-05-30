@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+// import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import AccountArea from "../components/AccountArea";
 import AccountInsert from "../components/AccountInsert";
@@ -25,6 +26,8 @@ function HomeView() {
   const [rows, setRows] = useState(orgRows);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
+
+  // const id = location.state.id;
 
   useEffect(() => {
     setRows(orgRows);

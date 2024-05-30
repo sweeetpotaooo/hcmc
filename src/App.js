@@ -16,7 +16,7 @@ import Login from "./views/Login";
 import Plan from "./views/Plan";
 import SignUp from "./components/SignUp";
 import PlandetailFree from "./views/Plandetail_free";
-import PlandetailPremeditate from "./views/Plandetail_premeditate";
+import Plandetail_Premeditate from "./views/Plandetail_premeditate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
@@ -48,12 +48,12 @@ const App = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isAuth) {
-      dispatch(authUser());
-      if (pathname === "/") {
-        navigate("/free");
-      }
-    }
+    // if (isAuth) {
+    //   dispatch(authUser());
+    //   if (pathname === "/") {
+    //     navigate("/free");
+    //   }
+    // }
   }, [dispatch, pathname, isAuth, navigate, planId]);
 
   return (
@@ -73,8 +73,8 @@ const App = () => {
 
           <Route path="/plandetail_free" element={<PlandetailFree />} />
           <Route
-            path="/Plandetail_premeditate"
-            element={<PlandetailPremeditate />}
+            path="/plandetail_premeditate"
+            element={<Plandetail_Premeditate />}
           />
           <Route path="/myplan" element={<MyPlan />} />
         </Route>
