@@ -7,61 +7,141 @@
   //position: absolute;
   width: 100%;
   height: 90vh;
-  padding: 50px;
+  //padding: 50px;
   display: flex;
   justify-content: center; //가로축 가운데 정렬
   align-items: left; //세로축 왼쪽 정렬
   flex-direction: column; // 요소 세로로 배치
 }
+.mainPage4 {
+  width: 100%;
+  height: 30vh;
+}
 
 .mainPage {
-  background-color: #f1f6ff !important;
+  background-color: #f1f6ff;
 }
 
 .mainPage2 {
-  background-color: #c7cfdc;
+  background-color: #e3ecff;
 }
 
-.mainPage {
-  background-color: #e4e9f3;
+.mainPage3 {
+  background-color: #cacfdd;
 }
 
 .mainsubdiv {
   padding-left: 18%;
-}
-.maintitle {
-  //margin-top: 85px;
-  margin-bottom: 40px;
-  font-size: 60px;
-  font-weight: 700;
-  color: #262626;
-}
+  padding-right: 18%;
 
-.maincontent {
-  font-size: 20px;
-  font-weight: 600;
-  color: #414141;
-}
-
-.Button {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+
+  .mainTextContainer {
+    max-width: 60%;
+    padding-right: 10px; /* 텍스트와 이미지 사이의 간격을 조절 */
+
+  }
+
+  .maintitle {
+    //margin-top: 85px;
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 60px;
+    font-weight: 700;
+    color: #262626;
+  }
+  .mainTitle2 {
+    margin-bottom: 40px;
+    padding: 10px;
+    font-size: 40px;
+    font-weight: 700;
+    color: #262626;
+  }
+
+  .maincontent {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #414141;
+  }
+
+  .Button {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+    padding: 10px;
+  }
+  .mainbtn {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    width: 150px;
+    height: 48px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    background-color: rgb(43, 5, 133);
+    border-radius: 7px;
+    color: rgb(255, 255, 255);
+  }
+
+  .mainbtn:hover {
+    background-color: rgb(129, 134, 203);
+  }
+  //#1a328e
+
+  .characterImage {
+    width: 40%;
+    max-width: 50%;
+    display: flex;
+    justify-content: center; //가로축 가운데 정렬
+    align-items: left; //세로축 왼쪽 정렬
+    flex-direction: column;
+  }
+
+  .chartImage {
+    width: 100%;
+    max-width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center; //가로축 가운데 정렬
+    align-items: left; //세로축 왼쪽 정렬
+    flex-direction: column;
+  }
+}
+
+.Subcontent {
+  font-size: 17px;
+  color: #606060;
   margin-top: 30px;
 }
-.mainbtn {
-  margin-top: 50px;
-  margin-bottom: 30px;
-  width: 150px;
-  height: 48px;
-  border: none;
-  font-size: 15px;
-  font-weight: 700;
-  background-color: rgb(43, 5, 133);
-  border-radius: 7px;
-  color: rgb(255, 255, 255);
+
+.we {
+  padding: 90px;
 }
 
-.mainbtn:hover {
-  background-color: rgb(129, 134, 203);
+
+@media all and (max-width: 768px){
+  .mainsubdiv {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+
+  }
+  .mainTextContainer, .characterImage, .chartImage {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+  .mainTextContainer {
+    padding-right: 0;
+    padding-top: 20px;
+  }
+  .characterImage, .chartImage{
+    margin-top: 20px;
+    margin-bottom: 20px
+  }
 }
-//#1a328e

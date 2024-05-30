@@ -1,5 +1,12 @@
 import React, { useEffect } from "react";
-import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Outlet,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Main from "./views/Main";
@@ -9,7 +16,7 @@ import Login from "./views/Login";
 import Plan from "./views/Plan";
 import SignUp from "./components/SignUp";
 import PlandetailFree from "./views/Plandetail_free";
-import PlandetailPremeditated from "./views/Plandetail_premeditated";
+import PlandetailPremeditate from "./views/Plandetail_premeditate";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Header from "./components/Header";
@@ -37,12 +44,17 @@ const App = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user?.isAuth);
   const { pathname } = useLocation();
+  const { planId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuth) {
       dispatch(authUser());
+      if (pathname === "/") {
+        navigate("/free");
+      }
     }
-  }, [dispatch, pathname, isAuth]);
+  }, [dispatch, pathname, isAuth, navigate, planId]);
 
   return (
     <Routes>
@@ -52,12 +64,17 @@ const App = () => {
         {/* 로그인 한 사람만 갈 수 있는 경로 */}
         <Route element={<ProtectedRoutes />}>
           <Route path="/plan" element={<Plan />} />
+
           <Route path="/free" element={<HomeView />} />
+          <Route path="/free/:planId" element={<HomeView />} />
+
           <Route path="/planned" element={<PlannedView />} />
+          <Route path="/planned/:planId" element={<PlannedView />} />
+
           <Route path="/plandetail_free" element={<PlandetailFree />} />
           <Route
-            path="/plandetail_premeditated"
-            element={<PlandetailPremeditated />}
+            path="/Plandetail_premeditate"
+            element={<PlandetailPremeditate />}
           />
           <Route path="/myplan" element={<MyPlan />} />
         </Route>

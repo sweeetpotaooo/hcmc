@@ -21,7 +21,7 @@ const PlanDetail = () => {
   const sendData = async (data) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/plandetail_premeditated/consumption",
+        "http://localhost:4000/plandetail_premeditate/consumption",
         data,
         {
           headers: {
@@ -31,7 +31,7 @@ const PlanDetail = () => {
       );
       console.log(response.data);
       if (response.data) {
-        navigate("/planned");
+        navigate(`/planned/${response.data._id}`);
       }
     } catch (err) {
       console.error(err);
