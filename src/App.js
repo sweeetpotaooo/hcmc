@@ -4,6 +4,7 @@ import {
   Route,
   Routes,
   useLocation,
+  useNavigate,
   useParams,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,12 +45,16 @@ const App = () => {
   const isAuth = useSelector((state) => state.user?.isAuth);
   const { pathname } = useLocation();
   const { planId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuth) {
       dispatch(authUser());
+      if (pathname === "/") {
+        navigate("/free");
+      }
     }
-  }, [dispatch, pathname, isAuth, planId]);
+  }, [dispatch, pathname, isAuth, navigate, planId]);
 
   return (
     <Routes>
