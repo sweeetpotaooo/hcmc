@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { Outlet, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Main from "./views/Main";
@@ -37,12 +37,16 @@ const App = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector((state) => state.user?.isAuth);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuth) {
       dispatch(authUser());
+      if (pathname === "/") {
+        navigate("/free");
+      }
     }
-  }, [dispatch, pathname, isAuth]);
+  }, [dispatch, pathname, isAuth, navigate]);
 
   return (
     <Routes>

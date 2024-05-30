@@ -1,15 +1,44 @@
-import React, { useState } from 'react';
-import "../style/Calender.scss";
+import React, { useState, useEffect } from 'react';
+import "../style/Calender.scss"; // 파일명은 "Calendar.scss"로 맞춰야 합니다
+import axios from 'axios';
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const data = {
-    '2024-05-01': { income: 100, expense: 50 },
-    '2024-05-02': { income: 200, expense: 30 },
-    // 추가적인 날짜 데이터
-  };
-
+  const [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:4000/wallet/money");
+        const rawData = response.data;
+        const processedData = {};
+
+        rawData.forEach(item => {
+          const dateKey = item.date.split('T')[0];
+          if (!processedData[dateKey]) {
+            processedData[dateKey] = { income: 0, expense: 0 };
+          }
+
+          if (item.tag === "수입") {
+            processedData[dateKey].income += item.amount;
+          } else if (item.tag === "지출") {
+            processedData[dateKey].expense += item.amount;
+          }
+        });
+
+        setData(processedData);
+        setLoading(false);
+      } catch (error) {
+        setError('데이터를 가져오는데 실패했습니다.');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const getMonthDays = (date) => {
     const year = date.getFullYear();
@@ -39,32 +68,32 @@ const Calendar = () => {
       const income = data[dateKey]?.income || 0;
       const expense = data[dateKey]?.expense || 0;
 
-      if (income === 0 && expense === 0) {
-        days.push(
-          <div key={i} className="day">
-            <div className="date">{i}</div>
-          </div>
-        );
-      } else {
-        days.push(
-          <div key={i} className="day">
-            <div className="date">{i}</div>
-            {income !== 0 && <div className="income">₩{income}</div>}
-            {expense !== 0 && <div className="expense">₩{expense}</div>}
-          </div>
-        );
-      }
+      days.push(
+        <div key={i} className="day">
+          <div className="date">{i}</div>
+          {income !== 0 && <div className="income">₩{income.toLocaleString()}</div>}
+          {expense !== 0 && <div className="expense">₩{expense.toLocaleString()}</div>}
+        </div>
+      );
     }
     return days;
   };
 
   const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)));
+    setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1));
   };
 
   const handleNextMonth = () => {
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)));
+    setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1));
   };
+
+  if (loading) {
+    return <div>로딩 중...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <div className="calender">
