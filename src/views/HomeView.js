@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import AccountArea from "../components/AccountArea";
 import AccountInsert from "../components/AccountInsert";
 import AccountList from "../components/AccountList";
@@ -6,7 +7,7 @@ import AccountTempleat from "../components/AccountTempleat";
 import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea";
 import VerticalBarChart from "../components/VerticalBarChart";
-import PlanName from "../components/PlanName";
+import FreePlanName from "../components/FreePlanName";
 import Calender from "../components/Calender";
 import GenderCard from "../components/GenderCard";
 import AgeCard from "../components/AgeCard";
@@ -19,6 +20,7 @@ import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 
 function HomeView() {
+  const { id } = useParams();
   const [orgRows, setOrgRows] = useState([]);
   const [rows, setRows] = useState(orgRows);
   const [income, setIncome] = useState(0);
@@ -65,7 +67,7 @@ function HomeView() {
     <>
       <AccountTempleat>
         <AccountArea>
-          <PlanName />
+          <FreePlanName planId={id} />
 
           <AccountInsert insertRow={insertRowHandler} />
           <AccountList
@@ -85,8 +87,8 @@ function HomeView() {
             //dataList={dataList}
             orgRows={orgRows}
           />
-          <Calender/>
-          
+          <Calender />
+
           <SwiperComponent
             slidesPerView={1}
             spaceBetween={5}
@@ -99,18 +101,17 @@ function HomeView() {
             className="mySwiper"
           >
             <SwiperSlide>
-              <Chart/>
+              <Chart />
             </SwiperSlide>
             <SwiperSlide>
-              <GenderCard/>
+              <GenderCard />
             </SwiperSlide>
             <SwiperSlide>
-              <AgeCard/>
+              <AgeCard />
             </SwiperSlide>
             <SwiperSlide>
-              <UnivCard/>
+              <UnivCard />
             </SwiperSlide>
-            
           </SwiperComponent>
         </AccountArea>
       </AccountTempleat>

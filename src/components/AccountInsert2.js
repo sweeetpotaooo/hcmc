@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "../style/AccountInsert.scss";
 import Button from "@mui/material/Button";
 import axios from "axios";
-// import Radio from "@mui/material/Radio";
+import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-// import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 const AccountInsert2 = ({ insertRow }) => {
   const [value, setValue] = useState({
@@ -26,7 +26,7 @@ const AccountInsert2 = ({ insertRow }) => {
       value.date.trimEnd() === "" ||
       value.category.trimEnd() === "" ||
       value.title.trimEnd() === "" ||
-      value.amount.trimEnd() === "" 
+      value.amount.trimEnd() === ""
       //value.tag.trimEnd() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
@@ -37,7 +37,7 @@ const AccountInsert2 = ({ insertRow }) => {
       title: value.title,
       category: value.category,
       amount: parseInt(value.amount),
-      //tag: value.tag,
+      tag: value.tag,
     };
     insertRow(newRow);
 
@@ -126,6 +126,18 @@ const AccountInsert2 = ({ insertRow }) => {
           value={value.tag}
           onChange={inputHandler}
         >
+          <FormControlLabel
+            value="수입"
+            control={<Radio size="small" />}
+            label="수입"
+            labelPlacement="start"
+          />
+          <FormControlLabel
+            value="지출"
+            control={<Radio size="small" />}
+            label="지출"
+            labelPlacement="start"
+          />
         </RadioGroup>
       </label>
 

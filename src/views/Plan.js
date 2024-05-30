@@ -8,7 +8,7 @@ export default function Plan() {
     navigate("/plandetail_free");
   };
   const handle2Navigate = () => {
-    navigate("/plandetail_premeditated");
+    navigate("/plandetail_premeditate");
   };
 
   return (
@@ -34,7 +34,7 @@ export default function Plan() {
             </div>
           </button>
         </div>
-     </div>
+      </div>
     </div>
   );
 }

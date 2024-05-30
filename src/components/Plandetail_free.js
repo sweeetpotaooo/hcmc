@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "../style/Plandetail_premeditated.scss";
+import "../style/Plandetail_free.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const PlanDetail = () => {
   const [value, setValue] = useState({
@@ -29,8 +30,9 @@ const PlanDetail = () => {
         }
       );
       console.log(response.data);
+      toast.info("로그인에 성공하였습니다.");
       if (response.data) {
-        navigate("/free");
+        navigate(`/free/${response.data._id}`);
       }
     } catch (err) {
       console.error(err);
@@ -82,6 +84,7 @@ const PlanDetail = () => {
                 className="input"
                 value={value.planName}
                 onChange={inputHandler}
+                required
               />
             </div>
           </div>
@@ -121,6 +124,7 @@ const PlanDetail = () => {
                 className="input"
                 value={value.description}
                 onChange={inputHandler}
+                required
               />
             </div>
           </div>

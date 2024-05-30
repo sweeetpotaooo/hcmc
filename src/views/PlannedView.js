@@ -6,7 +6,7 @@ import AccountTempleat from "../components/AccountTempleat2";
 import Chart from "../components/Chart";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart";
-import PlanName from "../components/PlanName";
+import PlannedPlanName from "../components/PlannedPlanName";
 import Calender from "../components/Calender";
 import GenderCard from "../components/GenderCard";
 import AgeCard from "../components/AgeCard";
@@ -17,47 +17,15 @@ import "../style/Swiper.scss";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
+import { useParams } from "react-router-dom";
 
 function PlannedView() {
-  const [orgRows, setOrgRows] = useState([
-    {
-      id: 1,
-      date: "2022-12-02",
-      title: "점심",
-      category: "식비",
-      //tag: "지출",
-      amount: 8000,
-    },
-    {
-      id: 2,
-      date: "2022-12-02",
-      title: "간식",
-      category: "식비",
-      //tag: "지출",
-      amount: 2000,
-    },
-    {
-      id: 3,
-      date: "2022-12-02",
-      title: "영화",
-      category: "문화/교육비",
-      //tag: "지출",
-      amount: 12000,
-    },
-  ]);
-
+  const [orgRows, setOrgRows] = useState([]);
+  const { id } = useParams();
   const [rows, setRows] = useState(orgRows);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
   const [count, setCount] = useState(0);
-
-  const [dataList, setDataList] = useState({
-    food: 0,
-    goods: 0,
-    edu: 0,
-    etc: 0,
-    save: 0,
-  });
 
   useEffect(() => {
     setRows(orgRows);
@@ -77,45 +45,6 @@ function PlannedView() {
     setOrgRows((prevState) => [newRow, ...prevState]);
     ++nextId.current;
   };
-
-  useEffect(() => {
-    setDataList({
-      food: 0,
-      goods: 0,
-      edu: 0,
-      etc: 0,
-      save: 0,
-    });
-
-    rows.forEach((item) => {
-      if (item.category === "식비") {
-        setDataList((prev) => ({
-          ...prev,
-          food: prev.food + item.amount,
-        }));
-      } else if (item.category === "생필품") {
-        setDataList((prev) => ({
-          ...prev,
-          goods: prev.goods + item.amount,
-        }));
-      } else if (item.category === "문화/교육비") {
-        setDataList((prev) => ({
-          ...prev,
-          edu: prev.edu + item.amount,
-        }));
-      } else if (item.category === "기타") {
-        setDataList((prev) => ({
-          ...prev,
-          etc: prev.etc + item.amount,
-        }));
-      } else if (item.category === "저축") {
-        setDataList((prev) => ({
-          ...prev,
-          save: prev.save + item.amount,
-        }));
-      }
-    });
-  }, [rows]);
 
   function totalIncomeHandler(data) {
     setIncome(data);
@@ -151,7 +80,7 @@ function PlannedView() {
     <>
       <AccountTempleat>
         <AccountArea>
-          <PlanName />
+          <PlannedPlanName planId={id} />
           <AccountInsert insertRow={insertRowHandler} />
           <AccountList
             rows={rows}
