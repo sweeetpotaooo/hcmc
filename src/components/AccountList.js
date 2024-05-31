@@ -95,7 +95,7 @@ const AccountList = (props) => {
   const handleSave = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_free/money/update/${selectedRow._id}`,
         selectedRow
       );
       const updatedRows = selectedRow.map((filteredRows) =>
@@ -113,7 +113,7 @@ const AccountList = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/delete/${selectedRow._id}`,
+        `http://localhost:4000/wallet/money/account_free/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();
@@ -132,7 +132,9 @@ const AccountList = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_free/money"
+        );
         const formattedData = response.data.map((item) => ({
           ...item,
           date: formatDate(item.date),
@@ -186,7 +188,7 @@ const AccountList = (props) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/wallet/money/find/${searchInput}`
+        `http://localhost:4000/wallet/account_free/money/find/${searchInput}`
       );
       const formattedData = response.data.map((item) => ({
         ...item,
