@@ -108,9 +108,9 @@ const MyPlan = () => {
 
   const handleMovePlan = async () => {
     try {
-      if (selectedPlan.pattern) {
+      if (selectedPlan.pattern === "자유로운 소비") {
         navigate(`/free/${selectedPlan._id}`);
-      } else if (selectedPlan) {
+      } else if (selectedPlan.pattern === "계획적인 소비") {
         navigate(`/planned/${selectedPlan._id}`);
       }
     } catch (err) {
