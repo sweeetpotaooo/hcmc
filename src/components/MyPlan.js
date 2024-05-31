@@ -246,15 +246,17 @@ const MyPlan = () => {
               ) : (
                 <p>완료된 소비 계획이 없습니다.</p>
               )}
-              <TablePagination
-                rowsPerPageOptions={[3, 6, 10]}
-                component="div"
-                count={freePlans.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
+              <div className="pagechange">
+                <TablePagination
+                  rowsPerPageOptions={[3, 6, 10]}
+                  component="div"
+                  count={freePlans.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+              </div>
             </div>
           </div>
         </div>

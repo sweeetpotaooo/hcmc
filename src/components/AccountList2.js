@@ -152,8 +152,8 @@ const AccountList2 = (props) => {
     let exp = 0;
     let inc = 0;
     filteredRows.forEach((item) => {
-      if (item.tag === "지출") {
-        exp -= parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
+      if (item.amount) {
+        exp = (item.budget) - parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
       }
     });
     setExpense(exp);
@@ -268,10 +268,8 @@ const AccountList2 = (props) => {
                       let style = {};
 
                       if (column.id === "amount") {
-                        if (row.tag === "지출") {
-                          displayValue = `-${value}`;
-                          style.color = "red";
-                        }
+                        displayValue = `-${value}`;
+                        style.color = "red";
                       }
                       return (
                         <TableCell

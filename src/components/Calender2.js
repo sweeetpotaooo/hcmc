@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../style/Calender.scss"; // 파일명은 "Calendar.scss"로 맞춰야 합니다
 import axios from "axios";
 
-const Calendar = () => {
+const Calendar2 = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -129,4 +129,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default Calendar2;
