@@ -44,7 +44,7 @@ const AccountInsert = ({ insertRow }) => {
     const sendData = async (data) => {
       try {
         const response = await axios.post(
-          "http://localhost:4000/wallet/account_free/money",
+          "http://localhost:4000/plandetail_free/consumption",
           data,
           {
             headers: {
