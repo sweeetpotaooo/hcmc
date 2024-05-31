@@ -43,7 +43,7 @@ const App = () => {
     if (isAuth) {
       dispatch(authUser());
       if (pathname === "/") {
-        navigate("/free");
+        navigate("/");
       }
     }
   }, [dispatch, pathname, isAuth, navigate]);
