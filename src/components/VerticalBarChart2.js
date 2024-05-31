@@ -46,12 +46,12 @@ const monthMapping = {
   "07": "jul",
   "08": "aug",
   "09": "sep",
-  "10": "oct", 
-  "11": "nov", 
-  "12": "dec", 
+  10: "oct",
+  11: "nov",
+  12: "dec",
 };
 
-const VerticalBarChart2 = ({ orgRows }) => {
+const VerticalBarChart = ({ orgRows }) => {
   // 차트에 들어갈 데이터 초기화
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,9 @@ const VerticalBarChart2 = ({ orgRows }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/consumption/premeditate");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_premeditate/money"
+        );
         const verDataList = response.data.reduce((acc, item) => {
           const month = item.date.slice(5, 7); // YYYY-MM-DD 중 MM을 선택
           const monthKey = monthMapping[month];
@@ -86,6 +88,11 @@ const VerticalBarChart2 = ({ orgRows }) => {
               label: "지출",
               data: months.map((month) => verDataList[`${month}Out`] || 0),
               backgroundColor: "rgba(92, 53, 178, 0.9)",
+            },
+            {
+              label: "수입",
+              data: months.map((month) => verDataList[`${month}In`] || 0),
+              backgroundColor: "rgba(30, 136, 229, 0.9)",
             },
           ],
         };
@@ -110,4 +117,4 @@ const VerticalBarChart2 = ({ orgRows }) => {
   );
 };
 
-export default memo(VerticalBarChart2);
+export default memo(VerticalBarChart);

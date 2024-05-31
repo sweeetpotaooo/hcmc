@@ -46,9 +46,9 @@ const monthMapping = {
   "07": "jul",
   "08": "aug",
   "09": "sep",
-  "10": "oct", 
-  "11": "nov", 
-  "12": "dec", 
+  10: "oct",
+  11: "nov",
+  12: "dec",
 };
 
 const VerticalBarChart = ({ orgRows }) => {
@@ -65,7 +65,9 @@ const VerticalBarChart = ({ orgRows }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_free/money"
+        );
         const verDataList = response.data.reduce((acc, item) => {
           const month = item.date.slice(5, 7); // YYYY-MM-DD 중 MM을 선택
           const monthKey = monthMapping[month];

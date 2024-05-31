@@ -95,7 +95,7 @@ const AccountList2 = (props) => {
   const handleSave = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_premeditate/money/update/${selectedRow._id}`,
         selectedRow
       );
       const updatedRows = selectedRow.map((filteredRows) =>
@@ -113,7 +113,7 @@ const AccountList2 = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/delete/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_premeditate/money/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();
@@ -132,7 +132,9 @@ const AccountList2 = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_premeditate/money"
+        );
         const formattedData = response.data.map((item) => ({
           ...item,
           date: formatDate(item.date),
@@ -151,7 +153,7 @@ const AccountList2 = (props) => {
     let inc = 0;
     filteredRows.forEach((item) => {
       if (item.tag === "지출") {
-        exp -= parseInt(item.amount);  //예산값 받아오면 예산에서 마이너스 되도록
+        exp -= parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
       }
     });
     setExpense(exp);
@@ -183,7 +185,7 @@ const AccountList2 = (props) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/wallet/money/find/${searchInput}`
+        `http://localhost:4000/wallet/account_premeditate/money/find/${searchInput}`
       );
       const formattedData = response.data.map((item) => ({
         ...item,

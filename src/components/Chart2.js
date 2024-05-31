@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../style/Chart.scss";
-import { Chart2 as ChartJS, ArcElement, Tooltip, Legend } from "chart2.js";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import axios from "axios";
 
@@ -45,7 +45,9 @@ const Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/consumption/premeditate");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_premeditate/money"
+        );
         const chartData = processData(response.data);
         setData(chartData);
         setLoading(false);

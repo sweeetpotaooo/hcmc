@@ -36,6 +36,7 @@ const AccountInsert2 = ({ insertRow }) => {
       category: value.category,
       amount: parseInt(value.amount),
     };
+    console.log("Inserting Row:", newRow);
     insertRow(newRow);
 
     const sendData = async (data) => {
@@ -58,10 +59,10 @@ const AccountInsert2 = ({ insertRow }) => {
     sendData([newRow]); // 데이터를 백엔드로 전송
 
     setValue({
-      date: " ",
-      category: " ",
-      title: " ",
-      amount: " ",
+      date: "",
+      category: "",
+      title: "",
+      amount: "",
     });
   };
 
@@ -73,7 +74,13 @@ const AccountInsert2 = ({ insertRow }) => {
     >
       <label className="inputDate">
         <h3>Date</h3>
-        <input type="date" name="date" onChange={inputHandler} />
+        <input
+          type="date"
+          name="date"
+          value={value.date}
+          onChange={inputHandler}
+          required
+        />
       </label>
 
       <label className="inputSelect">

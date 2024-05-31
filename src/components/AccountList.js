@@ -113,7 +113,7 @@ const AccountList = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/account_free/delete/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_free/money/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();

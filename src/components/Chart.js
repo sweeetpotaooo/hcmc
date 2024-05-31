@@ -45,7 +45,9 @@ const Chart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_free/money"
+        );
         const chartData = processData(response.data);
         setData(chartData);
         setLoading(false);

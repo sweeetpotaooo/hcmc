@@ -46,7 +46,7 @@ const GenderSpendingCard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          "http://localhost:4000/wallet/account_premeditate/money"
         );
         const chartData = processData(response.data);
         setData(chartData);
