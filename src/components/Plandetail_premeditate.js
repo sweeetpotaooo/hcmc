@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import "../style/Plandetail_premeditated.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const PlanDetail = () => {
   const [value, setValue] = useState({
     planName: "",
     planStart: "",
     planEnd: "",
-    budget: "",
     description: "",
+    pattern: "계획적인 소비",
   });
 
   const navigate = useNavigate();
@@ -30,42 +31,45 @@ const PlanDetail = () => {
         }
       );
       console.log(response.data);
-      if (response.data) {
-        navigate(`/planned/${response.data._id}`);
-      }
+      toast.info("플랜이 생성되었습니다.");
+      return response.data._id;
     } catch (err) {
       console.error(err);
       alert("데이터 전송에 실패했습니다. 다시 시도해주세요.");
+      return null;
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (
-      value.planName.trimEnd() === "" ||
-      value.planStart.trimEnd() === "" ||
-      value.planEnd.trimEnd() === "" ||
-      value.budget.trimEnd() === "" ||
-      value.description.trimEnd() === ""
+      value.planName.trim() === "" ||
+      value.planStart.trim() === "" ||
+      value.planEnd.trim() === "" ||
+      value.description.trim() === ""
     ) {
-      return alert("모든 정보를 입력해주세요");
+      return alert("모든 정보를 입력해주세요.");
     }
 
     const newRow = {
       planName: value.planName,
       planStart: value.planStart,
       planEnd: value.planEnd,
-      budget: value.budget,
       description: value.description,
+      pattern: value.pattern,
     };
-    sendData(newRow);
+
+    const planId = await sendData(newRow);
+    if (planId) {
+      navigate(`/planned/${planId}`, { state: { id: planId } });
+    }
 
     setValue({
       planName: "",
       planStart: "",
       planEnd: "",
-      budget: "",
       description: "",
+      pattern: "계획적인 소비",
     });
   };
 
@@ -115,28 +119,13 @@ const PlanDetail = () => {
             </div>
           </div>
           <div className="contentTitle">
-            <label className="inputtitle" htmlFor="budget">
-              예산
-            </label>
-            <div className="inputWrite">
-              <input
-                type="number"
-                id="budget"
-                name="budget"
-                className="input"
-                value={value.budget}
-                onChange={inputHandler}
-                required
-              />
-            </div>
-          </div>
-          <div className="contentTitle">
-            <label className="inputtitle" htmlFor="details">
+            <label className="inputtitle" htmlFor="description">
               세부 설명
             </label>
             <div className="inputWrite">
               <input
                 id="description"
+                type="text"
                 name="description"
                 className="input"
                 value={value.description}
@@ -144,6 +133,7 @@ const PlanDetail = () => {
                 required
               />
             </div>
+            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="button">
             <button className="btn" type="submit">
