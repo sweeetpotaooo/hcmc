@@ -10,6 +10,7 @@ import {
   Modal,
   FormLabel,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // 모달창 스타일
 const style = {
@@ -31,6 +32,8 @@ const MyPlan = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
+
+  const navigate = useNavigate();
 
   const handleOpen = (filteredRows) => {
     setSelectedPlan(filteredRows);
@@ -59,7 +62,7 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_free/consumption/update/${selectedPlan._id}`,
         selectedPlan
       );
-      const premeditateResponse = await axios.post(
+      const PremeditateResponse = await axios.post(
         `http://localhost:4000/plandetail_premeditate/consumption/update//${selectedPlan._id}`,
         selectedPlan
       );
@@ -74,7 +77,7 @@ const MyPlan = () => {
           plan._id === selectedPlan._id ? selectedPlan : plan
         );
         setFreePlans(updatedPlans);
-        console.log(premeditateResponse.data);
+        console.log(PremeditateResponse.data);
       }
       handleClose();
     } catch (err) {
@@ -85,19 +88,31 @@ const MyPlan = () => {
   const handleDelete = async () => {
     try {
       const FreeResponse = await axios.post(
-        `http://localhost:4000/plandetail_free/consumption/update/${selectedPlan._id}`,
+        `http://localhost:4000/plandetail_free/consumption/delete/${selectedPlan._id}`,
         selectedPlan
       );
-      const premeditateResponse = await axios.post(
-        `http://localhost:4000/plandetail_premeditate/consumption/update//${selectedPlan._id}`,
+      const PremeditateResponse = await axios.post(
+        `http://localhost:4000/plandetail_premeditate/consumption/delete/${selectedPlan._id}`,
         selectedPlan
       );
       if (FreeResponse) {
         console.log(FreeResponse.data);
       } else {
-        console.log(premeditateResponse.data);
+        console.log(PremeditateResponse.data);
       }
       handleClose();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleMovePlan = async () => {
+    try {
+      if (selectedPlan.pattern === "자유로운 소비") {
+        navigate(`/free/${selectedPlan._id}`);
+      } else if (selectedPlan.pattern === "계획적인 소비") {
+        navigate(`/planned/${selectedPlan._id}`);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -116,15 +131,15 @@ const MyPlan = () => {
         }));
         setFreePlans(formatFreeData);
 
-        const premeditateResponse = await axios.get(
+        const PremeditateResponse = await axios.get(
           `http://localhost:4000/plandetail_premeditate/consumption/find`
         );
-        const premeditateData = premeditateResponse.data.map((plan) => ({
+        const premeditateFormatData = PremeditateResponse.data.map((plan) => ({
           ...plan,
           planStart: formatDate(plan.planStart),
           planEnd: formatDate(plan.planEnd),
         }));
-        setPremeditatePlans(premeditateData);
+        setPremeditatePlans(premeditateFormatData);
       } catch (err) {
         console.error(err);
       }
@@ -279,6 +294,7 @@ const MyPlan = () => {
                 value={selectedPlan.description}
                 onChange={handleInputChange}
               />
+              <Button onClick={handleMovePlan}>Move</Button>
               <Button onClick={handleSave}>Save</Button>
               <Button onClick={handleDelete}>Delete</Button>
             </FormLabel>

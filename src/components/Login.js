@@ -19,7 +19,7 @@ const Login = () => {
     const body = { id, password };
     try {
       await dispatch(loginUser(body));
-      navigate("/free");
+      navigate("/");
     } catch (err) {
       console.error(err);
     }
