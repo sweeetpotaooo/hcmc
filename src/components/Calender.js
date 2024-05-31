@@ -71,8 +71,8 @@ const Calendar = () => {
       days.push(
         <div key={i} className="day">
           <div className="date">{i}</div>
-          {income !== 0 && <div className="income">₩{income.toLocaleString()}</div>}
-          {expense !== 0 && <div className="expense">₩{expense.toLocaleString()}</div>}
+          {income !== 0 && <div className="income">+{income.toLocaleString()}</div>}
+          {expense !== 0 && <div className="expense">-{expense.toLocaleString()}</div>}
         </div>
       );
     }

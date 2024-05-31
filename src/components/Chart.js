@@ -26,7 +26,6 @@ const processData = (data) => {
       dataList[item.category] += item.amount;
     }
   });
-  console.log(dataList);
 
   return {
     labels: categories,
@@ -73,7 +72,7 @@ const Chart = () => {
       <div className="charSubDiv">
         <div className="charTitle">소비 분석 레포트 📈</div>
         <div className="char">
-          <Doughnut data={data} options={options}/>
+          <Doughnut data={data} options={options} />
         </div>
       </div>
     </div>
