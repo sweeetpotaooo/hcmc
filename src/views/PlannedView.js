@@ -25,13 +25,13 @@ function PlannedView() {
   const [rows, setRows] = useState(orgRows);
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
-  const [count, setCount] = useState(0);
+  //const [count, setCount] = useState(0);
 
   useEffect(() => {
     setRows(orgRows);
   }, [orgRows]);
 
-  const nextId = useRef(4);
+  const nextId = useRef(3);
   const insertRowHandler = (row) => {
     const newRow = {
       id: nextId.current,
@@ -64,17 +64,17 @@ function PlannedView() {
     setRows(newRows);
   };
 
-  const changeTagHandler = () => {
-    setCount(count + 1);
-    console.log(count);
-    let newRows = [];
-    if (count % 3 === 1) {
-      newRows = orgRows.filter((prevState) => prevState.tag !== "지출");
-      setRows(newRows);
-    } else {
-      setRows(orgRows);
-    }
-  };
+  // const changeTagHandler = () => {
+  //   setCount(count + 1);
+  //   console.log(count);
+  //   let newRows = [];
+  //   if (count % 3 === 1) {
+  //     newRows = orgRows.filter((prevState) => prevState.tag !== "지출");
+  //     setRows(newRows);
+  //   } else {
+  //     setRows(orgRows);
+  //   }
+  // };
 
   return (
     <>
@@ -87,10 +87,11 @@ function PlannedView() {
             totalIncome={totalIncomeHandler}
             totalExpense={totalExpenseHandler}
             monthFilter={changeMonthHandler}
-            tagFilter={changeTagHandler}
+            //tagFilter={changeTagHandler}
           />
           <VerticalBarChart orgRows={rows} />
         </AccountArea>
+
         <AccountArea>
           <ChartArea
             totalExpense={expense}

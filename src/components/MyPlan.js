@@ -149,7 +149,7 @@ const MyPlan = () => {
           <div className="planContainer">
             <div className="current">
               <div className="plantitle">진행 중</div>
-              {freePlans.length > 0 ? (
+              {freePlans.length > 0 || premeditatePlans.length > 0 ? (
                 freePlans
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((plan, index) => (
@@ -170,7 +170,7 @@ const MyPlan = () => {
                     </div>
                   ))
               ) : (
-                <p>자유로운 소비 플랜이 없습니다.</p>
+                <p>소비 플랜이 없습니다.<br/>위 플랜추가 버튼을 눌러 시작해보세요.</p>
               )}
               {premeditatePlans.length > 0 ? (
                 premeditatePlans
@@ -193,7 +193,7 @@ const MyPlan = () => {
                     </div>
                   ))
               ) : (
-                <p>계획적인 소비 플랜이 없습니다.</p>
+                <p>계획적인 소비 플랜이 없습니다.<br/>위 플랜추가 버튼을 눌러 시작해보세요.</p>
               )}
               <TablePagination
                 rowsPerPageOptions={[3, 6, 10]}

@@ -46,7 +46,7 @@ const App = () => {
   const { pathname } = useLocation();
   const { planId } = useParams();
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     if (isAuth) {
       dispatch(authUser());

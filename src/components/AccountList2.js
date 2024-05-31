@@ -61,8 +61,8 @@ const months = [
   { number: "12", name: "12월" },
 ];
 
-const AccountList = (props) => {
-  const { totalIncome, totalExpense, monthFilter, tagFilter } = props;
+const AccountList2 = (props) => {
+  const { totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [, setExpense] = useState(0);
@@ -95,7 +95,7 @@ const AccountList = (props) => {
   const handleSave = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
+        `http://localhost:4000/walletEntries/plannedwallet/update/${selectedRow._id}`,
         selectedRow
       );
       const updatedRows = selectedRow.map((filteredRows) =>
@@ -113,7 +113,7 @@ const AccountList = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/delete/${selectedRow._id}`,
+        `http://localhost:4000/walletEntries/plannedwallet/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();
@@ -132,7 +132,7 @@ const AccountList = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get("http://localhost:4000/walletEntries/plannedwallet");
         const formattedData = response.data.map((item) => ({
           ...item,
           date: formatDate(item.date),
@@ -151,16 +151,13 @@ const AccountList = (props) => {
     let inc = 0;
     filteredRows.forEach((item) => {
       if (item.tag === "지출") {
-        exp += parseInt(item.amount);
-      } else if (item.tag === "수입") {
-        inc += parseInt(item.amount);
+        exp -= parseInt(item.amount);  //예산값 받아오면 예산에서 마이너스 되도록
       }
     });
     setExpense(exp);
     setIncome(inc);
     totalExpense(exp);
-    totalIncome(inc);
-  }, [filteredRows, totalExpense, totalIncome]);
+  }, [filteredRows, totalExpense]);
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
@@ -186,7 +183,7 @@ const AccountList = (props) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/wallet/money/find/${searchInput}`
+        `http://localhost:4000/walletEntries/plannedwallet/find/${searchInput}`
       );
       const formattedData = response.data.map((item) => ({
         ...item,
@@ -272,9 +269,6 @@ const AccountList = (props) => {
                         if (row.tag === "지출") {
                           displayValue = `-${value}`;
                           style.color = "red";
-                        } else if (row.tag === "수입") {
-                          displayValue = `+${value}`;
-                          style.color = "blue";
                         }
                       }
                       return (
@@ -333,9 +327,6 @@ const AccountList = (props) => {
                 <MenuItem value="문화/교육비">문화/교육비</MenuItem>
                 <MenuItem value="기타">기타</MenuItem>
                 <MenuItem value="저축">저축</MenuItem>
-                <MenuItem disabled>수입</MenuItem>
-                <MenuItem value="월급">월급</MenuItem>
-                <MenuItem value="기타소득">기타소득</MenuItem>
               </Select>
               <TextField
                 margin="normal"
@@ -362,4 +353,4 @@ const AccountList = (props) => {
   );
 };
 
-export default AccountList;
+export default AccountList2;
