@@ -66,18 +66,11 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_premeditate/consumption/update/${selectedPlan._id}`,
         selectedPlan
       );
-      if (FreeResponse) {
+      if (FreeResponse.data || PremeditateResponse.data) {
         const updatedPlans = selectedPlan.map((plan) =>
           plan._id === selectedPlan._id ? selectedPlan : plan
         );
         setFreePlans(updatedPlans);
-        console.log(FreeResponse.data);
-      } else {
-        const updatedPlans = selectedPlan.map((plan) =>
-          plan._id === selectedPlan._id ? selectedPlan : plan
-        );
-        setFreePlans(updatedPlans);
-        console.log(PremeditateResponse.data);
       }
       handleClose();
     } catch (err) {
@@ -95,10 +88,11 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_premeditate/consumption/delete/${selectedPlan._id}`,
         selectedPlan
       );
-      if (FreeResponse) {
-        console.log(FreeResponse.data);
-      } else {
-        console.log(PremeditateResponse.data);
+      if (FreeResponse.data || PremeditateResponse.data) {
+        const updatedPlans = selectedPlan.map((plan) =>
+          plan._id === selectedPlan._id ? selectedPlan : plan
+        );
+        setFreePlans(updatedPlans);
       }
       handleClose();
     } catch (err) {
