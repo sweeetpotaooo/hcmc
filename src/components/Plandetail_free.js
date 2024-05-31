@@ -10,6 +10,7 @@ const PlanDetail = () => {
     planStart: "",
     planEnd: "",
     description: "",
+    pattern: "자유로운 소비",
   });
 
   const navigate = useNavigate();
@@ -30,17 +31,16 @@ const PlanDetail = () => {
         }
       );
       console.log(response.data);
-      toast.info("로그인에 성공하였습니다.");
-      if (response.data) {
-        navigate(`/free/${response.data._id}`);
-      }
+      toast.info("플랜이 생성되었습니다.");
+      return response.data._id;
     } catch (err) {
       console.error(err);
       alert("데이터 전송에 실패했습니다. 다시 시도해주세요.");
+      return null;
     }
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (
       value.planName.trim() === "" ||
@@ -56,14 +56,19 @@ const PlanDetail = () => {
       planStart: value.planStart,
       planEnd: value.planEnd,
       description: value.description,
+      pattern: value.pattern,
     };
-    sendData(newRow);
+    const planId = await sendData(newRow);
+    if (planId) {
+      navigate(`/free/${planId}`, { state: { id: planId } });
+    }
 
     setValue({
       planName: "",
       planStart: "",
       planEnd: "",
       description: "",
+      pattern: "자유로운 소비",
     });
   };
 
@@ -127,6 +132,7 @@ const PlanDetail = () => {
                 required
               />
             </div>
+            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="button">
             <button className="btn" type="submit">
