@@ -108,12 +108,10 @@ const MyPlan = () => {
 
   const handleMovePlan = async () => {
     try {
-      const FreeResponse = `${selectedPlan._id}`;
-      const PremeditateResponse = `${selectedPlan._id}`;
-      if (FreeResponse) {
-        navigate(`/free/${FreeResponse}`);
-      } else {
-        navigate(`/planned/${PremeditateResponse}`);
+      if (selectedPlan.pattern) {
+        navigate(`/free/${selectedPlan._id}`);
+      } else if (selectedPlan) {
+        navigate(`/planned/${selectedPlan._id}`);
       }
     } catch (err) {
       console.error(err);
