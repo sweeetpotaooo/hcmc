@@ -13,7 +13,7 @@ const Calendar = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_premeditate/money"
+          "http://localhost:4000/wallet/account_free/money"
         );
         const rawData = response.data;
         const processedData = {};

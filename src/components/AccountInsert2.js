@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import "../style/AccountInsert.scss";
 import Button from "@mui/material/Button";
 import axios from "axios";
-//import Radio from "@mui/material/Radio";
-//import RadioGroup from "@mui/material/RadioGroup";
-//import FormControlLabel from "@mui/material/FormControlLabel";
 
 const AccountInsert2 = ({ insertRow }) => {
   const [value, setValue] = useState({
@@ -22,10 +19,10 @@ const AccountInsert2 = ({ insertRow }) => {
     e.preventDefault();
 
     if (
-      value.date.trimEnd() === "" ||
-      value.category.trimEnd() === "" ||
-      value.title.trimEnd() === "" ||
-      value.amount.trimEnd() === ""
+      value.date.trim() === "" ||
+      value.category.trim() === "" ||
+      value.title.trim() === "" ||
+      value.amount.trim() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
     }
@@ -42,7 +39,7 @@ const AccountInsert2 = ({ insertRow }) => {
     const sendData = async (data) => {
       try {
         const response = await axios.post(
-          "http://localhost:4000/plandetail_premeditate/consumption",
+          "http://localhost:4000/wallet/account_premeditate/money",
           data,
           {
             headers: {
@@ -56,7 +53,7 @@ const AccountInsert2 = ({ insertRow }) => {
         console.error(err);
       }
     };
-    sendData([newRow]); // 데이터를 백엔드로 전송
+    sendData(newRow); // Send data to the backend
 
     setValue({
       date: "",
@@ -92,15 +89,16 @@ const AccountInsert2 = ({ insertRow }) => {
           required
         >
           <option value="" disabled>
-            지출
+            카테고리 선택
           </option>
-          <option>식비</option>
-          <option>생필품</option>
-          <option>문화/교육비</option>
-          <option>기타</option>
-          <option>저축</option>
+          <option value="식비">식비</option>
+          <option value="생필품">생필품</option>
+          <option value="문화/교육비">문화/교육비</option>
+          <option value="기타">기타</option>
+          <option value="저축">저축</option>
         </select>
       </label>
+
       <label className="inputTitle">
         <h3>Title</h3>
         <input
@@ -108,6 +106,7 @@ const AccountInsert2 = ({ insertRow }) => {
           name="title"
           value={value.title}
           onChange={inputHandler}
+          required
         />
       </label>
 
@@ -118,10 +117,9 @@ const AccountInsert2 = ({ insertRow }) => {
           name="amount"
           value={value.amount}
           onChange={inputHandler}
+          required
         />
       </label>
-
-      <label className="radioBtn"></label>
 
       <Button variant="contained" className="submitBtn" type="submit">
         추가
