@@ -63,7 +63,7 @@ const MyPlan = () => {
         selectedPlan
       );
       const PremeditateResponse = await axios.post(
-        `http://localhost:4000/plandetail_premeditate/consumption/update//${selectedPlan._id}`,
+        `http://localhost:4000/plandetail_premeditate/consumption/update/${selectedPlan._id}`,
         selectedPlan
       );
       if (FreeResponse) {
@@ -185,7 +185,10 @@ const MyPlan = () => {
                     </div>
                   ))
               ) : (
-                <p>소비 플랜이 없습니다.<br/>위 플랜추가 버튼을 눌러 시작해보세요.</p>
+                <p>
+                  소비 플랜이 없습니다.
+                  <br />위 플랜추가 버튼을 눌러 시작해보세요.
+                </p>
               )}
               {premeditatePlans.length > 0 ? (
                 premeditatePlans
@@ -208,7 +211,10 @@ const MyPlan = () => {
                     </div>
                   ))
               ) : (
-                <p>계획적인 소비 플랜이 없습니다.<br/>위 플랜추가 버튼을 눌러 시작해보세요.</p>
+                <p>
+                  계획적인 소비 플랜이 없습니다.
+                  <br />위 플랜추가 버튼을 눌러 시작해보세요.
+                </p>
               )}
               <TablePagination
                 rowsPerPageOptions={[3, 6, 10]}
