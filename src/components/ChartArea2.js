@@ -1,7 +1,7 @@
 import React from "react";
 import "../style/ChartArea2.scss";
 
-const ChartArea2 = ({ totalExpense, totalIncome, rows, dataList, orgRows }) => {
+const ChartArea2 = ({ totalExpense, rows, dataList, orgRows }) => {
   return (
       <div className="totalBox">
         <div className="Total totalExpense">

@@ -10,6 +10,7 @@ const PlanDetail = () => {
     planStart: "",
     planEnd: "",
     description: "",
+    budget:"",
     pattern: "계획적인 소비",
   });
 
@@ -46,6 +47,7 @@ const PlanDetail = () => {
       value.planName.trim() === "" ||
       value.planStart.trim() === "" ||
       value.planEnd.trim() === "" ||
+      value.budget.trim() === "" ||
       value.description.trim() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
@@ -55,6 +57,7 @@ const PlanDetail = () => {
       planName: value.planName,
       planStart: value.planStart,
       planEnd: value.planEnd,
+      budget: value.budget,
       description: value.description,
       pattern: value.pattern,
     };
@@ -68,6 +71,7 @@ const PlanDetail = () => {
       planName: "",
       planStart: "",
       planEnd: "",
+      budget: "",
       description: "",
       pattern: "계획적인 소비",
     });
@@ -117,6 +121,23 @@ const PlanDetail = () => {
                 required
               />
             </div>
+          </div>
+          <div className="contentTitle">
+            <label className="inputtitle" htmlFor="description">
+              예산
+            </label>
+            <div className="inputWrite">
+              <input
+                id="budget"
+                type="text"
+                name="budget"
+                className="input"
+                value={value.budget}
+                onChange={inputHandler}
+                required
+              />
+            </div>
+            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="contentTitle">
             <label className="inputtitle" htmlFor="description">
