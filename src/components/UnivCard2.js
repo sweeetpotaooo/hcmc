@@ -12,20 +12,14 @@ import "../style/Card.scss";
 
 ChartJS.register(BarElement, LinearScale, Tooltip, Legend);
 
-const processData = (data) => {
-  const categories = ["지출", "전체 평균"];
+const processData = (userData, averageSpending) => {
+  const categories = ["지출", "동문 평균"];
   const backgroundColors = ["rgb(255, 130, 157)", "rgba(54, 162, 235)"];
-  const dataList = categories.reduce((acc, tag) => {
-    acc[tag] = 0;
-    return acc;
-  }, {});
 
-  data.forEach((item) => {
-    if (dataList[item.tag] !== undefined) {
-      dataList[item.tag] += item.amount;
-    }
-  });
-  console.log(dataList);
+  const dataList = {
+    지출: userData.reduce((sum, item) => sum + item.amount, 0),
+    "동문 평균": averageSpending,
+  };
 
   return {
     labels: categories,
@@ -38,21 +32,32 @@ const processData = (data) => {
   };
 };
 
-const AgeSpendingCard = () => {
+const UnivSpendingCard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const userUniversity = "건국대학교"; // 실제 사용자 대학 이름으로 교체 필요
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          "http://localhost:4000/wallet/account_premeditate/money"
         );
-        const chartData = processData(response.data);
+        const averageResponse = await axios.get(
+          `http://localhost:4000/wallet/account_free/average/${encodeURIComponent(
+            userUniversity
+          )}`
+        );
+        const chartData = processData(
+          response.data,
+          averageResponse.data.averageAmount
+        );
         setData(chartData);
         setLoading(false);
       } catch (err) {
         console.error(err);
+        setError(err);
         setLoading(false);
       }
     };
@@ -61,6 +66,14 @@ const AgeSpendingCard = () => {
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>데이터를 불러오는 중 오류가 발생했습니다: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>데이터가 없습니다.</div>;
   }
 
   const options = {
@@ -75,10 +88,10 @@ const AgeSpendingCard = () => {
 
   return (
     <div className="cardDiv">
-      <h4>내 또래 친구들은 얼마나 썼을까?</h4>
+      <h4>나의 동창들은 얼마나 썼을까?</h4>
       <Bar data={data} options={options} className="bar" />
     </div>
   );
 };
 
-export default AgeSpendingCard;
+export default UnivSpendingCard;

@@ -38,7 +38,7 @@ const processData = (data) => {
   };
 };
 
-const AgeSpendingCard = () => {
+const GenderSpendingCard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +46,7 @@ const AgeSpendingCard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          "http://localhost:4000/wallet/account_premeditate/money"
         );
         const chartData = processData(response.data);
         setData(chartData);
@@ -75,10 +75,14 @@ const AgeSpendingCard = () => {
 
   return (
     <div className="cardDiv">
-      <h4>내 또래 친구들은 얼마나 썼을까?</h4>
-      <Bar data={data} options={options} className="bar" />
+      <h4>나의 동성친구는 얼마나 썼을까?</h4>
+      <div className="card-body">
+        <div className="chart-container">
+          <Bar data={data} options={options} />
+        </div>
+      </div>
     </div>
   );
 };
 
-export default AgeSpendingCard;
+export default GenderSpendingCard;

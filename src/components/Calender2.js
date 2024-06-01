@@ -13,7 +13,7 @@ const Calendar = (userId, planId) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money",
+          "http://localhost:4000/wallet/account_premeditate/money",
           { params: { userId: userId, planId: planId } }
         );
         const rawData = response.data;
@@ -25,9 +25,7 @@ const Calendar = (userId, planId) => {
             processedData[dateKey] = { income: 0, expense: 0 };
           }
 
-          if (item.tag === "수입") {
-            processedData[dateKey].income += item.amount;
-          } else if (item.tag === "지출") {
+          if (item.tag === "지출") {
             processedData[dateKey].expense += item.amount;
           }
         });

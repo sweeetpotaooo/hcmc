@@ -66,14 +66,14 @@ const VerticalBarChart = ({ orgRows, userId, planId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money",
+          "http://localhost:4000/wallet/account_premeditate/money",
           { params: { userId: userId, planId: planId } }
         );
         const verDataList = response.data.reduce((acc, item) => {
           const month = item.date.slice(5, 7); // YYYY-MM-DD 중 MM을 선택
           const monthKey = monthMapping[month];
           if (monthKey) {
-            const type = item.tag === "지출" ? "Out" : "In";
+            const type = item.tag === "지출" ? "Out" : "Out";
             const key = `${monthKey}${type}`;
             acc[key] = (acc[key] || 0) + item.amount;
           }
@@ -89,11 +89,6 @@ const VerticalBarChart = ({ orgRows, userId, planId }) => {
               label: "지출",
               data: months.map((month) => verDataList[`${month}Out`] || 0),
               backgroundColor: "rgba(92, 53, 178, 0.9)",
-            },
-            {
-              label: "수입",
-              data: months.map((month) => verDataList[`${month}In`] || 0),
-              backgroundColor: "rgba(30, 136, 229, 0.9)",
             },
           ],
         };

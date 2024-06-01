@@ -61,7 +61,7 @@ const months = [
   { number: "12", name: "12월" },
 ];
 
-const AccountList = (props) => {
+const AccountList = (props, userId, planId) => {
   const { totalIncome, totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -113,7 +113,7 @@ const AccountList = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/account_free/delete/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_free/money/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();
@@ -133,7 +133,8 @@ const AccountList = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          `http://localhost:4000/wallet/account_free/money`,
+          { params: { userId: userId, planId: planId } }
         );
         const formattedData = response.data.map((item) => ({
           ...item,
@@ -280,13 +281,16 @@ const AccountList = (props) => {
                           style.color = "blue";
                         }
                       }
+
                       return (
                         <TableCell
                           key={column.id}
                           align={column.align}
                           style={style}
                         >
-                          {displayValue.toLocaleString()}
+                          {value !== undefined && value !== null
+                            ? displayValue.toLocaleString()
+                            : "N/A"}
                         </TableCell>
                       );
                     })}
@@ -316,7 +320,7 @@ const AccountList = (props) => {
           {selectedRow && (
             <FormLabel>
               <TextField
-                margin="normal"
+                margin="dense"
                 fullWidth
                 type="date"
                 name="date"
@@ -324,7 +328,7 @@ const AccountList = (props) => {
                 onChange={handleInputChange}
               />
               <Select
-                margin="normal"
+                margin="dense"
                 fullWidth
                 name="category"
                 value={selectedRow.category}
@@ -341,7 +345,7 @@ const AccountList = (props) => {
                 <MenuItem value="기타소득">기타소득</MenuItem>
               </Select>
               <TextField
-                margin="normal"
+                margin="dense"
                 fullWidth
                 type="text"
                 name="title"
@@ -349,7 +353,7 @@ const AccountList = (props) => {
                 onChange={handleInputChange}
               />
               <TextField
-                margin="normal"
+                margin="dense"
                 fullWidth
                 name="amount"
                 value={selectedRow.amount}

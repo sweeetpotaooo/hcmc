@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import "../style/Plandetail_premeditated.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const PlanDetail = () => {
+
+const PlanDetail = ({ userId }) => {
   const [value, setValue] = useState({
     planName: "",
     planStart: "",
     planEnd: "",
+    budget: "",
     description: "",
+    budget: "",
     pattern: "계획적인 소비",
   });
 
@@ -46,28 +48,32 @@ const PlanDetail = () => {
       value.planName.trim() === "" ||
       value.planStart.trim() === "" ||
       value.planEnd.trim() === "" ||
+      value.budget.trim() === "" ||
       value.description.trim() === ""
     ) {
       return alert("모든 정보를 입력해주세요.");
     }
 
     const newRow = {
+      userId,
       planName: value.planName,
       planStart: value.planStart,
       planEnd: value.planEnd,
+      budget: value.budget,
       description: value.description,
       pattern: value.pattern,
     };
 
     const planId = await sendData(newRow);
     if (planId) {
-      navigate(`/planned/${planId}`, { state: { id: planId } });
+      navigate(`/planned/${planId}`, { state: { budget: value.budget } });
     }
 
     setValue({
       planName: "",
       planStart: "",
       planEnd: "",
+      budget: "",
       description: "",
       pattern: "계획적인 소비",
     });
@@ -120,6 +126,22 @@ const PlanDetail = () => {
           </div>
           <div className="contentTitle">
             <label className="inputtitle" htmlFor="description">
+              예산
+            </label>
+            <div className="inputWrite">
+              <input
+                id="budget"
+                type="text"
+                name="budget"
+                className="input"
+                value={value.budget}
+                onChange={inputHandler}
+                required
+              />
+            </div>
+          </div>
+          <div className="contentTitle">
+            <label className="inputtitle" htmlFor="description">
               세부 설명
             </label>
             <div className="inputWrite">
@@ -133,7 +155,6 @@ const PlanDetail = () => {
                 required
               />
             </div>
-            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="button">
             <button className="btn" type="submit">

@@ -61,12 +61,12 @@ const months = [
   { number: "12", name: "12월" },
 ];
 
-const AccountList2 = (props) => {
+const AccountList2 = (props, userId, planId) => {
   const { totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [, setExpense] = useState(0);
-  const [, setIncome] = useState(0);
+  //const [, setIncome] = useState(0);
   // 검색기능 구현
   const [searchInput, setSearchInput] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
@@ -75,8 +75,8 @@ const AccountList2 = (props) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [selectedMonth, setSelectedMonth] = useState("");
 
-  const handleOpen = (row) => {
-    setSelectedRow(row);
+  const handleOpen = (filteredRows) => {
+    setSelectedRow(filteredRows);
     setOpen(true);
   };
 
@@ -95,10 +95,10 @@ const AccountList2 = (props) => {
   const handleSave = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/update/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_premeditate/money/update/${selectedRow._id}`,
         selectedRow
       );
-      const updatedRows = selectedRow.map((filteredRows) =>
+      const updatedRows = selectedRow.map((row) =>
         filteredRows._id === selectedRow._id ? selectedRow : filteredRows
       );
       setFilteredRows(updatedRows);
@@ -113,7 +113,7 @@ const AccountList2 = (props) => {
   const handleDelete = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/wallet/money/delete/${selectedRow._id}`,
+        `http://localhost:4000/wallet/account_premeditate/money/delete/${selectedRow._id}`,
         selectedRow
       );
       handleClose();
@@ -132,7 +132,10 @@ const AccountList2 = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_premeditate/money",
+          { params: { userId: userId, planId: planId } }
+        );
         const formattedData = response.data.map((item) => ({
           ...item,
           date: formatDate(item.date),
@@ -147,17 +150,18 @@ const AccountList2 = (props) => {
 
   // 지출, 수입 데이터 상태 체크
   useEffect(() => {
+    let Budget = 100000;
     let exp = 0;
-    let inc = 0;
     filteredRows.forEach((item) => {
-      if (item.tag === "지출") {
-        exp -= parseInt(item.amount);  //예산값 받아오면 예산에서 마이너스 되도록
+      if (item.amount) {
+        exp -= parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록 
       }
     });
-    setExpense(exp);
-    setIncome(inc);
-    totalExpense(exp);
-  }, [filteredRows, totalExpense]);
+    // setExpense(exp);
+    // setIncome(Budget);
+    totalExpense(exp + Budget);
+    //totalIncome(Budget);
+  }, [filteredRows, totalExpense, budget ]);
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
@@ -183,7 +187,7 @@ const AccountList2 = (props) => {
   const handleSearch = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/wallet/money/find/${searchInput}`
+        `http://localhost:4000/wallet/account_premeditate/money/find/${searchInput}`
       );
       const formattedData = response.data.map((item) => ({
         ...item,
@@ -266,10 +270,8 @@ const AccountList2 = (props) => {
                       let style = {};
 
                       if (column.id === "amount") {
-                        if (row.tag === "지출") {
-                          displayValue = `-${value}`;
-                          style.color = "red";
-                        }
+                        displayValue = `-${value}`;
+                        style.color = "red";
                       }
                       return (
                         <TableCell

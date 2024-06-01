@@ -3,14 +3,13 @@ import AccountArea from "../components/AccountArea2";
 import AccountInsert from "../components/AccountInsert2";
 import AccountList from "../components/AccountList2";
 import AccountTempleat from "../components/AccountTempleat2";
-import Chart from "../components/Chart";
+import Chart from "../components/Chart2";
 import ChartArea from "../components/ChartArea2";
-import VerticalBarChart from "../components/VerticalBarChart";
+import VerticalBarChart from "../components/VerticalBarChart2";
 import PlannedPlanName from "../components/PlannedPlanName";
-import Calender from "../components/Calender";
-import GenderCard from "../components/GenderCard";
-import AgeCard from "../components/AgeCard";
-import UnivCard from "../components/UnivCard";
+import GenderCard from "../components/GenderCard2";
+import AgeCard from "../components/AgeCard2";
+import UnivCard from "../components/UnivCard2";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../style/Swiper.scss";
@@ -18,6 +17,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { useParams } from "react-router-dom";
+import Calendar from "../components/Calender2";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([]);
@@ -96,10 +96,9 @@ function PlannedView() {
           <ChartArea
             totalExpense={expense}
             totalIncome={income}
-            //dataList={dataList}
             orgRows={orgRows}
           />
-          <Calender />
+          <Calendar />
 
           <SwiperComponent
             slidesPerView={1}

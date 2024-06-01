@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, LinearScale, Tooltip, Legend } from 'chart.js';
-import axios from 'axios';
-import '../style/Card.scss';
+import React, { useState, useEffect } from "react";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  BarElement,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import axios from "axios";
+import "../style/Card.scss";
 
 ChartJS.register(BarElement, LinearScale, Tooltip, Legend);
 
-  const processData = (data) => {
-    const categories = ["지출", "전체 평균"];
-    const backgroundColors = [
-      "rgb(255, 130, 157)", 
-      "rgba(54, 162, 235)", 
-    ];
+const processData = (data) => {
+  const categories = ["지출", "전체 평균"];
+  const backgroundColors = ["rgb(255, 130, 157)", "rgba(54, 162, 235)"];
   const dataList = categories.reduce((acc, tag) => {
     acc[tag] = 0;
     return acc;
@@ -22,11 +25,11 @@ ChartJS.register(BarElement, LinearScale, Tooltip, Legend);
       dataList[item.tag] += item.amount;
     }
   });
-console.log(dataList);
+  console.log(dataList);
 
-return {
-  labels: categories,
-  datasets: [
+  return {
+    labels: categories,
+    datasets: [
       {
         data: categories.map((tag) => dataList[tag]),
         backgroundColor: backgroundColors,
@@ -42,7 +45,9 @@ const GenderSpendingCard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/wallet/money");
+        const response = await axios.get(
+          "http://localhost:4000/wallet/account_free/money"
+        );
         const chartData = processData(response.data);
         setData(chartData);
         setLoading(false);
