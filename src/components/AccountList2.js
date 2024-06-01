@@ -161,7 +161,7 @@ const AccountList2 = (props, userId, planId) => {
     // setIncome(Budget);
     totalExpense(exp + Budget);
     //totalIncome(Budget);
-  }, [filteredRows, totalExpense, budget ]);
+  }, [filteredRows, totalExpense ]);
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);
