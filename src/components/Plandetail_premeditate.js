@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import "../style/Plandetail_premeditated.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 
 const PlanDetail = () => {
   const [value, setValue] = useState({
     planName: "",
     planStart: "",
     planEnd: "",
+    budget: "",
     description: "",
-    budget:"",
     pattern: "계획적인 소비",
   });
 
@@ -64,7 +64,7 @@ const PlanDetail = () => {
 
     const planId = await sendData(newRow);
     if (planId) {
-      navigate(`/planned/${planId}`, { state: { id: planId } });
+      navigate(`/planned/${planId}`, { state: { budget: value.budget } });
     }
 
     setValue({
@@ -137,7 +137,6 @@ const PlanDetail = () => {
                 required
               />
             </div>
-            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="contentTitle">
             <label className="inputtitle" htmlFor="description">
@@ -154,7 +153,6 @@ const PlanDetail = () => {
                 required
               />
             </div>
-            <p id="pattern" name="pattern" value={value.pattern}></p>
           </div>
           <div className="button">
             <button className="btn" type="submit">

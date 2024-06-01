@@ -186,7 +186,7 @@ const MyPlan = () => {
                   ))
               ) : (
                 <p>
-                  소비 플랜이 없습니다.
+                  자유로운 소비 플랜이 없습니다.
                   <br />위 플랜추가 버튼을 눌러 시작해보세요.
                 </p>
               )}
@@ -302,6 +302,15 @@ const MyPlan = () => {
                 value={selectedPlan.description}
                 onChange={handleInputChange}
               />
+              {/* 아래 이거 추가하면 예산칸 생기는데 자유로운, 계획적인 둘 다 생김 */}
+              {/* <TextField
+                margin="dense"
+                fullWidth
+                name="budget"
+                type="text"
+                value={selectedPlan.budget}
+                onChange={handleInputChange}
+              /> */}
               <Button onClick={handleMovePlan}>Move</Button>
               <Button onClick={handleSave}>Save</Button>
               <Button onClick={handleDelete}>Delete</Button>
