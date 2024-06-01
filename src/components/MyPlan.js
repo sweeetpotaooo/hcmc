@@ -40,7 +40,7 @@ const MyPlan = () => {
     const currentDate = new Date();
     const planEndDate = new Date(filteredRows.planEnd);
 
-    if (planEndDate < currentDate) {
+    if (planEndDate > currentDate) {
       filteredRows.isEditable = false;
     } else {
       filteredRows.isEditable = true;
@@ -244,9 +244,9 @@ const MyPlan = () => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
               />
             </div>
+
             <div className="past">
               <div className="plantitle">진행 완료</div>
-
               <div className="pagechange">
                 <TablePagination
                   rowsPerPageOptions={[3, 6, 10]}
