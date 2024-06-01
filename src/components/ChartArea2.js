@@ -31,7 +31,7 @@ const ChartArea2 = ({ totalExpense, amount }) => {
       <div className="Total totalExpense">
         남은 예산
         <br />
-        <span>{totalExpense.toLocaleString()}원 / {(Budget || 0).toLocaleString()}원</span>
+        <span>{((Budget || 0) + totalExpense).toLocaleString()}원 / {(Budget || 0).toLocaleString()}원</span>
       </div>
     </div>
   );
