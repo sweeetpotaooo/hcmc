@@ -96,7 +96,6 @@ function PlannedView() {
           <ChartArea
             totalExpense={expense}
             totalIncome={income}
-            //dataList={dataList}
             orgRows={orgRows}
           />
           <Calendar />

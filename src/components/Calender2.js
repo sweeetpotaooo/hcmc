@@ -25,9 +25,7 @@ const Calendar = (userId, planId) => {
             processedData[dateKey] = { income: 0, expense: 0 };
           }
 
-          if (item.tag === "수입") {
-            processedData[dateKey].income += item.amount;
-          } else if (item.tag === "지출") {
+          if (item.tag === "지출") {
             processedData[dateKey].expense += item.amount;
           }
         });
