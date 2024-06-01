@@ -29,6 +29,7 @@ const MyPlan = () => {
   const [freePlans, setFreePlans] = useState([]);
   const [premeditatePlans, setPremeditatePlans] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
+  const [completedPlans, setCompletedPlans] = useState([]);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
@@ -36,6 +37,14 @@ const MyPlan = () => {
   const navigate = useNavigate();
 
   const handleOpen = (filteredRows) => {
+    const currentDate = new Date();
+    const planEndDate = new Date(filteredRows.planEnd);
+
+    if (planEndDate < currentDate) {
+      filteredRows.isEditable = false;
+    } else {
+      filteredRows.isEditable = true;
+    }
     setSelectedPlan(filteredRows);
     setOpen(true);
   };
@@ -66,18 +75,18 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_premeditate/consumption/update/${selectedPlan._id}`,
         selectedPlan
       );
-      if (FreeResponse) {
-        const updatedPlans = selectedPlan.map((plan) =>
-          plan._id === selectedPlan._id ? selectedPlan : plan
+
+      let updatedPlans;
+      if (FreeResponse.data.plan === "자유로운 소비") {
+        updatedPlans = freePlans.map((plan) =>
+          plan._id === selectedPlan._id ? FreeResponse.data : plan
         );
         setFreePlans(updatedPlans);
-        console.log(FreeResponse.data);
       } else {
-        const updatedPlans = selectedPlan.map((plan) =>
-          plan._id === selectedPlan._id ? selectedPlan : plan
+        updatedPlans = premeditatePlans.map((plan) =>
+          plan._id === selectedPlan._id ? PremeditateResponse.data : plan
         );
-        setFreePlans(updatedPlans);
-        console.log(PremeditateResponse.data);
+        setPremeditatePlans(updatedPlans);
       }
       handleClose();
     } catch (err) {
@@ -95,10 +104,11 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_premeditate/consumption/delete/${selectedPlan._id}`,
         selectedPlan
       );
-      if (FreeResponse) {
-        console.log(FreeResponse.data);
-      } else {
-        console.log(PremeditateResponse.data);
+      if (FreeResponse.data || PremeditateResponse.data) {
+        const updatedPlans = selectedPlan.map((plan) =>
+          plan._id === selectedPlan._id ? selectedPlan : plan
+        );
+        setFreePlans(updatedPlans);
       }
       handleClose();
     } catch (err) {
@@ -124,22 +134,29 @@ const MyPlan = () => {
         const freeResponse = await axios.get(
           `http://localhost:4000/plandetail_free/consumption/find`
         );
-        const formatFreeData = freeResponse.data.map((plan) => ({
-          ...plan,
-          planStart: formatDate(plan.planStart),
-          planEnd: formatDate(plan.planEnd),
-        }));
-        setFreePlans(formatFreeData);
-
         const PremeditateResponse = await axios.get(
           `http://localhost:4000/plandetail_premeditate/consumption/find`
         );
-        const premeditateFormatData = PremeditateResponse.data.map((plan) => ({
-          ...plan,
-          planStart: formatDate(plan.planStart),
-          planEnd: formatDate(plan.planEnd),
-        }));
-        setPremeditatePlans(premeditateFormatData);
+
+        const currentDate = new Date();
+        const formatPlans = (plans) =>
+          plans.map((plan) => ({
+            ...plan,
+            planStart: formatDate(plan.planStart),
+            planEnd: formatDate(plan.planEnd),
+            isEditable: new Date(plan.planEnd) > currentDate,
+          }));
+        const formattedFreePlans = formatPlans(freeResponse.data);
+        const formattedPremeditatePlans = formatPlans(PremeditateResponse.data);
+        setFreePlans(formattedFreePlans.filter((plan) => plan.isEditable));
+        setPremeditatePlans(
+          formattedPremeditatePlans.filter((plan) => plan.isEditable)
+        );
+
+        setCompletedPlans([
+          ...formattedFreePlans.filter((plan) => !plan.isEditable),
+          ...formattedPremeditatePlans.filter((plan) => !plan.isEditable),
+        ]);
       } catch (err) {
         console.error(err);
       }
@@ -166,6 +183,7 @@ const MyPlan = () => {
               <div className="plantitle">진행 중</div>
               {freePlans.length > 0 || premeditatePlans.length > 0 ? (
                 freePlans
+                  .concat(premeditatePlans)
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((plan, index) => (
                     <div
@@ -228,24 +246,7 @@ const MyPlan = () => {
             </div>
             <div className="past">
               <div className="plantitle">진행 완료</div>
-              {premeditatePlans.length > 0 ? (
-                premeditatePlans.map((plan, index) => (
-                  <div key={index} className="pastplan">
-                    <div>
-                      <p>{plan.planName}</p>
-                    </div>
-                    <div>
-                      <p>{`${plan.planStart} ~ ${plan.planEnd}`}</p>
-                    </div>
-                    <div>
-                      <p>{plan.pattern}</p>
-                    </div>
-                    <div>총 수입 / 총 지출(계획적 소비인 경우 총 지출만?)</div>
-                  </div>
-                ))
-              ) : (
-                <p>완료된 소비 계획이 없습니다.</p>
-              )}
+
               <div className="pagechange">
                 <TablePagination
                   rowsPerPageOptions={[3, 6, 10]}
@@ -268,7 +269,9 @@ const MyPlan = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" />
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {selectedPlan && selectedPlan.planName}
+          </Typography>
           {selectedPlan && (
             <FormLabel>
               <TextField
@@ -277,6 +280,7 @@ const MyPlan = () => {
                 name="planName"
                 value={selectedPlan.planName}
                 onChange={handleInputChange}
+                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -285,6 +289,7 @@ const MyPlan = () => {
                 type="date"
                 value={selectedPlan.planStart}
                 onChange={handleInputChange}
+                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -293,6 +298,7 @@ const MyPlan = () => {
                 type="date"
                 value={selectedPlan.planEnd}
                 onChange={handleInputChange}
+                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -301,6 +307,7 @@ const MyPlan = () => {
                 type="text"
                 value={selectedPlan.description}
                 onChange={handleInputChange}
+                disabled={!selectedPlan.isEditable}
               />
               {/* 아래 이거 추가하면 예산칸 생기는데 자유로운, 계획적인 둘 다 생김 */}
               {/* <TextField

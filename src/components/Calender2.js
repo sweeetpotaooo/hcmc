@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../style/Calender.scss"; // 파일명은 "Calendar.scss"로 맞춰야 합니다
 import axios from "axios";
 
-const Calendar2 = () => {
+const Calendar = (userId, planId) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -13,7 +13,8 @@ const Calendar2 = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          "http://localhost:4000/wallet/account_premeditate/money",
+          { params: { userId: userId, planId: planId } }
         );
         const rawData = response.data;
         const processedData = {};
@@ -127,4 +128,4 @@ const Calendar2 = () => {
   );
 };
 
-export default Calendar2;
+export default Calendar;

@@ -61,8 +61,8 @@ const months = [
   { number: "12", name: "12월" },
 ];
 
-const AccountList2 = (props) => {
-  const { totalExpense, monthFilter, budget } = props;
+const AccountList2 = (props, userId, planId) => {
+  const { totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [, setExpense] = useState(0);
@@ -133,7 +133,8 @@ const AccountList2 = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_premeditate/money"
+          "http://localhost:4000/wallet/account_premeditate/money",
+          { params: { userId: userId, planId: planId } }
         );
         const formattedData = response.data.map((item) => ({
           ...item,
