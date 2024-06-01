@@ -41,9 +41,9 @@ const MyPlan = () => {
     const planEndDate = new Date(filteredRows.planEnd);
 
     if (planEndDate > currentDate) {
-      filteredRows.isEditable = false;
-    } else {
       filteredRows.isEditable = true;
+    } else {
+      filteredRows.isEditable = false;
     }
     setSelectedPlan(filteredRows);
     setOpen(true);
@@ -309,15 +309,7 @@ const MyPlan = () => {
                 onChange={handleInputChange}
                 disabled={!selectedPlan.isEditable}
               />
-              {/* 아래 이거 추가하면 예산칸 생기는데 자유로운, 계획적인 둘 다 생김 */}
-              {/* <TextField
-                margin="dense"
-                fullWidth
-                name="budget"
-                type="text"
-                value={selectedPlan.budget}
-                onChange={handleInputChange}
-              /> */}
+
               <Button onClick={handleMovePlan}>Move</Button>
               <Button onClick={handleSave}>Save</Button>
               <Button onClick={handleDelete}>Delete</Button>
