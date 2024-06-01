@@ -66,11 +66,18 @@ const MyPlan = () => {
         `http://localhost:4000/plandetail_premeditate/consumption/update/${selectedPlan._id}`,
         selectedPlan
       );
-      if (FreeResponse.data || PremeditateResponse.data) {
-        const updatedPlans = selectedPlan.map((plan) =>
-          plan._id === selectedPlan._id ? selectedPlan : plan
+
+      let updatedPlans;
+      if (FreeResponse.data) {
+        updatedPlans = freePlans.map((plan) =>
+          plan._id === selectedPlan._id ? FreeResponse.data : plan
         );
         setFreePlans(updatedPlans);
+      } else if (PremeditateResponse.data) {
+        updatedPlans = premeditatePlans.map((plan) =>
+          plan._id === selectedPlan._id ? PremeditateResponse.data : plan
+        );
+        setPremeditatePlans(updatedPlans);
       }
       handleClose();
     } catch (err) {
