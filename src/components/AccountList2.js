@@ -61,7 +61,7 @@ const months = [
   { number: "12", name: "12월" },
 ];
 
-const AccountList2 = (props) => {
+const AccountList2 = (props, userId, planId) => {
   const { totalExpense, monthFilter } = props;
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -133,7 +133,8 @@ const AccountList2 = (props) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_premeditate/money"
+          "http://localhost:4000/wallet/account_premeditate/money",
+          { params: { userId: userId, planId: planId } }
         );
         const formattedData = response.data.map((item) => ({
           ...item,
@@ -153,7 +154,7 @@ const AccountList2 = (props) => {
     let inc = 0;
     filteredRows.forEach((item) => {
       if (item.amount) {
-        exp = (item.budget) - parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
+        exp = item.budget - parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
       }
     });
     setExpense(exp);

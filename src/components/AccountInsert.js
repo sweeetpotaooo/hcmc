@@ -6,7 +6,7 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import { FormControlLabel } from "@mui/material";
 
-const AccountInsert = ({ insertRow }) => {
+const AccountInsert = ({ insertRow, userId }) => {
   const [value, setValue] = useState({
     date: "",
     category: "",
@@ -33,6 +33,7 @@ const AccountInsert = ({ insertRow }) => {
     }
 
     const newRow = {
+      userId,
       date: value.date,
       title: value.title,
       category: value.category,
@@ -44,8 +45,9 @@ const AccountInsert = ({ insertRow }) => {
     const sendData = async (data) => {
       try {
         const response = await axios.post(
-          "http://localhost:4000/plandetail_free/consumption",
+          "http://localhost:4000/wallet/account_free/money",
           data,
+          { params: { userId: userId, planId: data._id } },
           {
             headers: {
               "Content-Type": "application/json",
@@ -58,7 +60,7 @@ const AccountInsert = ({ insertRow }) => {
         console.error(err);
       }
     };
-    sendData([newRow]); // 데이터를 백엔드로 전송
+    sendData(newRow); // 데이터를 백엔드로 전송
 
     setValue({
       date: " ",

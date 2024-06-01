@@ -3,12 +3,13 @@ import "../style/AccountInsert.scss";
 import Button from "@mui/material/Button";
 import axios from "axios";
 
-const AccountInsert2 = ({ insertRow }) => {
+const AccountInsert2 = ({ insertRow, userId }) => {
   const [value, setValue] = useState({
     date: "",
     category: "",
     title: "",
     amount: "",
+    tag: "",
   });
 
   const inputHandler = (e) => {
@@ -28,10 +29,12 @@ const AccountInsert2 = ({ insertRow }) => {
     }
 
     const newRow = {
+      userId,
       date: value.date,
       title: value.title,
       category: value.category,
       amount: parseInt(value.amount),
+      tag: "",
     };
     console.log("Inserting Row:", newRow);
     insertRow(newRow);
@@ -41,6 +44,7 @@ const AccountInsert2 = ({ insertRow }) => {
         const response = await axios.post(
           "http://localhost:4000/wallet/account_premeditate/money",
           data,
+          { params: { userId: userId, planId: data._id } },
           {
             headers: {
               "Content-Type": "application/json",
@@ -60,6 +64,7 @@ const AccountInsert2 = ({ insertRow }) => {
       category: "",
       title: "",
       amount: "",
+      tag: "",
     });
   };
 

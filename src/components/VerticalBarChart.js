@@ -51,7 +51,7 @@ const monthMapping = {
   12: "dec",
 };
 
-const VerticalBarChart = ({ orgRows }) => {
+const VerticalBarChart = ({ orgRows, userId, planId }) => {
   // 차트에 들어갈 데이터 초기화
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,8 @@ const VerticalBarChart = ({ orgRows }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_free/money"
+          "http://localhost:4000/wallet/account_free/money",
+          { params: { userId: userId, planId: planId } }
         );
         const verDataList = response.data.reduce((acc, item) => {
           const month = item.date.slice(5, 7); // YYYY-MM-DD 중 MM을 선택

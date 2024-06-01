@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const PlanDetail = () => {
+const PlanDetail = ({ userId }) => {
   const [value, setValue] = useState({
     planName: "",
     planStart: "",
     planEnd: "",
     description: "",
-    budget:"",
+    budget: "",
     pattern: "계획적인 소비",
   });
 
@@ -54,6 +54,7 @@ const PlanDetail = () => {
     }
 
     const newRow = {
+      userId,
       planName: value.planName,
       planStart: value.planStart,
       planEnd: value.planEnd,

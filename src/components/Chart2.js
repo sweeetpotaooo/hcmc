@@ -38,7 +38,7 @@ const processData = (data) => {
   };
 };
 
-const Chart = () => {
+const Chart = (userId, planId) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,7 +46,8 @@ const Chart = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/wallet/account_premeditate/money"
+          "http://localhost:4000/wallet/account_premeditate/money",
+          { params: { userId: userId, planId: planId } }
         );
         const chartData = processData(response.data);
         setData(chartData);

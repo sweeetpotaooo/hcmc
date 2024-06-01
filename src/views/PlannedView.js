@@ -7,7 +7,6 @@ import Chart from "../components/Chart2";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart2";
 import PlannedPlanName from "../components/PlannedPlanName";
-import Calender from "../components/Calender2";
 import GenderCard from "../components/GenderCard2";
 import AgeCard from "../components/AgeCard2";
 import UnivCard from "../components/UnivCard2";
@@ -18,6 +17,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Pagination, Navigation } from "swiper/modules";
 import { useParams } from "react-router-dom";
+import Calendar from "../components/Calender2";
 
 function PlannedView() {
   const [orgRows, setOrgRows] = useState([]);
@@ -99,7 +99,7 @@ function PlannedView() {
             //dataList={dataList}
             orgRows={orgRows}
           />
-          <Calender />
+          <Calendar />
 
           <SwiperComponent
             slidesPerView={1}
