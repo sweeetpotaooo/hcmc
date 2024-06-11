@@ -150,18 +150,18 @@ const AccountList2 = (props, userId, planId) => {
 
   // 지출, 수입 데이터 상태 체크
   useEffect(() => {
-    let Budget = 100000;
+    let Budget = 0;
     let exp = 0;
     filteredRows.forEach((item) => {
       if (item.amount) {
-        exp -= parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록 
+        exp -= parseInt(item.amount); //예산값 받아오면 예산에서 마이너스 되도록
       }
     });
     // setExpense(exp);
     // setIncome(Budget);
     totalExpense(exp + Budget);
     //totalIncome(Budget);
-  }, [filteredRows, totalExpense ]);
+  }, [filteredRows, totalExpense]);
 
   const handleChangePage = (_event, newPage) => {
     setPage(newPage);

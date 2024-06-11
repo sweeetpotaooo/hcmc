@@ -25,7 +25,6 @@ const processData = (data) => {
       dataList[item.tag] += item.amount;
     }
   });
-  console.log(dataList);
 
   return {
     labels: categories,

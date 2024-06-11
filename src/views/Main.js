@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"; // useNavigate 훅을 가져옵�
 import "../style/Main.scss";
 import characterImg from "../views/public/character.png";
 import chartImg from "../views/public/chart.png";
+import planImg from "../views/public/plan.png";
 
 export default function Main() {
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ export default function Main() {
 
       <div className="mainPage2">
         <div className="mainsubdiv">
-          <img src={chartImg} alt="Char" className="chartImage" />
+          <img src={planImg} alt="Char" className="chartImage" />
           <div className="mainTextContainer">
             <div className="mainTitle2">
               <p>두 가지 플랜으로</p>
@@ -76,31 +77,6 @@ export default function Main() {
             </div>
           </div>
           <img src={chartImg} alt="Char" className="chartImage" />
-        </div>
-      </div>
-
-      <div className="mainPage4">
-        <div className="we">
-          <p>
-            김세현 -{" "}
-            <a href="https://github.com/sweeetpotatooo">
-              https://github.com/sweeetpotatooo
-            </a>
-          </p>
-          <br />
-          <p>
-            김성인 -{" "}
-            <a href="https://github.com/saint0721">
-              https://github.com/saint0721s
-            </a>
-          </p>
-          <br />
-          <p>
-            하가형 -{" "}
-            <a href="https://github.com/Hagotits">
-              https://github.com/Hagotits
-            </a>
-          </p>
         </div>
       </div>
     </div>
