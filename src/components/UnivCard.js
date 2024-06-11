@@ -12,14 +12,20 @@ import "../style/Card.scss";
 
 ChartJS.register(BarElement, LinearScale, Tooltip, Legend);
 
-const processData = (userData, averageSpending) => {
-  const categories = ["지출", "동문 평균"];
+const processData = (data) => {
+  const categories = ["지출", "전체 평균"];
   const backgroundColors = ["rgb(255, 130, 157)", "rgba(54, 162, 235)"];
+  const dataList = categories.reduce((acc, tag) => {
+    acc[tag] = 0;
+    return acc;
+  }, {});
 
-  const dataList = {
-    지출: userData.reduce((sum, item) => sum + item.amount, 0),
-    "동문 평균": averageSpending,
-  };
+  data.forEach((item) => {
+    if (dataList[item.tag] !== undefined) {
+      dataList[item.tag] += item.amount;
+    }
+  });
+  console.log(dataList);
 
   return {
     labels: categories,
@@ -35,8 +41,6 @@ const processData = (userData, averageSpending) => {
 const UnivSpendingCard = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const userUniversity = "건국대학교"; // 실제 사용자 대학 이름으로 교체 필요
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,20 +48,11 @@ const UnivSpendingCard = () => {
         const response = await axios.get(
           "http://localhost:4000/wallet/account_free/money"
         );
-        const averageResponse = await axios.get(
-          `http://localhost:4000/wallet/account_free/average/${encodeURIComponent(
-            userUniversity
-          )}`
-        );
-        const chartData = processData(
-          response.data,
-          averageResponse.data.averageAmount
-        );
+        const chartData = processData(response.data);
         setData(chartData);
         setLoading(false);
       } catch (err) {
         console.error(err);
-        setError(err);
         setLoading(false);
       }
     };
@@ -66,14 +61,6 @@ const UnivSpendingCard = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>데이터를 불러오는 중 오류가 발생했습니다: {error.message}</div>;
-  }
-
-  if (!data) {
-    return <div>데이터가 없습니다.</div>;
   }
 
   const options = {

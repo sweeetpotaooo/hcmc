@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const PlanDetail = ({ userId }) => {
   const [value, setValue] = useState({
     planName: "",
@@ -11,7 +10,6 @@ const PlanDetail = ({ userId }) => {
     planEnd: "",
     budget: "",
     description: "",
-    budget: "",
     pattern: "계획적인 소비",
   });
 

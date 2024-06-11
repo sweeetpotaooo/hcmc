@@ -29,7 +29,6 @@ const MyPlan = () => {
   const [freePlans, setFreePlans] = useState([]);
   const [premeditatePlans, setPremeditatePlans] = useState([]);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const [completedPlans, setCompletedPlans] = useState([]);
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(3);
@@ -37,14 +36,6 @@ const MyPlan = () => {
   const navigate = useNavigate();
 
   const handleOpen = (filteredRows) => {
-    const currentDate = new Date();
-    const planEndDate = new Date(filteredRows.planEnd);
-
-    if (planEndDate > currentDate) {
-      filteredRows.isEditable = true;
-    } else {
-      filteredRows.isEditable = false;
-    }
     setSelectedPlan(filteredRows);
     setOpen(true);
   };
@@ -138,25 +129,20 @@ const MyPlan = () => {
           `http://localhost:4000/plandetail_premeditate/consumption/find`
         );
 
-        const currentDate = new Date();
-        const formatPlans = (plans) =>
-          plans.map((plan) => ({
+        const formattedFreePlans = freeResponse.data.map((plan) => ({
+          ...plan,
+          planStart: formatDate(plan.planStart),
+          planEnd: formatDate(plan.planEnd),
+        }));
+        const formattedPremeditatePlans = PremeditateResponse.data.map(
+          (plan) => ({
             ...plan,
             planStart: formatDate(plan.planStart),
             planEnd: formatDate(plan.planEnd),
-            isEditable: new Date(plan.planEnd) > currentDate,
-          }));
-        const formattedFreePlans = formatPlans(freeResponse.data);
-        const formattedPremeditatePlans = formatPlans(PremeditateResponse.data);
-        setFreePlans(formattedFreePlans.filter((plan) => plan.isEditable));
-        setPremeditatePlans(
-          formattedPremeditatePlans.filter((plan) => plan.isEditable)
+          })
         );
-
-        setCompletedPlans([
-          ...formattedFreePlans.filter((plan) => !plan.isEditable),
-          ...formattedPremeditatePlans.filter((plan) => !plan.isEditable),
-        ]);
+        setFreePlans(formattedFreePlans);
+        setPremeditatePlans(formattedPremeditatePlans);
       } catch (err) {
         console.error(err);
       }
@@ -183,7 +169,6 @@ const MyPlan = () => {
               <div className="plantitle">진행 중</div>
               {freePlans.length > 0 || premeditatePlans.length > 0 ? (
                 freePlans
-                  .concat(premeditatePlans)
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((plan, index) => (
                     <div
@@ -208,7 +193,7 @@ const MyPlan = () => {
                   <br />위 플랜추가 버튼을 눌러 시작해보세요.
                 </p>
               )}
-              {premeditatePlans.length > 0 ? (
+              {premeditatePlans.length > 0 || freePlans.length > 0 ? (
                 premeditatePlans
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((plan, index) => (
@@ -269,9 +254,7 @@ const MyPlan = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={{ ...style, width: 400 }}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            {selectedPlan && selectedPlan.planName}
-          </Typography>
+          <Typography id="modal-modal-title" variant="h6" component="h2" />
           {selectedPlan && (
             <FormLabel>
               <TextField
@@ -280,7 +263,6 @@ const MyPlan = () => {
                 name="planName"
                 value={selectedPlan.planName}
                 onChange={handleInputChange}
-                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -289,7 +271,6 @@ const MyPlan = () => {
                 type="date"
                 value={selectedPlan.planStart}
                 onChange={handleInputChange}
-                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -298,7 +279,6 @@ const MyPlan = () => {
                 type="date"
                 value={selectedPlan.planEnd}
                 onChange={handleInputChange}
-                disabled={!selectedPlan.isEditable}
               />
               <TextField
                 margin="dense"
@@ -307,7 +287,6 @@ const MyPlan = () => {
                 type="text"
                 value={selectedPlan.description}
                 onChange={handleInputChange}
-                disabled={!selectedPlan.isEditable}
               />
 
               <Button onClick={handleMovePlan}>Move</Button>

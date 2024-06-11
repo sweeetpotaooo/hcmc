@@ -7,9 +7,9 @@ import Chart from "../components/Chart2";
 import ChartArea from "../components/ChartArea2";
 import VerticalBarChart from "../components/VerticalBarChart2";
 import PlannedPlanName from "../components/PlannedPlanName";
-// import GenderCard from "../components/GenderCard2";
-// import AgeCard from "../components/AgeCard2";
-// import UnivCard from "../components/UnivCard2";
+import GenderCard from "../components/GenderCard2";
+import AgeCard from "../components/AgeCard2";
+import UnivCard from "../components/UnivCard2";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "../style/Swiper.scss";
@@ -114,9 +114,15 @@ function PlannedView() {
             <SwiperSlide>
               <Chart />
             </SwiperSlide>
-            <SwiperSlide>{/* <GenderCard /> */}</SwiperSlide>
-            <SwiperSlide>{/* <AgeCard /> */}</SwiperSlide>
-            <SwiperSlide>{/* <UnivCard /> */}</SwiperSlide>
+            <SwiperSlide>
+              <GenderCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <AgeCard />
+            </SwiperSlide>
+            <SwiperSlide>
+              <UnivCard />
+            </SwiperSlide>
           </SwiperComponent>
         </AccountArea>
       </AccountTempleat>

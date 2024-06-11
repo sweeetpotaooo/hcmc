@@ -14,16 +14,17 @@ const ChartArea2 = ({ totalExpense, amount }) => {
         const response = await axios.get(
           `http://localhost:4000/plandetail_premeditate/consumption/find/${params}`
         );
+        console.log(response.data.budget);
         if (response.data) {
           setBudget(response.data.budget);
+          console.log(Budget);
         }
       } catch (err) {
         console.error(err);
       }
     };
-    if (planId) {
-      fetchData();
-    }
+
+    fetchData();
   }, [planId]);
 
   return (
@@ -31,7 +32,10 @@ const ChartArea2 = ({ totalExpense, amount }) => {
       <div className="Total totalExpense">
         남은 예산
         <br />
-        <span>{((Budget || 0) + totalExpense).toLocaleString()}원 / {(Budget || 0).toLocaleString()}원</span>
+        <span>
+          {((Budget || 0) + totalExpense).toLocaleString()}원 /{" "}
+          {(Budget || 0).toLocaleString()}원
+        </span>
       </div>
     </div>
   );
